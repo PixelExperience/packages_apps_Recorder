@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.UserManager;
 
-import com.android.internal.util.custom.recorder.InternalAudioRecorder;
-
 public class PreferenceUtils {
 
     public static final String PREFS = "preferences";
@@ -66,12 +64,13 @@ public class PreferenceUtils {
     }
 
     public boolean isInternalAudioRecordingSupported(){
-        return InternalAudioRecorder.isSupported(mContext);
+        return true;
     }
 
     public boolean canControlShowTouches(){
         UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        return userManager.isAdminUser();
+        //return userManager.isAdminUser();
+        return true;
     }
 
     public boolean getShouldShowTouches(){
