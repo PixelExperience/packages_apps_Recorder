@@ -44,6 +44,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.pixelexperience.recorder.screen.OverlayService;
 import org.pixelexperience.recorder.screen.ScreencastService;
@@ -279,10 +280,15 @@ public class RecorderActivity extends AppCompatActivity implements
             startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
                     .setClass(this, ScreencastService.class));
         } else {
+            if (getAudioRecordingType() == Utils.PREF_AUDIO_RECORDING_TYPE_INTERNAL){
+                if (!Utils.isInternalAudioRecordingAllowed(this, true)) {
+                    return;
+                }
+            }
             // Start
             new Handler().postDelayed(() -> {
                 Intent intent = new Intent(this, OverlayService.class);
-                intent.putExtra(OverlayService.EXTRA_HAS_AUDIO, isAudioAllowedWithScreen());
+                intent.putExtra(OverlayService.EXTRA_AUDIO_TYPE, getAudioRecordingType());
                 startService(intent);
                 onBackPressed();
             }, 500);
@@ -402,8 +408,8 @@ public class RecorderActivity extends AppCompatActivity implements
         return true;
     }
 
-    private boolean isAudioAllowedWithScreen() {
-        return mPrefs.getBoolean(Utils.PREF_SCREEN_WITH_AUDIO, false);
+    private int getAudioRecordingType() {
+        return mPrefs.getInt(Utils.PREF_AUDIO_RECORDING_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT);
     }
 
     private void setupConnection() {

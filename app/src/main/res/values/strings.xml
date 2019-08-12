@@ -51,12 +51,15 @@
     <string name="sound_channel_desc">Persistent notification when recording sound and notification after it is complete</string>
 
     <!-- Screen recorder -->
-    <!-- Screen recorder enabled audio message -->
-    <string name="screen_audio_message_on">Audio from the microphone will be included in the video</string>
-    <!-- Screen recorder disabled audio message -->
-    <string name="screen_audio_message_off">Audio from microphone won\'t be included in the video</string>
-    <!-- Screen recorder disabled audio toggle message -->
-    <string name="screen_audio_message_disabled">It\'s not possible to change this setting while recording the screen</string>
+    <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">Audio source</string>
+    <string name="screen_audio_recording_internal">System audio</string>
+    <string name="screen_audio_recording_microphone">Microphone</string>
+    <string name="screen_audio_recording_off">Disabled</string>
+    <string name="screen_audio_recording_disabled_wfd">System internal audio recording does not work when using Miracast or Wi-Fi display.</string>
+    <string name="screen_audio_recording_disabled_others_apps">System internal audio recording does not work when using another recorder simultaneously.</string>
+    <string name="screen_audio_recording_not_allowed">System internal audio recording works only on speaker or wired headphones.</string>
+    <string name="screen_audio_recording_route_changed">Recording stopped because audio output changed</string>
     <!-- Screen recorder audio permission request card button -->
     <string name="screen_audio_warning_button_ask">Ask</string>
     <!-- Screen recorder notification storage error title -->

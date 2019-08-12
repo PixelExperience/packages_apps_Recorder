@@ -28,6 +28,8 @@ import android.media.MediaScannerConnection;
 import android.os.Environment;
 import android.util.Log;
 
+import org.pixelexperience.recorder.utils.Utils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -41,12 +43,12 @@ class RecordingDevice extends EncoderDevice {
     private static final File RECORDINGS_DIR =
             new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES),
                     "ScreenRecords");
-    private final boolean mRecordAudio;
+    private final int mRecordAudioType;
     private final File mPath;
 
-    RecordingDevice(Context context, int width, int height, boolean recordAudio) {
+    RecordingDevice(Context context, int width, int height, int recordAudioType) {
         super(context, width, height);
-        mRecordAudio = recordAudio;
+        mRecordAudioType = recordAudioType;
         // Prepare all the output metadata
         String videoDate = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault())
                 .format(new Date());
@@ -135,7 +137,8 @@ class RecordingDevice extends EncoderDevice {
         final MediaFormat format;
         MediaCodec codec;
 
-        AudioRecorder(Recorder recorder) {
+        AudioRecorder(Recorder recorder, int source) {
+            boolean isInternal = source == Utils.PREF_AUDIO_RECORDING_TYPE_INTERNAL;
             try {
                 codec = MediaCodec.createEncoderByType("audio/mp4a-latm");
             } catch (IOException e) {
@@ -143,9 +146,9 @@ class RecordingDevice extends EncoderDevice {
             }
             format = new MediaFormat();
             format.setString(MediaFormat.KEY_MIME, "audio/mp4a-latm");
-            format.setInteger(MediaFormat.KEY_BIT_RATE, 64 * 1024);
+            format.setInteger(MediaFormat.KEY_BIT_RATE, isInternal ? 156000 : 64 * 1024);
             format.setInteger(MediaFormat.KEY_CHANNEL_COUNT, 1);
-            format.setInteger(MediaFormat.KEY_SAMPLE_RATE, 44100);
+            format.setInteger(MediaFormat.KEY_SAMPLE_RATE, isInternal ? 48000 : 44100);
             format.setInteger(MediaFormat.KEY_AAC_PROFILE,
                     MediaCodecInfo.CodecProfileLevel.AACObjectHE);
             codec.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
@@ -154,13 +157,14 @@ class RecordingDevice extends EncoderDevice {
             this.recorder = recorder;
 
             int bufferSize = 1024 * 30;
-            int minBufferSize = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO,
+            int minBufferSize = AudioRecord.getMinBufferSize(isInternal ? 48000 : 44100, AudioFormat.CHANNEL_IN_MONO,
                     AudioFormat.ENCODING_PCM_16BIT);
             if (bufferSize < minBufferSize) {
                 bufferSize = ((minBufferSize / 1024) + 1) * 1024 * 2;
             }
             Log.i(LOGTAG, "AudioRecorder init");
-            record = new AudioRecord(MediaRecorder.AudioSource.MIC, 44100,
+            record = new AudioRecord(isInternal ? MediaRecorder.AudioSource.REMOTE_SUBMIX :
+                    MediaRecorder.AudioSource.MIC, isInternal ? 48000 : 44100,
                     AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
         }
 
@@ -270,8 +274,8 @@ class RecordingDevice extends EncoderDevice {
 
                     // now that we have the Magic Goodies, start the muxer
                     trackIndex = muxer.addTrack(newFormat);
-                    if (mRecordAudio) {
-                        audio = new AudioRecorder(this);
+                    if (mRecordAudioType != Utils.PREF_AUDIO_RECORDING_TYPE_DISABLED) {
+                        audio = new AudioRecorder(this, mRecordAudioType);
                         Semaphore semaphore = new Semaphore(0);
                         audioMuxer = new AudioMuxer(audio, muxer, semaphore);
                         muxerStarted = true;

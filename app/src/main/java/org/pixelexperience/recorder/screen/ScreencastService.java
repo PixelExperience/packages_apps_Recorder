@@ -27,8 +27,10 @@ import android.content.IntentFilter;
 import android.graphics.Point;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
+import android.media.AudioSystem;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.StatFs;
 import android.os.SystemClock;
@@ -52,7 +54,7 @@ public class ScreencastService extends Service {
     private static final String SCREENCAST_NOTIFICATION_CHANNEL =
             "screencast_notification_channel";
 
-    public static final String EXTRA_WITHAUDIO = "withaudio";
+    public static final String EXTRA_WITHAUDIO_TYPE = "withaudiotype";
     public static final String ACTION_START_SCREENCAST =
             "org.pixelexperience.recorder.screen.ACTION_START_SCREENCAST";
     public static final String ACTION_STOP_SCREENCAST =
@@ -76,8 +78,42 @@ public class ScreencastService extends Service {
             if (Intent.ACTION_USER_BACKGROUND.equals(action) ||
                     Intent.ACTION_SHUTDOWN.equals(action)) {
                 stopCasting();
+            }else if ("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED".equals(action) &&
+                    mAudioSource == Utils.PREF_AUDIO_RECORDING_TYPE_INTERNAL && Utils.isBluetoothHeadsetConnected()) {
+                stopCasting();
+                Toast.makeText(context, R.string.screen_audio_recording_not_allowed,Toast.LENGTH_LONG).show();
             }
         }
+    };
+
+    private int mCurrentDevices;
+    private int mAudioSource;
+    private Handler mHandler = new Handler();
+
+    private Runnable currentDevicesCheckerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (Utils.isBluetoothHeadsetConnected()) {
+                return;
+            }
+            int currentDevices = AudioSystem.getDevicesForStream(AudioSystem.STREAM_MUSIC);
+            currentDevices &= ~AudioSystem.DEVICE_OUT_REMOTE_SUBMIX; // Remove submix
+            if (mCurrentDevices != currentDevices){
+                mHandler.postDelayed(stopCastRunnable, 500);
+                return;
+            }
+            mHandler.postDelayed(this, 100);
+        }
+    };
+
+    private Runnable stopCastRunnable = () -> {
+        if (Utils.isBluetoothHeadsetConnected()) {
+            return;
+        }
+        if (Utils.isInternalAudioRecordingAllowed(ScreencastService.this, false)){
+            Toast.makeText(ScreencastService.this, R.string.screen_audio_recording_route_changed, Toast.LENGTH_SHORT).show();
+        }
+        stopCasting();
     };
 
     @Override
@@ -117,12 +153,12 @@ public class ScreencastService extends Service {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_USER_BACKGROUND);
         filter.addAction(Intent.ACTION_SHUTDOWN);
+        filter.addAction("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED");
         registerReceiver(mBroadcastReceiver, filter);
 
         mNotificationManager = getSystemService(NotificationManager.class);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
-                mNotificationManager == null || mNotificationManager.getNotificationChannel(
+        if (mNotificationManager == null || mNotificationManager.getNotificationChannel(
                         SCREENCAST_NOTIFICATION_CHANNEL) != null) {
             return;
         }
@@ -151,8 +187,12 @@ public class ScreencastService extends Service {
                 return START_NOT_STICKY;
             }
 
+            mCurrentDevices = 0;
+
             mStartTime = SystemClock.elapsedRealtime();
-            registerScreencaster(intent.getBooleanExtra(EXTRA_WITHAUDIO, false));
+            mAudioSource = intent.getIntExtra(EXTRA_WITHAUDIO_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT);
+
+            registerScreencaster(intent.getIntExtra(EXTRA_WITHAUDIO_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT));
             mBuilder = createNotificationBuilder();
             mTimer = new Timer();
             mTimer.scheduleAtFixedRate(new TimerTask() {
@@ -165,6 +205,14 @@ public class ScreencastService extends Service {
             Utils.setStatus(getApplicationContext(), Utils.PREF_RECORDING_SCREEN);
 
             startForeground(NOTIFICATION_ID, mBuilder.build());
+
+            mCurrentDevices = AudioSystem.getDevicesForStream(AudioSystem.STREAM_MUSIC);
+            mCurrentDevices &= ~AudioSystem.DEVICE_OUT_REMOTE_SUBMIX; // Remove submix
+
+            if (mAudioSource == Utils.PREF_AUDIO_RECORDING_TYPE_INTERNAL){
+                mHandler.postDelayed(currentDevicesCheckerRunnable, 100);
+            }
+
             return START_STICKY;
         } catch (Exception e) {
             Log.e(LOGTAG, e.getMessage());
@@ -230,14 +278,14 @@ public class ScreencastService extends Service {
     }
 
 
-    private void registerScreencaster(boolean withAudio) {
+    private void registerScreencaster(int audioSourceType) {
         assert mRecorder == null;
         Point size = getNativeResolution();
         if (size == null) {
             return;
         }
 
-        mRecorder = new RecordingDevice(this, size.x, size.y, withAudio);
+        mRecorder = new RecordingDevice(this, size.x, size.y, audioSourceType);
         VirtualDisplay vd = mRecorder.registerVirtualDisplay(this);
         if (vd == null) {
             cleanup();
@@ -245,6 +293,7 @@ public class ScreencastService extends Service {
     }
 
     private void stopCasting() {
+        mHandler.removeCallbacksAndMessages(null);
         Utils.setStatus(getApplicationContext(), Utils.PREF_RECORDING_NOTHING);
         cleanup();
 

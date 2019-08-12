@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Audio recorder entries -->
+    <string-array name="screen_audio_recording_entries" translatable="false">
+        <item>@string/screen_audio_recording_off</item>
+        <item>@string/screen_audio_recording_internal</item>
+        <item>@string/screen_audio_recording_microphone</item>
+    </string-array>
+</resources>

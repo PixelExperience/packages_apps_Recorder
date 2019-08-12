@@ -24,20 +24,21 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.pixelexperience.recorder.utils.LastRecordHelper;
 import org.pixelexperience.recorder.utils.Utils;
 
-public class DialogActivity extends AppCompatActivity implements
-        SharedPreferences.OnSharedPreferenceChangeListener {
+public class DialogActivity extends AppCompatActivity {
     public static final String EXTRA_TITLE = "dialogTitle";
     public static final String EXTRA_LAST_SCREEN = "lastScreenItem";
     public static final String EXTRA_LAST_SOUND = "lastSoundItem";
@@ -49,7 +50,7 @@ public class DialogActivity extends AppCompatActivity implements
 
     private LinearLayout mRootView;
     private FrameLayout mContent;
-    private Switch mAudioSwitch;
+    private Spinner mAudioType;
 
     private SharedPreferences mPrefs;
 
@@ -65,7 +66,6 @@ public class DialogActivity extends AppCompatActivity implements
         mContent = findViewById(R.id.dialog_content);
 
         mPrefs = getSharedPreferences(Utils.PREFS, 0);
-        mPrefs.registerOnSharedPreferenceChangeListener(this);
 
         Intent intent = getIntent();
         int dialogTitle = intent.getIntExtra(EXTRA_TITLE, 0);
@@ -97,33 +97,21 @@ public class DialogActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onDestroy() {
-        mPrefs.unregisterOnSharedPreferenceChangeListener(this);
-        super.onDestroy();
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] results) {
         if (requestCode != REQUEST_RECORD_AUDIO_PERMS) {
             return;
         }
 
-        mAudioSwitch.setChecked(hasAudioPermission());
-        setScreenWithAudio(hasAudioPermission());
+        if (!hasAudioPermission()){
+            setScreenWithAudio(Utils.PREF_AUDIO_RECORDING_TYPE_DISABLED);
+            mAudioType.setSelection(Utils.PREF_AUDIO_RECORDING_TYPE_DISABLED);
+        }
     }
 
     @Override
     public void onBackPressed() {
         finish();
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        if (key.equals(Utils.PREF_SCREEN_WITH_AUDIO)) {
-            mAudioSwitch.setText(getString(getScreenWithAudio() ?
-                    R.string.screen_audio_message_on : R.string.screen_audio_message_off));
-        }
     }
 
     private void animateAppareance() {
@@ -169,25 +157,27 @@ public class DialogActivity extends AppCompatActivity implements
 
     private void setupAsSettingsScreen() {
         View view = createContentView(R.layout.dialog_content_screen_settings);
-        mAudioSwitch = view.findViewById(R.id.dialog_content_screen_settings_switch);
-        mAudioSwitch.setOnCheckedChangeListener((button, isChecked) -> {
-            if (hasAudioPermission()) {
-                setScreenWithAudio(isChecked);
-            } else if (isChecked) {
-                askAudioPermission();
-            } else {
-                setScreenWithAudio(false);
+        mAudioType = view.findViewById(R.id.dialog_content_screen_settings_audio_type);
+        mAudioType.setSelection(getScreenWithAudio());
+        mAudioType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setScreenWithAudio(position);
+                if (!hasAudioPermission() && position != Utils.PREF_AUDIO_RECORDING_TYPE_DISABLED) {
+                    askAudioPermission();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        boolean isEnabled = getScreenWithAudio();
-        mAudioSwitch.setChecked(isEnabled);
-        mAudioSwitch.setText(getString(isEnabled ?
-                R.string.screen_audio_message_on : R.string.screen_audio_message_off));
+        mAudioType.setSelection(getScreenWithAudio());
 
         if (Utils.isScreenRecording(this)) {
-            mAudioSwitch.setEnabled(false);
-            mAudioSwitch.setText(getString(R.string.screen_audio_message_disabled));
+            mAudioType.setEnabled(false);
         }
     }
 
@@ -206,11 +196,11 @@ public class DialogActivity extends AppCompatActivity implements
                 REQUEST_RECORD_AUDIO_PERMS);
     }
 
-    private void setScreenWithAudio(boolean enabled) {
-        mPrefs.edit().putBoolean(Utils.PREF_SCREEN_WITH_AUDIO, enabled).apply();
+    private void setScreenWithAudio(int type) {
+        mPrefs.edit().putInt(Utils.PREF_AUDIO_RECORDING_TYPE, type).apply();
     }
 
-    private boolean getScreenWithAudio() {
-        return mPrefs.getBoolean(Utils.PREF_SCREEN_WITH_AUDIO, false);
+    private int getScreenWithAudio() {
+        return mPrefs.getInt(Utils.PREF_AUDIO_RECORDING_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT);
     }
 }
