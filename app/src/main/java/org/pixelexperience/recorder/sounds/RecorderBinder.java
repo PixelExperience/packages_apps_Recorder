@@ -1,5 +1,4 @@
 /*
- * Copyright (C) 2013 The CyanogenMod Project
  * Copyright (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.screen;
+package org.pixelexperience.recorder.sounds;
 
+import android.os.Binder;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+public class RecorderBinder extends Binder {
+    private final SoundRecorderService mService;
 
-public class ScreencastStartReceiver extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        context.startService(intent.setClass(context, ScreencastService.class));
+    RecorderBinder(SoundRecorderService service) {
+        super();
+        mService = service;
+    }
+
+    public SoundRecorderService getService() {
+        return mService;
     }
 }

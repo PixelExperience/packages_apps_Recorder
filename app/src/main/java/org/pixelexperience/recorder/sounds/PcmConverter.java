@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.sounds;
+package org.pixelexperience.recorder.sounds;
 
 import android.util.Log;
 
-import org.lineageos.recorder.utils.Utils;
+import org.pixelexperience.recorder.utils.Utils;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static org.lineageos.recorder.sounds.SoundRecorderService.EXTENSION;
+import static org.pixelexperience.recorder.sounds.SoundRecorderService.EXTENSION;
 
 class PcmConverter {
     static final String WAV_EXTENSION = ".wav";

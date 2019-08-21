@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2013 The CyanogenMod Project
  * Copyright (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,27 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.ui;
+package org.pixelexperience.recorder.screen;
 
-import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.util.AttributeSet;
-import android.widget.ImageButton;
+import android.content.Intent;
 
-/**
- * Custom ImageButton implementation to avoid
- * performClick() warnings
- */
-@SuppressLint("AppCompatCustomView")
-class DragView extends ImageButton {
-
-    public DragView(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
-    }
-
+public class ScreencastControlReceiver extends BroadcastReceiver {
     @Override
-    public boolean performClick() {
-        super.performClick();
-        return false;
+    public void onReceive(Context context, Intent intent) {
+        context.startService(intent.setClass(context, ScreencastService.class));
     }
 }

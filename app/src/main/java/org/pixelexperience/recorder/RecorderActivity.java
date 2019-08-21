@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder;
+package org.pixelexperience.recorder;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -45,14 +45,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.lineageos.recorder.screen.OverlayService;
-import org.lineageos.recorder.screen.ScreencastService;
-import org.lineageos.recorder.sounds.RecorderBinder;
-import org.lineageos.recorder.sounds.SoundRecorderService;
-import org.lineageos.recorder.ui.SoundVisualizer;
-import org.lineageos.recorder.utils.LastRecordHelper;
-import org.lineageos.recorder.utils.OnBoardingHelper;
-import org.lineageos.recorder.utils.Utils;
+import org.pixelexperience.recorder.screen.OverlayService;
+import org.pixelexperience.recorder.screen.ScreencastService;
+import org.pixelexperience.recorder.sounds.RecorderBinder;
+import org.pixelexperience.recorder.sounds.SoundRecorderService;
+import org.pixelexperience.recorder.ui.SoundVisualizer;
+import org.pixelexperience.recorder.utils.LastRecordHelper;
+import org.pixelexperience.recorder.utils.OnBoardingHelper;
+import org.pixelexperience.recorder.utils.Utils;
 
 import java.util.ArrayList;
 

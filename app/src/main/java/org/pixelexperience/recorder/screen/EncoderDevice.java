@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.screen;
+package org.pixelexperience.recorder.screen;
 
 import android.content.Context;
 import android.hardware.display.DisplayManager;
@@ -29,7 +29,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Surface;
 
-import org.lineageos.recorder.R;
+import org.pixelexperience.recorder.R;
 
 import java.io.IOException;
 import java.util.List;

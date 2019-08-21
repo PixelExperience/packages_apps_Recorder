@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.utils;
+package org.pixelexperience.recorder.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,7 +23,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import org.lineageos.recorder.R;
+import org.pixelexperience.recorder.R;
 
 public class OnBoardingHelper {
     private static final String ONBOARD_SCREEN_SETTINGS = "onboard_screen_settings";

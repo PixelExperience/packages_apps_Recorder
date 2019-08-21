@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.utils;
+package org.pixelexperience.recorder.utils;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -23,10 +23,10 @@ import android.net.Uri;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 
-import org.lineageos.recorder.DialogActivity;
-import org.lineageos.recorder.R;
-import org.lineageos.recorder.screen.ScreencastService;
-import org.lineageos.recorder.sounds.SoundRecorderService;
+import org.pixelexperience.recorder.DialogActivity;
+import org.pixelexperience.recorder.R;
+import org.pixelexperience.recorder.screen.ScreencastService;
+import org.pixelexperience.recorder.sounds.SoundRecorderService;
 
 import java.io.File;
 
@@ -36,7 +36,7 @@ public class LastRecordHelper {
     private static final String KEY_LAST_SCREEN = "screen_last_path";
     private static final String KEY_LAST_SOUND_TIME = "sound_last_duration";
     private static final String KEY_LAST_SCREEN_TIME = "screen_last_duration";
-    private static final String FILE_PROVIDER = "org.lineageos.recorder.fileprovider";
+    private static final String FILE_PROVIDER = "org.pixelexperience.recorder.fileprovider";
 
     private LastRecordHelper() {
     }

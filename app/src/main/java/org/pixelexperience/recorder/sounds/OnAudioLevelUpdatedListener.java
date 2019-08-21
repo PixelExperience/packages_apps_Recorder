@@ -13,19 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.sounds;
+package org.pixelexperience.recorder.sounds;
 
-import android.os.Binder;
-
-public class RecorderBinder extends Binder {
-    private final SoundRecorderService mService;
-
-    RecorderBinder(SoundRecorderService service) {
-        super();
-        mService = service;
-    }
-
-    public SoundRecorderService getService() {
-        return mService;
-    }
+public interface OnAudioLevelUpdatedListener {
+    void onAudioLevelUpdated(int value);
 }

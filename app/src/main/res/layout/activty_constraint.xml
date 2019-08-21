@@ -43,7 +43,7 @@
             android:textColor="@color/white"
             android:textSize="28sp" />
 
-        <org.lineageos.recorder.ui.SoundVisualizer
+        <org.pixelexperience.recorder.ui.SoundVisualizer
             android:id="@+id/main_recording_visualizer"
             android:layout_width="match_parent"
             android:layout_height="128dp"

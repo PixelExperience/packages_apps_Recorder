@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.screen;
+package org.pixelexperience.recorder.screen;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -38,10 +38,10 @@ import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
-import org.lineageos.recorder.R;
-import org.lineageos.recorder.RecorderActivity;
-import org.lineageos.recorder.utils.LastRecordHelper;
-import org.lineageos.recorder.utils.Utils;
+import org.pixelexperience.recorder.R;
+import org.pixelexperience.recorder.RecorderActivity;
+import org.pixelexperience.recorder.utils.LastRecordHelper;
+import org.pixelexperience.recorder.utils.Utils;
 
 import java.lang.reflect.Method;
 import java.util.Timer;
@@ -54,13 +54,13 @@ public class ScreencastService extends Service {
 
     public static final String EXTRA_WITHAUDIO = "withaudio";
     public static final String ACTION_START_SCREENCAST =
-            "org.lineageos.recorder.screen.ACTION_START_SCREENCAST";
+            "org.pixelexperience.recorder.screen.ACTION_START_SCREENCAST";
     public static final String ACTION_STOP_SCREENCAST =
-            "org.lineageos.recorder.screen.ACTION_STOP_SCREENCAST";
+            "org.pixelexperience.recorder.screen.ACTION_STOP_SCREENCAST";
     private static final String ACTION_SCAN =
-            "org.lineageos.recorder.server.display.SCAN";
+            "org.pixelexperience.recorder.server.display.SCAN";
     private static final String ACTION_STOP_SCAN =
-            "org.lineageos.recorder.server.display.STOP_SCAN";
+            "org.pixelexperience.recorder.server.display.STOP_SCAN";
     static final String SCREENCASTER_NAME = "hidden:screen-recording";
     public static final int NOTIFICATION_ID = 61;
     private static final String LOGTAG = "ScreencastService";

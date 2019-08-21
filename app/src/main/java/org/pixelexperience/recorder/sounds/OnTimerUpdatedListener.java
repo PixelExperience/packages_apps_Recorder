@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.recorder.sounds;
+package org.pixelexperience.recorder.sounds;
 
-public interface OnAudioLevelUpdatedListener {
-    void onAudioLevelUpdated(int value);
+interface OnTimerUpdatedListener {
+    void onTimerUpdated(int seconds);
 }

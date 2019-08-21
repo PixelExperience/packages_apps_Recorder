@@ -31,7 +31,7 @@
         android:src="@drawable/ic_action_screen_record"
         android:tint="@color/white" />
 
-    <org.lineageos.recorder.ui.DragView
+    <org.pixelexperience.recorder.ui.DragView
         android:id="@+id/overlay_drag"
         android:layout_width="48dp"
         android:layout_height="48dp"

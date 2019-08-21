@@ -15,7 +15,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.lineageos.recorder">
+    package="org.pixelexperience.recorder">
 
     <uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT" />
     <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
@@ -47,7 +47,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.provider.MediaStore.RECORD_SOUND" />
-                <action android:name="org.lineageos.recorder.server.display.SCAN" />
+                <action android:name="org.pixelexperience.recorder.server.display.SCAN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -72,8 +72,8 @@
             android:name=".screen.ScreencastStartReceiver"
             android:permission="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT">
             <intent-filter>
-                <action android:name="org.lineageos.recorder.screen.ACTION_START_SCREENCAST" />
-                <action android:name="org.lineageos.recorder.screen.ACTION_STOP_SCREENCAST" />
+                <action android:name="org.pixelexperience.recorder.screen.ACTION_START_SCREENCAST" />
+                <action android:name="org.pixelexperience.recorder.screen.ACTION_STOP_SCREENCAST" />
             </intent-filter>
         </receiver>
 
@@ -81,14 +81,14 @@
             android:name=".screen.ScreencastControlReceiver"
             android:permission="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT">
             <intent-filter>
-                <action android:name="org.lineageos.recorder.screen.ACTION_STOP_SCREENCAST" />
+                <action android:name="org.pixelexperience.recorder.screen.ACTION_STOP_SCREENCAST" />
             </intent-filter>
         </receiver>
 
         <!-- File provider -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="org.lineageos.recorder.fileprovider"
+            android:authorities="org.pixelexperience.recorder.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
