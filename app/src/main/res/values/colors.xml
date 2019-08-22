@@ -25,4 +25,5 @@
     <color name="overlay_icon">#ff1e1f22</color>
     <color name="fab_icon">@color/colorAccent</color>
     <color name="icon">#56000000</color>
+    <color name="ic_launcher_background">#1e1f22</color>
 </resources>
