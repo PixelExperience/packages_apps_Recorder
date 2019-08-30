@@ -60,12 +60,13 @@ public class OverlayService extends Service {
             Utils.setStatus(Utils.UiStatus.SCREEN);
             onDestroy();
         });
-        mLayer.setSettingsButtonOnActionClickListener(() -> {
+        mLayer.setSettingsButtonOnClickListener(() -> {
             Intent intent_ = new Intent(this, RecorderActivity.class);
             intent_.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent_);
             onDestroy();
         });
+        mLayer.setCloseButtonOnClickListener(this::onDestroy);
 
         Notification notification = new NotificationCompat.Builder(
                 this, SCREENCAST_OVERLAY_NOTIFICATION_CHANNEL)

@@ -15,6 +15,7 @@
  */
 package org.pixelexperience.recorder.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.view.Gravity;
@@ -28,14 +29,22 @@ import android.widget.ImageButton;
 
 import org.pixelexperience.recorder.R;
 
-public class OverlayLayer extends View {
+public class OverlayLayer extends View implements View.OnTouchListener {
 
     private final FrameLayout mLayout;
     private final WindowManager mManager;
     private final WindowManager.LayoutParams mParams;
     private final ImageButton mButton;
     private final ImageButton mSettingsButton;
+    private final ImageButton mCloseButton;
+    private int origX;
+    private int origY;
+    private int touchX;
+    private int touchY;
+    private final float movimentThreshold = 10;
+    private boolean isClick;
 
+    @SuppressLint("ClickableViewAccessibility")
     public OverlayLayer(Context context) {
         super(context);
 
@@ -59,42 +68,11 @@ public class OverlayLayer extends View {
 
         mButton = mLayout.findViewById(R.id.overlay_button);
         mSettingsButton = mLayout.findViewById(R.id.overlay_settings);
-        DragView drag = mLayout.findViewById(R.id.overlay_drag);
-        drag.setOnTouchListener(new OnTouchListener() {
-            private int origX;
-            private int origY;
-            private int touchX;
-            private int touchY;
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int x = (int) event.getRawX();
-                int y = (int) event.getRawY();
-
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        origX = mParams.x;
-                        origY = mParams.y;
-                        touchX = x;
-                        touchY = y;
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        mParams.x = origX + x - touchX;
-                        mParams.y = origY + y - touchY;
-                        if (mManager != null) {
-                            mManager.updateViewLayout(mLayout, mParams);
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        v.performClick();
-                        break;
-                    default:
-                        return false;
-                }
-
-                return true;
-            }
-        });
+        mCloseButton = mLayout.findViewById(R.id.overlay_close);
+        mLayout.setOnTouchListener(this);
+        mButton.setOnTouchListener(this);
+        mSettingsButton.setOnTouchListener(this);
+        mCloseButton.setOnTouchListener(this);
     }
 
     public void destroy() {
@@ -106,8 +84,50 @@ public class OverlayLayer extends View {
         mButton.setOnClickListener(v -> listener.onClick());
     }
 
-    public void setSettingsButtonOnActionClickListener(ActionClickListener listener) {
+    public void setSettingsButtonOnClickListener(ActionClickListener listener) {
         mSettingsButton.setOnClickListener(v -> listener.onClick());
+    }
+
+
+    public void setCloseButtonOnClickListener(ActionClickListener listener) {
+        mCloseButton.setOnClickListener(v -> listener.onClick());
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        int x = (int) event.getRawX();
+        int y = (int) event.getRawY();
+
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                origX = mParams.x;
+                origY = mParams.y;
+                touchX = x;
+                touchY = y;
+                isClick = true;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                mParams.x = origX + x - touchX;
+                mParams.y = origY + y - touchY;
+                if (mManager != null) {
+                    mManager.updateViewLayout(mLayout, mParams);
+                }
+                if (isClick && (Math.abs(origX - mParams.x) > movimentThreshold ||
+                        Math.abs(origY - mParams.y) > movimentThreshold)) {
+                    isClick = false;
+                }
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                if (isClick) {
+                    v.performClick();
+                }
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 
     public interface ActionClickListener {

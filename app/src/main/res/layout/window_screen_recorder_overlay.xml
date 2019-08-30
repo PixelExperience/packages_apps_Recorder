@@ -40,12 +40,12 @@
         android:scaleType="center"
         android:src="@drawable/ic_settings_overlay" />
 
-    <org.pixelexperience.recorder.ui.DragView
-        android:id="@+id/overlay_drag"
+    <ImageButton
+        android:id="@+id/overlay_close"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@null"
         android:padding="12dp"
         android:scaleType="center"
-        android:src="@drawable/ic_drag" />
+        android:src="@drawable/ic_close_overlay" />
 </LinearLayout>
