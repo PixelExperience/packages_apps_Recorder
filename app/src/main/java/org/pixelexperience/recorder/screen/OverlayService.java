@@ -35,7 +35,6 @@ public class OverlayService extends Service {
     private static final String SCREENCAST_OVERLAY_NOTIFICATION_CHANNEL =
             "screencast_overlay_notification_channel";
 
-    public static final String EXTRA_AUDIO_TYPE = "extra_audio_type";
     private final static int FG_ID = 123;
 
     /* Horrible hack to determine whether the service is running:
@@ -48,21 +47,17 @@ public class OverlayService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int id) {
-        int audioType = intent != null ?
-                intent.getIntExtra(EXTRA_AUDIO_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT) :
-                Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT;
-
         mLayer = new OverlayLayer(this);
         mLayer.setOnActionClickListener(() -> {
             Intent fabIntent = new Intent(ScreencastService.ACTION_START_SCREENCAST);
-            fabIntent.putExtra(ScreencastService.EXTRA_WITHAUDIO_TYPE, audioType);
             startService(fabIntent.setClass(this, ScreencastService.class));
-            Utils.setStatus(Utils.UiStatus.SCREEN);
+            Utils.setStatus(Utils.UiStatus.SCREEN, this);
             onDestroy();
         });
         mLayer.setSettingsButtonOnClickListener(() -> {
             Intent intent_ = new Intent(this, RecorderActivity.class);
             intent_.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent_.putExtra(RecorderActivity.EXTRA_UI_TYPE, Utils.SCREEN_PREFS);
             startActivity(intent_);
             onDestroy();
         });

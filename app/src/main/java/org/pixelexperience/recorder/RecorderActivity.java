@@ -22,29 +22,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.transition.TransitionManager;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.transition.TransitionManager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.pixelexperience.recorder.screen.OverlayService;
 import org.pixelexperience.recorder.screen.ScreencastService;
@@ -53,15 +53,16 @@ import org.pixelexperience.recorder.sounds.SoundRecorderService;
 import org.pixelexperience.recorder.ui.SoundVisualizer;
 import org.pixelexperience.recorder.utils.LastRecordHelper;
 import org.pixelexperience.recorder.utils.OnBoardingHelper;
+import org.pixelexperience.recorder.utils.PermissionUtils;
 import org.pixelexperience.recorder.utils.Utils;
 
 import java.util.ArrayList;
 
-public class RecorderActivity extends AppCompatActivity implements
-        SharedPreferences.OnSharedPreferenceChangeListener {
+public class RecorderActivity extends AppCompatActivity {
     private static final int REQUEST_SCREEN_REC_PERMS = 439;
     private static final int REQUEST_SOUND_REC_PERMS = 440;
     private static final int REQUEST_DIALOG_ACTIVITY = 441;
+    public static final String EXTRA_UI_TYPE = "ui";
 
     private static final int[] PERMISSION_ERROR_MESSAGE_RES_IDS = {
             0,
@@ -76,7 +77,6 @@ public class RecorderActivity extends AppCompatActivity implements
 
     private ServiceConnection mConnection;
     private SoundRecorderService mSoundService;
-    private SharedPreferences mPrefs;
 
     private ConstraintLayout mConstraintRoot;
 
@@ -100,6 +100,17 @@ public class RecorderActivity extends AppCompatActivity implements
                         Utils.isSoundRecording()) {
                     toggleSoundRecorder();
                 }
+            }
+        }
+    };
+
+    private final BroadcastReceiver mRecordingStateChanged = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (Utils.ACTION_RECORDING_STATE_CHANGED.equals(intent.getAction())) {
+                refresh();
+            }else if (Utils.ACTION_HIDE_ACTIVITY.equals(intent.getAction())) {
+                onBackPressed();
             }
         }
     };
@@ -128,20 +139,37 @@ public class RecorderActivity extends AppCompatActivity implements
         mScreenLast.setOnClickListener(v -> openLastScreen());
         mSoundLast.setOnClickListener(v -> openLastSound());
 
-        mPrefs = getSharedPreferences(Utils.PREFS, 0);
-        mPrefs.registerOnSharedPreferenceChangeListener(this);
-
         bindSoundRecService();
 
         OnBoardingHelper.onBoardScreenSettings(this, mScreenSettings);
+        if (getUiParam().equals(Utils.UiStatus.SOUND.toString())) {
+            new Handler().postDelayed(this::toggleSoundRecorder, 500);
+        }else if (getUiParam().equals(Utils.UiStatus.SCREEN.toString())) {
+            new Handler().postDelayed(this::toggleScreenRecorder, 500);
+        }else if (getUiParam().equals(Utils.SCREEN_PREFS)) {
+            new Handler().postDelayed(this::openScreenSettings, 500);
+        }
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Utils.ACTION_RECORDING_STATE_CHANGED);
+        filter.addAction(Utils.ACTION_HIDE_ACTIVITY);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRecordingStateChanged,filter);
     }
+
+    private String getUiParam() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey(EXTRA_UI_TYPE)) {
+            return extras.getString(EXTRA_UI_TYPE);
+        }
+        return "";
+    }
+
 
     @Override
     public void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRecordingStateChanged);
         if (mConnection != null) {
             unbindService(mConnection);
         }
-        mPrefs.unregisterOnSharedPreferenceChangeListener(this);
         super.onDestroy();
     }
 
@@ -161,7 +189,7 @@ public class RecorderActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        stopOverlayService();
+        Utils.stopOverlayService(this);
         refresh();
         clearTransitionNames();
     }
@@ -169,8 +197,8 @@ public class RecorderActivity extends AppCompatActivity implements
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] results) {
-        if (requestCode == REQUEST_SCREEN_REC_PERMS && hasAllScreenRecorderPermissions() ||
-                requestCode == REQUEST_SOUND_REC_PERMS && hasAllAudioRecorderPermissions()) {
+        if (requestCode == REQUEST_SCREEN_REC_PERMS && PermissionUtils.hasAllScreenRecorderPermissions(this) ||
+                requestCode == REQUEST_SOUND_REC_PERMS && PermissionUtils.hasAllAudioRecorderPermissions(this)) {
             toggleAfterPermissionRequest(requestCode);
             return;
         }
@@ -181,13 +209,13 @@ public class RecorderActivity extends AppCompatActivity implements
             // Explain the user why the denied permission is needed
             int error = 0;
 
-            if (!hasAudioPermission()) {
+            if (!PermissionUtils.hasAudioPermission(this)) {
                 error |= 1;
             }
-            if (!hasStoragePermission()) {
+            if (!PermissionUtils.hasStoragePermission(this)) {
                 error |= 1 << 1;
             }
-            if (!hasPhoneReaderPermission()) {
+            if (!PermissionUtils.hasPhoneReaderPermission(this)) {
                 error |= 1 << 2;
             }
 
@@ -212,14 +240,6 @@ public class RecorderActivity extends AppCompatActivity implements
                     .show();
         }
     }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        if (Utils.KEY_RECORDING.equals(key)) {
-            refresh();
-        }
-    }
-
 
     private void toggleAfterPermissionRequest(int requestCode) {
         switch (requestCode) {
@@ -259,12 +279,12 @@ public class RecorderActivity extends AppCompatActivity implements
             mSoundService.stopRecording();
             mSoundService.createShareNotification();
             stopService(new Intent(this, SoundRecorderService.class));
-            Utils.setStatus(Utils.UiStatus.NOTHING);
+            Utils.setStatus(Utils.UiStatus.NOTHING, this);
         } else {
             // Start
             startService(new Intent(this, SoundRecorderService.class));
             mSoundService.startRecording();
-            Utils.setStatus(Utils.UiStatus.SOUND);
+            Utils.setStatus(Utils.UiStatus.SOUND, this);
         }
         refresh();
     }
@@ -276,19 +296,19 @@ public class RecorderActivity extends AppCompatActivity implements
 
         if (Utils.isScreenRecording()) {
             // Stop
-            Utils.setStatus(Utils.UiStatus.NOTHING);
+            Utils.setStatus(Utils.UiStatus.NOTHING, this);
             startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
                     .setClass(this, ScreencastService.class));
         } else {
-            if (getAudioRecordingType() == Utils.PREF_AUDIO_RECORDING_TYPE_INTERNAL){
+            if (Utils.getAudioRecordingType(this) == Utils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
                 if (!Utils.isInternalAudioRecordingAllowed(this, true)) {
                     return;
                 }
             }
             // Start
             new Handler().postDelayed(() -> {
+                Utils.stopOverlayService(this);
                 Intent intent = new Intent(this, OverlayService.class);
-                intent.putExtra(OverlayService.EXTRA_AUDIO_TYPE, getAudioRecordingType());
                 startService(intent);
                 onBackPressed();
             }, 500);
@@ -335,45 +355,19 @@ public class RecorderActivity extends AppCompatActivity implements
         set.applyTo(mConstraintRoot);
     }
 
-    private boolean hasStoragePermission() {
-        int result = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean hasAudioPermission() {
-        int result = checkSelfPermission(Manifest.permission.RECORD_AUDIO);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean hasPhoneReaderPermission() {
-        int result = checkSelfPermission(Manifest.permission.READ_PHONE_STATE);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean hasDrawOverOtherAppsPermission() {
-        return Settings.canDrawOverlays(this);
-    }
-
-    private boolean hasAllAudioRecorderPermissions() {
-        return hasStoragePermission() && hasAudioPermission() && hasPhoneReaderPermission();
-    }
-
-    private boolean hasAllScreenRecorderPermissions() {
-        return hasStoragePermission();
-    }
 
     private boolean checkSoundRecPermissions() {
         ArrayList<String> permissions = new ArrayList<>();
 
-        if (!hasStoragePermission()) {
+        if (!PermissionUtils.hasStoragePermission(this)) {
             permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
 
-        if (!hasAudioPermission()) {
+        if (!PermissionUtils.hasAudioPermission(this)) {
             permissions.add(Manifest.permission.RECORD_AUDIO);
         }
 
-        if (!hasPhoneReaderPermission()) {
+        if (!PermissionUtils.hasPhoneReaderPermission(this)) {
             permissions.add(Manifest.permission.READ_PHONE_STATE);
         }
 
@@ -387,7 +381,7 @@ public class RecorderActivity extends AppCompatActivity implements
     }
 
     private boolean checkScreenRecPermissions() {
-        if (!hasDrawOverOtherAppsPermission()) {
+        if (!PermissionUtils.hasDrawOverOtherAppsPermission(this)) {
             Intent overlayIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:" + getPackageName()));
             new AlertDialog.Builder(this)
@@ -399,17 +393,13 @@ public class RecorderActivity extends AppCompatActivity implements
             return true;
         }
 
-        if (hasStoragePermission()) {
+        if (PermissionUtils.hasStoragePermission(this)) {
             return false;
         }
 
         final String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissions(perms, REQUEST_SCREEN_REC_PERMS);
         return true;
-    }
-
-    private int getAudioRecordingType() {
-        return mPrefs.getInt(Utils.PREF_AUDIO_RECORDING_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT);
     }
 
     private void setupConnection() {
@@ -429,17 +419,10 @@ public class RecorderActivity extends AppCompatActivity implements
     }
 
     private void bindSoundRecService() {
-        if (mSoundService == null && hasAllAudioRecorderPermissions()) {
+        if (mSoundService == null && PermissionUtils.hasAllAudioRecorderPermissions(this)) {
             setupConnection();
             bindService(new Intent(this, SoundRecorderService.class),
                     mConnection, BIND_AUTO_CREATE);
-        }
-    }
-
-    private void stopOverlayService() {
-        // Stop overlay service if running
-        if (OverlayService.isRunning) {
-            stopService(new Intent(this, OverlayService.class));
         }
     }
 

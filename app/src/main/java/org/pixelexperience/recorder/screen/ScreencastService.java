@@ -24,6 +24,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
@@ -54,7 +55,6 @@ public class ScreencastService extends Service {
     private static final String SCREENCAST_NOTIFICATION_CHANNEL =
             "screencast_notification_channel";
 
-    public static final String EXTRA_WITHAUDIO_TYPE = "withaudiotype";
     public static final String ACTION_START_SCREENCAST =
             "org.pixelexperience.recorder.screen.ACTION_START_SCREENCAST";
     public static final String ACTION_STOP_SCREENCAST =
@@ -187,12 +187,18 @@ public class ScreencastService extends Service {
                 return START_NOT_STICKY;
             }
 
+            if (Utils.getAudioRecordingType(this) == Utils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
+                if (!Utils.isInternalAudioRecordingAllowed(this, true)) {
+                    return START_NOT_STICKY;
+                }
+            }
+
             mCurrentDevices = 0;
 
             mStartTime = SystemClock.elapsedRealtime();
-            mAudioSource = intent.getIntExtra(EXTRA_WITHAUDIO_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT);
+            mAudioSource = Utils.getAudioRecordingType(this);
 
-            registerScreencaster(intent.getIntExtra(EXTRA_WITHAUDIO_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT));
+            registerScreencaster(mAudioSource);
             mBuilder = createNotificationBuilder();
             mTimer = new Timer();
             mTimer.scheduleAtFixedRate(new TimerTask() {
@@ -202,7 +208,7 @@ public class ScreencastService extends Service {
                 }
             }, 100, 1000);
 
-            Utils.setStatus(Utils.PREF_RECORDING_SCREEN);
+            Utils.setStatus(Utils.PREF_RECORDING_SCREEN, this);
 
             startForeground(NOTIFICATION_ID, mBuilder.build());
 
@@ -294,7 +300,7 @@ public class ScreencastService extends Service {
 
     private void stopCasting() {
         mHandler.removeCallbacksAndMessages(null);
-        Utils.setStatus(Utils.PREF_RECORDING_NOTHING);
+        Utils.setStatus(Utils.PREF_RECORDING_NOTHING, this);
         cleanup();
 
         if (hasNoAvailableSpace()) {
