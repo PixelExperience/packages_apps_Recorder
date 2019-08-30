@@ -176,7 +176,7 @@ public class DialogActivity extends AppCompatActivity {
 
         mAudioType.setSelection(getScreenWithAudio());
 
-        if (Utils.isScreenRecording(this)) {
+        if (Utils.isScreenRecording()) {
             mAudioType.setEnabled(false);
         }
     }

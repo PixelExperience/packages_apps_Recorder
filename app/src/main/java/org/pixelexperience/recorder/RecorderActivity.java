@@ -97,7 +97,7 @@ public class RecorderActivity extends AppCompatActivity implements
             if (TelephonyManager.ACTION_PHONE_STATE_CHANGED.equals(intent.getAction())) {
                 int state = intent.getIntExtra(TelephonyManager.EXTRA_STATE, -1);
                 if (state == TelephonyManager.CALL_STATE_OFFHOOK &&
-                        Utils.isSoundRecording(context)) {
+                        Utils.isSoundRecording()) {
                     toggleSoundRecorder();
                 }
             }
@@ -259,12 +259,12 @@ public class RecorderActivity extends AppCompatActivity implements
             mSoundService.stopRecording();
             mSoundService.createShareNotification();
             stopService(new Intent(this, SoundRecorderService.class));
-            Utils.setStatus(this, Utils.UiStatus.NOTHING);
+            Utils.setStatus(Utils.UiStatus.NOTHING);
         } else {
             // Start
             startService(new Intent(this, SoundRecorderService.class));
             mSoundService.startRecording();
-            Utils.setStatus(this, Utils.UiStatus.SOUND);
+            Utils.setStatus(Utils.UiStatus.SOUND);
         }
         refresh();
     }
@@ -274,9 +274,9 @@ public class RecorderActivity extends AppCompatActivity implements
             return;
         }
 
-        if (Utils.isScreenRecording(this)) {
+        if (Utils.isScreenRecording()) {
             // Stop
-            Utils.setStatus(this, Utils.UiStatus.NOTHING);
+            Utils.setStatus(Utils.UiStatus.NOTHING);
             startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
                     .setClass(this, ScreencastService.class));
         } else {
@@ -297,8 +297,8 @@ public class RecorderActivity extends AppCompatActivity implements
 
     private void refresh() {
         ConstraintSet set = new ConstraintSet();
-        if (Utils.isRecording(this)) {
-            boolean screenRec = Utils.isScreenRecording(this);
+        if (Utils.isRecording()) {
+            boolean screenRec = Utils.isScreenRecording();
 
             mRecordingText.setText(getString(screenRec ?
                     R.string.screen_recording_message : R.string.sound_recording_title_working));
@@ -466,8 +466,8 @@ public class RecorderActivity extends AppCompatActivity implements
         int statusBarColor;
         int navigationBarColor;
 
-        if (Utils.isRecording(this)) {
-            statusBarColor = ContextCompat.getColor(this, Utils.isScreenRecording(this) ?
+        if (Utils.isRecording()) {
+            statusBarColor = ContextCompat.getColor(this, Utils.isScreenRecording() ?
                     R.color.screen : R.color.sound);
             navigationBarColor = statusBarColor;
         } else {

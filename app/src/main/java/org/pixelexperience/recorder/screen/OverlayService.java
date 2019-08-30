@@ -57,7 +57,7 @@ public class OverlayService extends Service {
             Intent fabIntent = new Intent(ScreencastService.ACTION_START_SCREENCAST);
             fabIntent.putExtra(ScreencastService.EXTRA_WITHAUDIO_TYPE, audioType);
             startService(fabIntent.setClass(this, ScreencastService.class));
-            Utils.setStatus(getApplication(), Utils.UiStatus.SCREEN);
+            Utils.setStatus(Utils.UiStatus.SCREEN);
             onDestroy();
         });
         mLayer.setSettingsButtonOnActionClickListener(() -> {

@@ -202,7 +202,7 @@ public class ScreencastService extends Service {
                 }
             }, 100, 1000);
 
-            Utils.setStatus(getApplicationContext(), Utils.PREF_RECORDING_SCREEN);
+            Utils.setStatus(Utils.PREF_RECORDING_SCREEN);
 
             startForeground(NOTIFICATION_ID, mBuilder.build());
 
@@ -294,7 +294,7 @@ public class ScreencastService extends Service {
 
     private void stopCasting() {
         mHandler.removeCallbacksAndMessages(null);
-        Utils.setStatus(getApplicationContext(), Utils.PREF_RECORDING_NOTHING);
+        Utils.setStatus(Utils.PREF_RECORDING_NOTHING);
         cleanup();
 
         if (hasNoAvailableSpace()) {
