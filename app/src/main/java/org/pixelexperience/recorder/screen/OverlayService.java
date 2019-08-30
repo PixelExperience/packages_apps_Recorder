@@ -60,6 +60,12 @@ public class OverlayService extends Service {
             Utils.setStatus(getApplication(), Utils.UiStatus.SCREEN);
             onDestroy();
         });
+        mLayer.setSettingsButtonOnActionClickListener(() -> {
+            Intent intent_ = new Intent(this, RecorderActivity.class);
+            intent_.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent_);
+            onDestroy();
+        });
 
         Notification notification = new NotificationCompat.Builder(
                 this, SCREENCAST_OVERLAY_NOTIFICATION_CHANNEL)
@@ -86,8 +92,7 @@ public class OverlayService extends Service {
 
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
-                notificationManager == null || notificationManager
+        if (notificationManager
                 .getNotificationChannel(SCREENCAST_OVERLAY_NOTIFICATION_CHANNEL) != null) {
             return;
         }

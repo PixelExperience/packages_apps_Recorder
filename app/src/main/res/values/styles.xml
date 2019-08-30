@@ -48,6 +48,7 @@
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:textColor">@color/icon</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">google-sans-medium</item>
         <item name="android:maxLines">1</item>
         <item name="android:layout_alignParentBottom">true</item>
     </style>
@@ -57,7 +58,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">16dp</item>
         <item name="android:stateListAnimator">@animator/lift_on_touch</item>
-        <item name="backgroundTint">@color/white</item>
+        <item name="backgroundTint">#ffffff</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
 

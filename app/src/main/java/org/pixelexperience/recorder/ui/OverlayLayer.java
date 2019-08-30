@@ -17,7 +17,6 @@ package org.pixelexperience.recorder.ui;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
-import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -35,6 +34,7 @@ public class OverlayLayer extends View {
     private final WindowManager mManager;
     private final WindowManager.LayoutParams mParams;
     private final ImageButton mButton;
+    private final ImageButton mSettingsButton;
 
     public OverlayLayer(Context context) {
         super(context);
@@ -45,9 +45,7 @@ public class OverlayLayer extends View {
         mParams = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
-                        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY :
-                        WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
                         WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
                 PixelFormat.TRANSLUCENT);
@@ -60,6 +58,7 @@ public class OverlayLayer extends View {
         }
 
         mButton = mLayout.findViewById(R.id.overlay_button);
+        mSettingsButton = mLayout.findViewById(R.id.overlay_settings);
         DragView drag = mLayout.findViewById(R.id.overlay_drag);
         drag.setOnTouchListener(new OnTouchListener() {
             private int origX;
@@ -105,6 +104,10 @@ public class OverlayLayer extends View {
 
     public void setOnActionClickListener(ActionClickListener listener) {
         mButton.setOnClickListener(v -> listener.onClick());
+    }
+
+    public void setSettingsButtonOnActionClickListener(ActionClickListener listener) {
+        mSettingsButton.setOnClickListener(v -> listener.onClick());
     }
 
     public interface ActionClickListener {

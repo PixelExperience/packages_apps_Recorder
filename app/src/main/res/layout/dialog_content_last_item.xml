@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:textColor="@color/black"
+        android:textColor="@color/icon"
         android:textSize="14sp" />
 
     <LinearLayout style="@style/AppTheme.ActionsLayout">

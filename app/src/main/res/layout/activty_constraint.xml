@@ -40,8 +40,9 @@
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textColor="@color/icon"
+            android:fontFamily="google-sans-medium"
+            android:textSize="20sp" />
 
         <org.pixelexperience.recorder.ui.SoundVisualizer
             android:id="@+id/main_recording_visualizer"

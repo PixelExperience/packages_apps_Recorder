@@ -116,8 +116,7 @@ public class SoundRecorderService extends Service {
 
         mNotificationManager = getSystemService(NotificationManager.class);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
-                mNotificationManager == null || mNotificationManager.getNotificationChannel(
+        if (mNotificationManager.getNotificationChannel(
                         SOUNDRECORDER_NOTIFICATION_CHANNEL) != null) {
             return;
         }
