@@ -59,10 +59,6 @@ public class ScreencastService extends Service {
             "org.pixelexperience.recorder.screen.ACTION_START_SCREENCAST";
     public static final String ACTION_STOP_SCREENCAST =
             "org.pixelexperience.recorder.screen.ACTION_STOP_SCREENCAST";
-    private static final String ACTION_SCAN =
-            "org.pixelexperience.recorder.server.display.SCAN";
-    private static final String ACTION_STOP_SCAN =
-            "org.pixelexperience.recorder.server.display.STOP_SCAN";
     static final String SCREENCASTER_NAME = "hidden:screen-recording";
     public static final int NOTIFICATION_ID = 61;
     private static final String LOGTAG = "ScreencastService";
@@ -133,9 +129,6 @@ public class ScreencastService extends Service {
         }
 
         switch (action) {
-            case ACTION_SCAN:
-            case ACTION_STOP_SCAN:
-                return START_STICKY;
             case ACTION_START_SCREENCAST:
                 return startScreencasting(intent);
             case ACTION_STOP_SCREENCAST:
