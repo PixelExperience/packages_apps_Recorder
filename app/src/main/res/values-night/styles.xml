@@ -21,5 +21,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="actionBarStyle">@style/AppTheme.ActionBar</item>
     </style>
 </resources>

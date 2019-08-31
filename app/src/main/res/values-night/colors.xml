@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <color name="colorPrimary">#ff313235</color>
+    <color name="colorPrimary">#ff1e1f22</color>
     <color name="colorPrimaryDark">#ff1e1f22</color>
     <color name="overlay_icon">#fafafa</color>
     <color name="icon">#fafafa</color>
