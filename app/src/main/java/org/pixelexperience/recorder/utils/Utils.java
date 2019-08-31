@@ -19,7 +19,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioSystem;
 import android.util.DisplayMetrics;
@@ -34,18 +33,15 @@ import java.io.Closeable;
 import java.io.IOException;
 
 public class Utils {
-    public static final String PREFS = "preferences";
     public static final String SCREEN_PREFS = "screen_preferences";
     public static final String ACTION_RECORDING_STATE_CHANGED = "org.pixelexperience.recorder.RECORDING_STATE_CHANGED";
     public static final String ACTION_HIDE_ACTIVITY = "org.pixelexperience.recorder.HIDE_ACTIVITY";
     public static final String PREF_RECORDING_NOTHING = "nothing";
     public static final String PREF_RECORDING_SCREEN = "screen";
     public static final String PREF_RECORDING_SOUND = "sound";
-    public static final String PREF_AUDIO_RECORDING_TYPE = "audio_recording_type";
-    public static final int PREF_AUDIO_RECORDING_TYPE_DISABLED = 0;
-    public static final int PREF_AUDIO_RECORDING_TYPE_INTERNAL = 1;
-    public static final int PREF_AUDIO_RECORDING_TYPE_MICROPHONE = 2;
-    public static final int PREF_AUDIO_RECORDING_TYPE_DEFAULT = PREF_AUDIO_RECORDING_TYPE_DISABLED;
+    public static final int SCREEN_RECORD_REQUEST_CODE = 1058;
+    public static final String SCREEN_RECORD_INTENT_DATA = "recorder_intent_data";
+    public static final String SCREEN_RECORD_INTENT_RESULT = "recorder_intent_result";
 
     private Utils() {
     }
@@ -143,11 +139,6 @@ public class Utils {
     private static int getDarkenedColorValue(int value) {
         float dark = 0.8f; // -20% lightness
         return Math.min(Math.round(value * dark), 255);
-    }
-
-    public static int getAudioRecordingType(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(Utils.PREFS, 0);
-        return prefs.getInt(Utils.PREF_AUDIO_RECORDING_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT);
     }
 
     public static void stopOverlayService(Context context) {

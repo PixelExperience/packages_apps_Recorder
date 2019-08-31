@@ -54,6 +54,7 @@ import org.pixelexperience.recorder.ui.SoundVisualizer;
 import org.pixelexperience.recorder.utils.LastRecordHelper;
 import org.pixelexperience.recorder.utils.OnBoardingHelper;
 import org.pixelexperience.recorder.utils.PermissionUtils;
+import org.pixelexperience.recorder.utils.PreferenceUtils;
 import org.pixelexperience.recorder.utils.Utils;
 
 import java.util.ArrayList;
@@ -90,6 +91,7 @@ public class RecorderActivity extends AppCompatActivity {
     private RelativeLayout mRecordingLayout;
     private TextView mRecordingText;
     private SoundVisualizer mRecordingVisualizer;
+    private PreferenceUtils mPreferenceUtils;
 
     private final BroadcastReceiver mTelephonyReceiver = new BroadcastReceiver() {
         @Override
@@ -140,6 +142,7 @@ public class RecorderActivity extends AppCompatActivity {
         mSoundLast.setOnClickListener(v -> openLastSound());
 
         bindSoundRecService();
+        mPreferenceUtils = new PreferenceUtils(this);
 
         OnBoardingHelper.onBoardScreenSettings(this, mScreenSettings);
         if (getUiParam().equals(Utils.UiStatus.SOUND.toString())) {
@@ -300,7 +303,7 @@ public class RecorderActivity extends AppCompatActivity {
             startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
                     .setClass(this, ScreencastService.class));
         } else {
-            if (Utils.getAudioRecordingType(this) == Utils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
+            if (mPreferenceUtils.getAudioRecordingType() == PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
                 if (!Utils.isInternalAudioRecordingAllowed(this, true)) {
                     return;
                 }

@@ -17,14 +17,8 @@ package org.pixelexperience.recorder;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +29,13 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.pixelexperience.recorder.utils.LastRecordHelper;
+import org.pixelexperience.recorder.utils.PreferenceUtils;
 import org.pixelexperience.recorder.utils.Utils;
 
 public class DialogActivity extends AppCompatActivity {
@@ -52,7 +52,7 @@ public class DialogActivity extends AppCompatActivity {
     private FrameLayout mContent;
     private Spinner mAudioType;
 
-    private SharedPreferences mPrefs;
+    private PreferenceUtils mPreferenceUtils;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -65,7 +65,7 @@ public class DialogActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.dialog_title);
         mContent = findViewById(R.id.dialog_content);
 
-        mPrefs = getSharedPreferences(Utils.PREFS, 0);
+        mPreferenceUtils = new PreferenceUtils(this);
 
         Intent intent = getIntent();
         int dialogTitle = intent.getIntExtra(EXTRA_TITLE, 0);
@@ -104,8 +104,8 @@ public class DialogActivity extends AppCompatActivity {
         }
 
         if (!hasAudioPermission()){
-            setScreenWithAudio(Utils.PREF_AUDIO_RECORDING_TYPE_DISABLED);
-            mAudioType.setSelection(Utils.PREF_AUDIO_RECORDING_TYPE_DISABLED);
+            mPreferenceUtils.setAudioRecordingType(PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_DISABLED);
+            mAudioType.setSelection(PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_DISABLED);
         }
     }
 
@@ -158,12 +158,12 @@ public class DialogActivity extends AppCompatActivity {
     private void setupAsSettingsScreen() {
         View view = createContentView(R.layout.dialog_content_screen_settings);
         mAudioType = view.findViewById(R.id.dialog_content_screen_settings_audio_type);
-        mAudioType.setSelection(getScreenWithAudio());
+        mAudioType.setSelection(mPreferenceUtils.getAudioRecordingType());
         mAudioType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setScreenWithAudio(position);
-                if (!hasAudioPermission() && position != Utils.PREF_AUDIO_RECORDING_TYPE_DISABLED) {
+                mPreferenceUtils.setAudioRecordingType(position);
+                if (!hasAudioPermission() && position != PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_DISABLED) {
                     askAudioPermission();
                 }
             }
@@ -174,7 +174,7 @@ public class DialogActivity extends AppCompatActivity {
             }
         });
 
-        mAudioType.setSelection(getScreenWithAudio());
+        mAudioType.setSelection(mPreferenceUtils.getAudioRecordingType());
 
         if (Utils.isScreenRecording()) {
             mAudioType.setEnabled(false);
@@ -194,13 +194,5 @@ public class DialogActivity extends AppCompatActivity {
     private void askAudioPermission() {
         requestPermissions(new String[]{ Manifest.permission.RECORD_AUDIO },
                 REQUEST_RECORD_AUDIO_PERMS);
-    }
-
-    private void setScreenWithAudio(int type) {
-        mPrefs.edit().putInt(Utils.PREF_AUDIO_RECORDING_TYPE, type).apply();
-    }
-
-    private int getScreenWithAudio() {
-        return mPrefs.getInt(Utils.PREF_AUDIO_RECORDING_TYPE, Utils.PREF_AUDIO_RECORDING_TYPE_DEFAULT);
     }
 }

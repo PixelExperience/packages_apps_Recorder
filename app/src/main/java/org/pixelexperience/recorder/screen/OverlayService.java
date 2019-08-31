@@ -21,8 +21,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
+
 import androidx.core.app.NotificationCompat;
 
 import org.pixelexperience.recorder.R;
@@ -49,9 +49,9 @@ public class OverlayService extends Service {
     public int onStartCommand(Intent intent, int flags, int id) {
         mLayer = new OverlayLayer(this);
         mLayer.setOnActionClickListener(() -> {
-            Intent fabIntent = new Intent(ScreencastService.ACTION_START_SCREENCAST);
-            startService(fabIntent.setClass(this, ScreencastService.class));
-            Utils.setStatus(Utils.UiStatus.SCREEN, this);
+            Intent intent_ = new Intent(this, StartScreenRecorder.class);
+            intent_.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent_);
             onDestroy();
         });
         mLayer.setSettingsButtonOnClickListener(() -> {

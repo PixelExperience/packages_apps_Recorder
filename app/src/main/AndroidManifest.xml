@@ -18,15 +18,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.pixelexperience.recorder">
 
-    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
-    <uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT" />
-    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
+    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
@@ -64,6 +66,9 @@
         <service android:name=".sounds.SoundRecorderService" />
 
         <!-- Screen recorder -->
+        <activity
+            android:name=".screen.StartScreenRecorder"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <service android:name=".screen.ScreencastService" />
 
         <!-- Screen recorder overlay -->
@@ -91,23 +96,6 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-
-        <receiver
-            android:name=".screen.ScreencastStartReceiver"
-            android:permission="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT">
-            <intent-filter>
-                <action android:name="org.pixelexperience.recorder.screen.ACTION_START_SCREENCAST" />
-                <action android:name="org.pixelexperience.recorder.screen.ACTION_STOP_SCREENCAST" />
-            </intent-filter>
-        </receiver>
-
-        <receiver
-            android:name=".screen.ScreencastControlReceiver"
-            android:permission="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT">
-            <intent-filter>
-                <action android:name="org.pixelexperience.recorder.screen.ACTION_STOP_SCREENCAST" />
-            </intent-filter>
-        </receiver>
 
         <!-- File provider -->
         <provider
