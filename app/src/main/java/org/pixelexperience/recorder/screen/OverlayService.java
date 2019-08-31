@@ -27,8 +27,8 @@ import androidx.core.app.NotificationCompat;
 
 import org.pixelexperience.recorder.R;
 import org.pixelexperience.recorder.RecorderActivity;
+import org.pixelexperience.recorder.SettingsActivity;
 import org.pixelexperience.recorder.ui.OverlayLayer;
-import org.pixelexperience.recorder.utils.Utils;
 
 public class OverlayService extends Service {
 
@@ -55,9 +55,8 @@ public class OverlayService extends Service {
             onDestroy();
         });
         mLayer.setSettingsButtonOnClickListener(() -> {
-            Intent intent_ = new Intent(this, RecorderActivity.class);
+            Intent intent_ = new Intent(this, SettingsActivity.class);
             intent_.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent_.putExtra(RecorderActivity.EXTRA_UI_TYPE, Utils.SCREEN_PREFS);
             startActivity(intent_);
             onDestroy();
         });

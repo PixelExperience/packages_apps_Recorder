@@ -15,15 +15,16 @@
  */
 package org.pixelexperience.recorder.utils;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import androidx.core.content.FileProvider;
-import androidx.appcompat.app.AlertDialog;
 
-import org.pixelexperience.recorder.DialogActivity;
+import androidx.core.content.FileProvider;
+
+import org.pixelexperience.recorder.DeleteActivity;
 import org.pixelexperience.recorder.R;
 import org.pixelexperience.recorder.screen.ScreencastService;
 import org.pixelexperience.recorder.sounds.SoundRecorderService;
@@ -42,7 +43,7 @@ public class LastRecordHelper {
     }
 
     public static AlertDialog deleteFile(Context context, final String path, boolean isSound) {
-        return new AlertDialog.Builder(context)
+        return new AlertDialog.Builder(context, android.R.style.Theme_DeviceDefault_Dialog)
                 .setTitle(R.string.delete_title)
                 .setMessage(context.getString(R.string.delete_message, path))
                 .setPositiveButton(R.string.delete, (dialog, which) -> {
@@ -88,12 +89,8 @@ public class LastRecordHelper {
     }
 
     public static Intent getDeleteIntent(Context context, boolean isSound) {
-        Intent intent = new Intent(context, DialogActivity.class);
-        intent.putExtra(DialogActivity.EXTRA_TITLE,
-                isSound ? R.string.sound_last_title : R.string.screen_last_title);
-        intent.putExtra(DialogActivity.EXTRA_LAST_SCREEN, !isSound);
-        intent.putExtra(DialogActivity.EXTRA_LAST_SOUND, isSound);
-        intent.putExtra(DialogActivity.EXTRA_DELETE_LAST_RECORDING, true);
+        Intent intent = new Intent(context, DeleteActivity.class);
+        intent.putExtra(DeleteActivity.EXTRA_LAST_SOUND, isSound);
         return intent;
     }
 
@@ -111,25 +108,4 @@ public class LastRecordHelper {
         return prefs.getString(isSound ? KEY_LAST_SOUND : KEY_LAST_SCREEN, null);
     }
 
-    private static long getLastItemDuration(Context context, boolean isSound) {
-        SharedPreferences prefs = context.getSharedPreferences(PREFS, 0);
-        return prefs.getLong(isSound ? KEY_LAST_SOUND_TIME : KEY_LAST_SCREEN_TIME, -1);
-    }
-
-    private static String getLastItemDate(Context context, boolean isSound) {
-        String path = getLastItemPath(context, isSound);
-        String[] pathParts = path.split("/");
-        String[] date = pathParts[pathParts.length - 1]
-                .replace(isSound ? ".wav" : ".mp4", "")
-                .replace(isSound ? "SoundRecord" : "ScreenRecord", "")
-                .split("-");
-        return context.getString(R.string.date_format, date[1], date[2], date[3],
-                date[4], date[5]);
-    }
-
-    public static String getLastItemDescription(Context context, boolean isSound) {
-        return context.getString(R.string.screen_last_message,
-                getLastItemDate(context, isSound),
-                getLastItemDuration(context, isSound) / 1000);
-    }
 }

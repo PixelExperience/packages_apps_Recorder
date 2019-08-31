@@ -27,8 +27,10 @@ import android.media.EncoderCapabilities;
 import android.media.MediaCodecList;
 import android.media.MediaFormat;
 import android.media.MediaRecorder;
+import android.media.MediaScannerConnection;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.StatFs;
 import android.util.DisplayMetrics;
@@ -43,6 +45,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -331,6 +334,7 @@ public class ScreenRecorder {
     void stopRecording(boolean fireErrorCallback) {
         try {
             mMediaRecorder.stop();
+            indexFile();
         } catch (RuntimeException e) {
             Log.e(TAG, "Fatal exception! Destroying media projection failed." + "\n" + e.getMessage());
             mPath.delete();
@@ -349,6 +353,24 @@ public class ScreenRecorder {
         if (fireErrorCallback) {
             mScreenRecorderErrorCallback.onRecordingError();
         }
+    }
+
+    /* Its weird that android does not index the files immediately once its created and that causes
+     * trouble for user in finding the video in gallery. Let's explicitly announce the file creation
+     * to android and index it */
+    private void indexFile() {
+        //Create a new ArrayList and add the newly created video file path to it
+        ArrayList<String> toBeScanned = new ArrayList<>();
+        toBeScanned.add(mPath.getPath());
+        String[] toBeScannedStr = new String[toBeScanned.size()];
+        toBeScannedStr = toBeScanned.toArray(toBeScannedStr);
+
+        //Request MediaScannerConnection to scan the new file and index it
+        MediaScannerConnection.scanFile(mContext, toBeScannedStr, null, new MediaScannerConnection.OnScanCompletedListener() {
+            @Override
+            public void onScanCompleted(String path, Uri uri) {
+            }
+        });
     }
 
     String getRecordingFilePath() {

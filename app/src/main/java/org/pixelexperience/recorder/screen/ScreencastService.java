@@ -280,9 +280,6 @@ public class ScreencastService extends Service {
     }
 
     private NotificationCompat.Builder createShareNotificationBuilder(String file) {
-        Intent intent = new Intent(this, RecorderActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
-
         PendingIntent playPIntent = PendingIntent.getActivity(this, 0,
                 LastRecordHelper.getOpenIntent(this, file, "video/mp4"),
                 PendingIntent.FLAG_CANCEL_CURRENT);
@@ -307,6 +304,6 @@ public class ScreencastService extends Service {
                 .addAction(R.drawable.ic_play, getString(R.string.play), playPIntent)
                 .addAction(R.drawable.ic_share, getString(R.string.share), sharePIntent)
                 .addAction(R.drawable.ic_delete, getString(R.string.delete), deletePIntent)
-                .setContentIntent(pi);
+                .setContentIntent(playPIntent);
     }
 }

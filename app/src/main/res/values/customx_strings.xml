@@ -23,4 +23,6 @@
     <string name="screen_audio_recording_disabled_others_apps">System internal audio recording does not work when using another recorder simultaneously.</string>
     <string name="screen_audio_recording_not_allowed">System internal audio recording works only when using speaker or wired headphones.</string>
     <string name="screen_audio_recording_route_changed">Recording ended because audio output changed.</string>
+    <!-- Extra settings -->
+    <string name="title_activity_settings">Settings</string>
 </resources>

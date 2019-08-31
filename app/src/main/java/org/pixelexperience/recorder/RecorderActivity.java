@@ -38,8 +38,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.transition.TransitionManager;
@@ -51,7 +49,6 @@ import org.pixelexperience.recorder.screen.ScreencastService;
 import org.pixelexperience.recorder.sounds.RecorderBinder;
 import org.pixelexperience.recorder.sounds.SoundRecorderService;
 import org.pixelexperience.recorder.ui.SoundVisualizer;
-import org.pixelexperience.recorder.utils.LastRecordHelper;
 import org.pixelexperience.recorder.utils.OnBoardingHelper;
 import org.pixelexperience.recorder.utils.PermissionUtils;
 import org.pixelexperience.recorder.utils.PreferenceUtils;
@@ -62,7 +59,6 @@ import java.util.ArrayList;
 public class RecorderActivity extends AppCompatActivity {
     private static final int REQUEST_SCREEN_REC_PERMS = 439;
     private static final int REQUEST_SOUND_REC_PERMS = 440;
-    private static final int REQUEST_DIALOG_ACTIVITY = 441;
     public static final String EXTRA_UI_TYPE = "ui";
 
     private static final int[] PERMISSION_ERROR_MESSAGE_RES_IDS = {
@@ -82,11 +78,11 @@ public class RecorderActivity extends AppCompatActivity {
     private ConstraintLayout mConstraintRoot;
 
     private FloatingActionButton mScreenFab;
-    private ImageView mScreenSettings;
-    private ImageView mScreenLast;
+    private ImageView mSettingsIcon;
+    private ImageView mSettingsIconIconBottom1;
+    private ImageView mSettingsIconIconBottom2;
 
     private FloatingActionButton mSoundFab;
-    private ImageView mSoundLast;
 
     private RelativeLayout mRecordingLayout;
     private TextView mRecordingText;
@@ -125,11 +121,11 @@ public class RecorderActivity extends AppCompatActivity {
         mConstraintRoot = findViewById(R.id.main_root);
 
         mScreenFab = findViewById(R.id.screen_fab);
-        mScreenSettings = findViewById(R.id.screen_settings_icon);
-        mScreenLast = findViewById(R.id.screen_last_icon);
+        mSettingsIcon = findViewById(R.id.settings_icon_top);
+        mSettingsIconIconBottom1 = findViewById(R.id.settings_icon_bottom1);
+        mSettingsIconIconBottom2 = findViewById(R.id.settings_icon_bottom2);
 
         mSoundFab = findViewById(R.id.sound_fab);
-        mSoundLast = findViewById(R.id.sound_last_icon);
 
         mRecordingLayout = findViewById(R.id.main_recording);
         mRecordingText = findViewById(R.id.main_recording_text);
@@ -137,20 +133,18 @@ public class RecorderActivity extends AppCompatActivity {
 
         mScreenFab.setOnClickListener(v -> toggleScreenRecorder());
         mSoundFab.setOnClickListener(v -> toggleSoundRecorder());
-        mScreenSettings.setOnClickListener(v -> openScreenSettings());
-        mScreenLast.setOnClickListener(v -> openLastScreen());
-        mSoundLast.setOnClickListener(v -> openLastSound());
+        mSettingsIcon.setOnClickListener(v -> openScreenSettings());
+        mSettingsIconIconBottom1.setOnClickListener(v -> openScreenSettings());
+        mSettingsIconIconBottom2.setOnClickListener(v -> openScreenSettings());
 
         bindSoundRecService();
         mPreferenceUtils = new PreferenceUtils(this);
 
-        OnBoardingHelper.onBoardScreenSettings(this, mScreenSettings);
+        OnBoardingHelper.onBoardScreenSettings(this, mSettingsIcon);
         if (getUiParam().equals(Utils.UiStatus.SOUND.toString())) {
             new Handler().postDelayed(this::toggleSoundRecorder, 500);
         }else if (getUiParam().equals(Utils.UiStatus.SCREEN.toString())) {
             new Handler().postDelayed(this::toggleScreenRecorder, 500);
-        }else if (getUiParam().equals(Utils.SCREEN_PREFS)) {
-            new Handler().postDelayed(this::openScreenSettings, 500);
         }
         IntentFilter filter = new IntentFilter();
         filter.addAction(Utils.ACTION_RECORDING_STATE_CHANGED);
@@ -194,7 +188,6 @@ public class RecorderActivity extends AppCompatActivity {
         super.onResume();
         Utils.stopOverlayService(this);
         refresh();
-        clearTransitionNames();
     }
 
     @Override
@@ -334,6 +327,9 @@ public class RecorderActivity extends AppCompatActivity {
             if (screenRec) {
                 mScreenFab.setImageResource(R.drawable.ic_stop_screen);
                 set.clone(this, R.layout.constraint_screen);
+                mSettingsIcon.setVisibility(View.GONE);
+                mSettingsIconIconBottom1.setVisibility(View.VISIBLE);
+                mSettingsIconIconBottom2.setVisibility(View.GONE);
             } else {
                 mSoundFab.setImageResource(R.drawable.ic_stop_sound);
                 mRecordingVisualizer.onAudioLevelUpdated(0);
@@ -341,6 +337,9 @@ public class RecorderActivity extends AppCompatActivity {
                     mSoundService.setAudioListener(mRecordingVisualizer);
                 }
                 set.clone(this, R.layout.constraint_sound);
+                mSettingsIcon.setVisibility(View.GONE);
+                mSettingsIconIconBottom1.setVisibility(View.GONE);
+                mSettingsIconIconBottom2.setVisibility(View.VISIBLE);
             }
         } else {
             mScreenFab.setImageResource(R.drawable.ic_action_screen_record);
@@ -349,9 +348,11 @@ public class RecorderActivity extends AppCompatActivity {
             mSoundFab.setSelected(false);
             mRecordingVisualizer.setVisibility(View.GONE);
             set.clone(this, R.layout.constraint_default);
+            mSettingsIcon.setVisibility(View.VISIBLE);
+            mSettingsIconIconBottom1.setVisibility(View.GONE);
+            mSettingsIconIconBottom2.setVisibility(View.GONE);
         }
 
-        updateLastItemStatus();
         updateSystemUIColors();
 
         TransitionManager.beginDelayedTransition(mConstraintRoot);
@@ -429,25 +430,6 @@ public class RecorderActivity extends AppCompatActivity {
         }
     }
 
-    private void updateLastItemStatus() {
-        String lastScreen = LastRecordHelper.getLastItemPath(this, false);
-        String lastSound = LastRecordHelper.getLastItemPath(this, true);
-
-        if (lastScreen == null) {
-            mScreenLast.setVisibility(View.GONE);
-        } else {
-            mScreenLast.setVisibility(View.VISIBLE);
-            OnBoardingHelper.onBoardLastItem(this, mScreenLast, false);
-        }
-
-        if (lastSound == null) {
-            mSoundLast.setVisibility(View.GONE);
-        } else {
-            mSoundLast.setVisibility(View.VISIBLE);
-            OnBoardingHelper.onBoardLastItem(this, mSoundLast, true);
-        }
-    }
-
     private void updateSystemUIColors() {
         int statusBarColor;
         int navigationBarColor;
@@ -465,39 +447,9 @@ public class RecorderActivity extends AppCompatActivity {
         getWindow().setNavigationBarColor(Utils.darkenedColor(navigationBarColor));
     }
 
-    private void clearTransitionNames() {
-        mScreenSettings.setTransitionName("");
-        mScreenLast.setTransitionName("");
-        mSoundLast.setTransitionName("");
-    }
-
-    private void showDialog(Intent intent, View view) {
-        String transitionName = getString(R.string.transition_dialog_name);
-        view.setTransitionName(transitionName);
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                view, transitionName);
-        ActivityCompat.startActivityForResult(this, intent,
-                REQUEST_DIALOG_ACTIVITY, options.toBundle());
-    }
-
     private void openScreenSettings() {
-        Intent intent = new Intent(this, DialogActivity.class);
-        intent.putExtra(DialogActivity.EXTRA_TITLE, R.string.screen_settings_title);
-        intent.putExtra(DialogActivity.EXTRA_SETTINGS_SCREEN, true);
-        showDialog(intent, mScreenSettings);
-    }
-
-    private void openLastScreen() {
-        Intent intent = new Intent(this, DialogActivity.class);
-        intent.putExtra(DialogActivity.EXTRA_TITLE, R.string.screen_last_title);
-        intent.putExtra(DialogActivity.EXTRA_LAST_SCREEN, true);
-        showDialog(intent, mScreenLast);
-    }
-
-    private void openLastSound() {
-        Intent intent = new Intent(this, DialogActivity.class);
-        intent.putExtra(DialogActivity.EXTRA_TITLE, R.string.sound_last_title);
-        intent.putExtra(DialogActivity.EXTRA_LAST_SOUND, true);
-        showDialog(intent, mSoundLast);
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

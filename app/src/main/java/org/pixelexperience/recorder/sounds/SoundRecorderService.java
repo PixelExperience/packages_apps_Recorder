@@ -27,13 +27,13 @@ import android.content.IntentFilter;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 import android.text.format.DateUtils;
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import org.pixelexperience.recorder.R;
 import org.pixelexperience.recorder.RecorderActivity;
@@ -308,9 +308,6 @@ public class SoundRecorderService extends Service {
     }
 
     public void createShareNotification() {
-        Intent intent = new Intent(this, RecorderActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
-
         PendingIntent playPIntent = PendingIntent.getActivity(this, 0,
                 LastRecordHelper.getOpenIntent(this, mOutFilePath, "audio/wav"),
                 PendingIntent.FLAG_CANCEL_CURRENT);
@@ -333,7 +330,7 @@ public class SoundRecorderService extends Service {
                 .addAction(R.drawable.ic_play, getString(R.string.play), playPIntent)
                 .addAction(R.drawable.ic_share, getString(R.string.share), sharePIntent)
                 .addAction(R.drawable.ic_delete, getString(R.string.delete), deletePIntent)
-                .setContentIntent(pi)
+                .setContentIntent(playPIntent)
                 .build();
 
         mNotificationManager.notify(NOTIFICATION_ID, notification);

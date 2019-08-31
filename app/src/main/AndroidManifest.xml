@@ -1,40 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (c) 2017 The LineageOS Project
-     Copyright (c) 2019 PixelExperience
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-         http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="org.pixelexperience.recorder">
 
-    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT"
+    <!-- This is needed for aosp build env -->
+    <uses-sdk android:minSdkVersion="28"
+        tools:ignore="GradleOverrides" />
+
+    <uses-permission
+        android:name="android.permission.CAPTURE_AUDIO_OUTPUT"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT"
+    <uses-permission
+        android:name="android.permission.CAPTURE_VIDEO_OUTPUT"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-
-    <!-- This is needed for aosp build env -->
-    <uses-sdk android:minSdkVersion="28"
-        tools:ignore="GradleOverrides" />
 
     <application
         android:allowBackup="false"
@@ -43,7 +31,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity
+            android:name=".SettingsActivity"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".RecorderActivity" />
         <activity
             android:name=".RecorderActivity"
             android:label="@string/app_name"
@@ -53,22 +45,20 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.provider.MediaStore.RECORD_SOUND" />
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".DialogActivity"
-            android:excludeFromRecents="true"
-            android:theme="@style/AppTheme.DialogActivity" />
+            android:name=".screen.StartScreenRecorder"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".DeleteActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <!-- Sound recorder -->
         <service android:name=".sounds.SoundRecorderService" />
 
         <!-- Screen recorder -->
-        <activity
-            android:name=".screen.StartScreenRecorder"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <service android:name=".screen.ScreencastService" />
 
         <!-- Screen recorder overlay -->
@@ -85,7 +75,6 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-
         <service
             android:name=".tiles.SoundRecordTile"
             android:enabled="true"
@@ -108,4 +97,5 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
+
 </manifest>
