@@ -84,6 +84,7 @@ public class ScreencastService extends Service {
     private boolean mStopOnScreenOff;
     private Handler mHandler = new Handler();
     private PreferenceUtils mPreferenceUtils;
+    private boolean mReceiverRegistered;
     private Runnable stopCastRunnable = () -> {
         if (Utils.isBluetoothHeadsetConnected()) {
             return;
@@ -159,7 +160,9 @@ public class ScreencastService extends Service {
     @Override
     public void onDestroy() {
         stopRecording();
-        unregisterReceiver(mBroadcastReceiver);
+        if (mReceiverRegistered) {
+            unregisterReceiver(mBroadcastReceiver);
+        }
         super.onDestroy();
     }
 
@@ -214,6 +217,7 @@ public class ScreencastService extends Service {
             filter.addAction(Intent.ACTION_SCREEN_OFF);
             filter.addAction("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED");
             registerReceiver(mBroadcastReceiver, filter);
+            mReceiverRegistered = true;
 
             Utils.refreshShowTouchesState(this);
 
@@ -241,7 +245,9 @@ public class ScreencastService extends Service {
     }
 
     private void cleanup() {
-        unregisterReceiver(mBroadcastReceiver);
+        if (mReceiverRegistered) {
+            unregisterReceiver(mBroadcastReceiver);
+        }
         String recorderPath = null;
         if (mRecorder != null) {
             recorderPath = mRecorder.getRecordingFilePath();
