@@ -50,10 +50,10 @@
         </activity>
         <activity
             android:name=".screen.StartScreenRecorder"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
         <activity
             android:name=".DeleteActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar.Dim" />
 
         <!-- Sound recorder -->
         <service android:name=".sounds.SoundRecorderService" />
