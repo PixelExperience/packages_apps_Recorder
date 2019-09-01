@@ -1,16 +1,19 @@
 package org.pixelexperience.recorder;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.Preference;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
@@ -66,6 +69,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         private String KEY_SCREEN_CATEGORY = "screen_category";
 
+        private final BroadcastReceiver mRecordingStateChanged = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                refreshState();
+            }
+        };
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.settings, rootKey);
@@ -95,7 +104,28 @@ public class SettingsActivity extends AppCompatActivity {
             if (!mPreferenceUtils.canControlShowTouches()){
                 getPreferenceScreen().removePreference(mShowTouches);
             }
-            mScreenCategory.setEnabled(!Utils.isScreenRecording());
+            refreshState();
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            refreshState();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Utils.ACTION_RECORDING_STATE_CHANGED);
+            LocalBroadcastManager.getInstance(getContext()).registerReceiver(mRecordingStateChanged, filter);
+        }
+
+        @Override
+        public void onPause() {
+            LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mRecordingStateChanged);
+            super.onPause();
+        }
+
+        private void refreshState() {
+            if (mScreenCategory != null) {
+                mScreenCategory.setEnabled(!Utils.isScreenRecording());
+            }
         }
 
         private void askAudioPermission() {
