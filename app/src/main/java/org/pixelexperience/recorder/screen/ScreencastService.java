@@ -188,6 +188,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
     }
 
     private int startRecording(Intent intent) {
+        Utils.stopOverlayService(this);
         try {
             mPreferenceUtils = new PreferenceUtils(this);
             if (hasNoAvailableSpace()) {

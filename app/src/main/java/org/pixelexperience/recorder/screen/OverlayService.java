@@ -29,6 +29,7 @@ import org.pixelexperience.recorder.R;
 import org.pixelexperience.recorder.RecorderActivity;
 import org.pixelexperience.recorder.SettingsActivity;
 import org.pixelexperience.recorder.ui.OverlayLayer;
+import org.pixelexperience.recorder.utils.Utils;
 
 public class OverlayService extends Service {
 
@@ -47,6 +48,9 @@ public class OverlayService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int id) {
+        if (Utils.isScreenRecording()){
+            stopSelf();
+        }
         mLayer = new OverlayLayer(this);
         mLayer.setOnActionClickListener(() -> {
             Intent intent_ = new Intent(this, StartScreenRecorder.class);
