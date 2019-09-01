@@ -31,6 +31,7 @@ import org.pixelexperience.recorder.screen.OverlayService;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 public class Utils {
     public static final String ACTION_RECORDING_STATE_CHANGED = "org.pixelexperience.recorder.RECORDING_STATE_CHANGED";
@@ -188,7 +189,14 @@ public class Utils {
     }
 
     public static void collapseStatusBar(Context context) {
-        context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+        try{
+            Object sbservice = context.getSystemService( "statusbar" );
+            Class<?> statusbarManager = Class.forName( "android.app.StatusBarManager" );
+            Method collapse2 = statusbarManager.getMethod("collapsePanels");
+            collapse2.setAccessible(true);
+            collapse2.invoke(sbservice);
+        }catch (Exception ignored){
+        }
     }
 
 }
