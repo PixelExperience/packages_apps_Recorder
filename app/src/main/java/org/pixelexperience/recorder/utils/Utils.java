@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioSystem;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
@@ -196,6 +197,32 @@ public class Utils {
             collapse2.setAccessible(true);
             collapse2.invoke(sbservice);
         }catch (Exception ignored){
+        }
+    }
+
+    public static void setShowTouches(Context context, boolean show){
+        try{
+            Settings.System.putInt(context.getContentResolver(), "show_touches", show ? 1 : 0);
+        }catch (Exception e){
+        }
+    }
+    public static boolean isShowingTouches(Context context){
+        try{
+            return Settings.System.getInt(context.getContentResolver(), "show_touches", 0) != 0;
+        }catch (Exception e){
+        }
+        return false;
+    }
+
+    public static void refreshShowTouchesState(Context context){
+        PreferenceUtils preferenceUtils = new PreferenceUtils(context);
+        boolean isShowingTouches = isShowingTouches(context);
+        boolean isScreenRecording = isScreenRecording();
+        boolean shouldShowTouches = preferenceUtils.getShouldShowTouches();
+        if (!isScreenRecording && shouldShowTouches && isShowingTouches){
+            setShowTouches(context, false);
+        }else if(shouldShowTouches){
+            setShowTouches(context, isScreenRecording);
         }
     }
 

@@ -16,7 +16,7 @@
 
 <androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/screen_settings_title">
+    <PreferenceCategory app:title="@string/screen_settings_title" app:key="screen_category">
         <ListPreference
             app:defaultValue="0"
             app:entries="@array/screen_audio_recording_entries"
@@ -24,6 +24,26 @@
             app:key="audio_recording_type"
             app:summary="%s"
             app:title="@string/screen_audio_recording_title" />
+
+        <ListPreference
+            app:defaultValue="30"
+            app:entries="@array/frame_rates_entries"
+            app:entryValues="@array/frame_rates_values"
+            app:key="frame_rate"
+            app:summary="%s"
+            app:title="@string/frame_rate" />
+
+        <SwitchPreference
+            app:title="@string/show_touches"
+            app:summary="@string/show_touches_summary"
+            app:key="show_touches"
+            app:defaultValue="false" />
+
+        <SwitchPreference
+            app:title="@string/stop_recording_screen_off"
+            app:summary="@string/stop_recording_screen_off_summary"
+            app:key="stop_recording_screen_off"
+            app:defaultValue="false" />
 
     </PreferenceCategory>
 

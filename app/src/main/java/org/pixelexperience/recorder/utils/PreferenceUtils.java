@@ -2,6 +2,7 @@ package org.pixelexperience.recorder.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.UserManager;
 
 import com.android.internal.util.custom.recorder.InternalAudioRecorder;
 
@@ -13,6 +14,12 @@ public class PreferenceUtils {
     public static final int PREF_AUDIO_RECORDING_TYPE_INTERNAL = 1;
     public static final int PREF_AUDIO_RECORDING_TYPE_MICROPHONE = 2;
     public static final int PREF_AUDIO_RECORDING_TYPE_DEFAULT = PREF_AUDIO_RECORDING_TYPE_DISABLED;
+    public static final String PREF_SHOW_TOUCHES = "show_touches";
+    public static final Boolean PREF_SHOW_TOUCHES_DEFAULT = false;
+    public static final String PREF_STOP_SCREEN_OFF = "stop_recording_screen_off";
+    public static final Boolean PREF_STOP_SCREEN_OFF_DEFAULT = false;
+    public static final String PREF_FRAME_RATE = "frame_rate";
+    public static final int PREF_FRAME_RATE_DEFAULT = 30;
 
     SharedPreferences mSharedPrefs;
     Context mContext;
@@ -36,12 +43,35 @@ public class PreferenceUtils {
     }
 
     public int getVideoRecordingMaxFps() {
-        return 30;
+        return mSharedPrefs.getInt(PREF_FRAME_RATE, PREF_FRAME_RATE_DEFAULT);
+    }
+
+    public void setVideoRecordingMaxFps(int fps) {
+        mSharedPrefs.edit().putInt(PREF_FRAME_RATE, fps).apply();
     }
 
     public boolean isInternalAudioRecordingSupported(){
         return InternalAudioRecorder.isSupported(mContext);
     }
 
+    public boolean canControlShowTouches(){
+        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        return userManager.isAdminUser();
+    }
 
+    public boolean getShouldShowTouches(){
+        return mSharedPrefs.getBoolean(PREF_SHOW_TOUCHES, PREF_SHOW_TOUCHES_DEFAULT);
+    }
+
+    public boolean getShouldStopWhenScreenOff(){
+        return mSharedPrefs.getBoolean(PREF_STOP_SCREEN_OFF, PREF_STOP_SCREEN_OFF_DEFAULT);
+    }
+
+    public void setShouldShowTouches(boolean value){
+        mSharedPrefs.edit().putBoolean(PREF_SHOW_TOUCHES, value).apply();
+    }
+
+    public void setShouldStopWhenScreenOff(boolean value){
+        mSharedPrefs.edit().putBoolean(PREF_STOP_SCREEN_OFF, value).apply();
+    }
 }

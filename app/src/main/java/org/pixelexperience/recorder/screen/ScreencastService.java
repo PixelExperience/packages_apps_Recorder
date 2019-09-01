@@ -73,12 +73,15 @@ public class ScreencastService extends Service {
                     mAudioSource == PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL && Utils.isBluetoothHeadsetConnected()) {
                 stopRecording();
                 Toast.makeText(context, R.string.screen_audio_recording_not_allowed, Toast.LENGTH_LONG).show();
+            } else if (Intent.ACTION_SCREEN_OFF.equals(action) && mStopOnScreenOff) {
+                stopRecording();
             }
         }
     };
 
     private int mCurrentDevices;
     private int mAudioSource;
+    private boolean mStopOnScreenOff;
     private Handler mHandler = new Handler();
     private PreferenceUtils mPreferenceUtils;
     private Runnable stopCastRunnable = () -> {
@@ -137,12 +140,6 @@ public class ScreencastService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_USER_BACKGROUND);
-        filter.addAction(Intent.ACTION_SHUTDOWN);
-        filter.addAction("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED");
-        registerReceiver(mBroadcastReceiver, filter);
-
         mNotificationManager = getSystemService(NotificationManager.class);
 
         if (mNotificationManager == null || mNotificationManager.getNotificationChannel(
@@ -185,6 +182,7 @@ public class ScreencastService extends Service {
 
             mStartTime = SystemClock.elapsedRealtime();
             mAudioSource = mPreferenceUtils.getAudioRecordingType();
+            mStopOnScreenOff = mPreferenceUtils.getShouldStopWhenScreenOff();
 
             assert mRecorder == null;
             mRecorder = new ScreenRecorder(this, intent.getParcelableExtra(Utils.SCREEN_RECORD_INTENT_DATA),
@@ -210,8 +208,18 @@ public class ScreencastService extends Service {
                 mHandler.postDelayed(currentDevicesCheckerRunnable, 100);
             }
 
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_USER_BACKGROUND);
+            filter.addAction(Intent.ACTION_SHUTDOWN);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            filter.addAction("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED");
+            registerReceiver(mBroadcastReceiver, filter);
+
+            Utils.refreshShowTouchesState(this);
+
             return START_STICKY;
         } catch (Exception e) {
+            stopRecording();
             Log.e(LOGTAG, e.getMessage());
         }
 
@@ -233,6 +241,7 @@ public class ScreencastService extends Service {
     }
 
     private void cleanup() {
+        unregisterReceiver(mBroadcastReceiver);
         String recorderPath = null;
         if (mRecorder != null) {
             recorderPath = mRecorder.getRecordingFilePath();
@@ -257,6 +266,7 @@ public class ScreencastService extends Service {
         if (hasNoAvailableSpace()) {
             Toast.makeText(this, R.string.screen_not_enough_storage, Toast.LENGTH_LONG).show();
         }
+        Utils.refreshShowTouchesState(this);
     }
 
     private NotificationCompat.Builder createNotificationBuilder() {

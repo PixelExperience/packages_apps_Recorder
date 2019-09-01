@@ -3,13 +3,17 @@ package org.pixelexperience.recorder;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
 import androidx.preference.ListPreference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 
 import org.pixelexperience.recorder.utils.PermissionUtils;
 import org.pixelexperience.recorder.utils.PreferenceUtils;
@@ -50,24 +54,30 @@ public class SettingsActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat {
+    public static class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener{
         private static final int REQUEST_RECORD_AUDIO_PERMS = 213;
+        private PreferenceCategory mScreenCategory;
         private ListPreference mAudioSource;
+        private ListPreference mFramerate;
+        private SwitchPreference mShowTouches;
+        private SwitchPreference mStopRecordingWhenScreenOff;
         private PreferenceUtils mPreferenceUtils;
+
+        private String KEY_SCREEN_CATEGORY = "screen_category";
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.settings, rootKey);
             mPreferenceUtils = new PreferenceUtils(getContext());
+            mScreenCategory = findPreference(KEY_SCREEN_CATEGORY);
             mAudioSource = findPreference(PreferenceUtils.PREF_AUDIO_RECORDING_TYPE);
-            mAudioSource.setOnPreferenceChangeListener((preference, newValue) -> {
-                int value = Integer.valueOf((String) newValue);
-                mPreferenceUtils.setAudioRecordingType(value);
-                if (!PermissionUtils.hasAudioPermission(getContext()) && value != PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_DISABLED) {
-                    askAudioPermission();
-                }
-                return true;
-            });
+            mFramerate = findPreference(PreferenceUtils.PREF_FRAME_RATE);
+            mShowTouches = findPreference(PreferenceUtils.PREF_SHOW_TOUCHES);
+            mStopRecordingWhenScreenOff = findPreference(PreferenceUtils.PREF_STOP_SCREEN_OFF);
+            mAudioSource.setOnPreferenceChangeListener(this);
+            mFramerate.setOnPreferenceChangeListener(this);
+            mShowTouches.setOnPreferenceChangeListener(this);
+            mStopRecordingWhenScreenOff.setOnPreferenceChangeListener(this);
             if (!mPreferenceUtils.isInternalAudioRecordingSupported()){
                 String[] entries = getContext().getResources().getStringArray(R.array.screen_audio_recording_entries_alt);
                 String[] values = getContext().getResources().getStringArray(R.array.screen_audio_recording_values_alt);
@@ -75,9 +85,13 @@ public class SettingsActivity extends AppCompatActivity {
                 mAudioSource.setEntryValues(values);
             }
             mAudioSource.setValueIndex(mPreferenceUtils.getAudioRecordingType());
-            if (Utils.isScreenRecording()) {
-                mAudioSource.setEnabled(false);
+            mFramerate.setValue(String.valueOf(mPreferenceUtils.getVideoRecordingMaxFps()));
+            mShowTouches.setChecked(mPreferenceUtils.getShouldShowTouches());
+            mStopRecordingWhenScreenOff.setChecked(mPreferenceUtils.getShouldStopWhenScreenOff());
+            if (!mPreferenceUtils.canControlShowTouches()){
+                getPreferenceScreen().removePreference(mShowTouches);
             }
+            mScreenCategory.setEnabled(!Utils.isScreenRecording());
         }
 
         private void askAudioPermission() {
@@ -96,6 +110,27 @@ public class SettingsActivity extends AppCompatActivity {
                 mPreferenceUtils.setAudioRecordingType(PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_DISABLED);
                 mAudioSource.setValueIndex(PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_DISABLED);
             }
+        }
+
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            if (preference == mAudioSource){
+                int value = Integer.valueOf((String) newValue);
+                mPreferenceUtils.setAudioRecordingType(value);
+                if (!PermissionUtils.hasAudioPermission(getContext()) && value != PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_DISABLED) {
+                    askAudioPermission();
+                }
+            }else if(preference == mFramerate){
+                int value = Integer.valueOf((String) newValue);
+                mPreferenceUtils.setVideoRecordingMaxFps(value);
+            }else if(preference == mShowTouches){
+                boolean value = (Boolean) newValue;
+                mPreferenceUtils.setShouldShowTouches(value);
+            }else if(preference == mStopRecordingWhenScreenOff){
+                boolean value = (Boolean) newValue;
+                mPreferenceUtils.setShouldStopWhenScreenOff(value);
+            }
+            return true;
         }
     }
 

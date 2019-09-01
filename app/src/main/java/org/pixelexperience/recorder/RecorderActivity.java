@@ -351,6 +351,7 @@ public class RecorderActivity extends AppCompatActivity {
             mSettingsIcon.setVisibility(View.VISIBLE);
             mSettingsIconIconBottom1.setVisibility(View.GONE);
             mSettingsIconIconBottom2.setVisibility(View.GONE);
+            Utils.refreshShowTouchesState(this);
         }
 
         updateSystemUIColors();

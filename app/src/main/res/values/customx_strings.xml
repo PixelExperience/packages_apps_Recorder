@@ -25,4 +25,11 @@
     <string name="screen_audio_recording_route_changed">Recording ended because audio output changed.</string>
     <!-- Extra settings -->
     <string name="title_activity_settings">Settings</string>
+    <string name="show_touches">Show taps</string>
+    <string name="show_touches_summary">Show visual feedback for taps</string>
+    <string name="stop_recording_screen_off">Stop when turning off screen</string>
+    <string name="stop_recording_screen_off_summary">Stop recording when turning off screen</string>
+    <string name="frame_rate">Frame rate</string>
+    <string name="frame_rate_30_fps">30 FPS</string>
+    <string name="frame_rate_60_fps">60 FPS</string>
 </resources>
