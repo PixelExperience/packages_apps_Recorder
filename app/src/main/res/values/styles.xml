@@ -21,15 +21,20 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="actionBarTheme">@style/AppTheme.ActionBar</item>
         <item name="actionBarStyle">@style/AppTheme.ActionBar</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="titleTextStyle">@style/AppTheme.ActionBar.Title</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.ActionBar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:fontFamily">google-sans-medium</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -88,4 +93,5 @@
         <item name="android:paddingEnd">8dp</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
     </style>
+    <style name="CustomDialogTheme" parent="@*android:style/Theme.DeviceDefault.Light.Dialog"/>
 </resources>

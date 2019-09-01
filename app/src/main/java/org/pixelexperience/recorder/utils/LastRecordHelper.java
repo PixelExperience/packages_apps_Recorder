@@ -43,7 +43,7 @@ public class LastRecordHelper {
     }
 
     public static AlertDialog deleteFile(Context context, final String path, boolean isSound) {
-        return new AlertDialog.Builder(context, android.R.style.Theme_DeviceDefault_Dialog)
+        return new AlertDialog.Builder(context, R.style.CustomDialogTheme)
                 .setTitle(R.string.delete_title)
                 .setMessage(context.getString(R.string.delete_message, path))
                 .setPositiveButton(R.string.delete, (dialog, which) -> {
