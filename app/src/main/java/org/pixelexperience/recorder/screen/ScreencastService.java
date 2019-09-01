@@ -272,6 +272,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
         stopTimer();
         stopForeground(true);
         if (recorderPath != null) {
+            LastRecordHelper.setLastItem(this, recorderPath, mElapsedTimeInSeconds, false);
             sendShareNotification(recorderPath);
         }
     }
@@ -317,8 +318,6 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
         PendingIntent deletePIntent = PendingIntent.getActivity(this, 0,
                 LastRecordHelper.getDeleteIntent(this, false),
                 PendingIntent.FLAG_CANCEL_CURRENT);
-
-        LastRecordHelper.setLastItem(this, file, mElapsedTimeInSeconds, false);
 
         Log.i(LOGTAG, "Video complete: " + file);
 

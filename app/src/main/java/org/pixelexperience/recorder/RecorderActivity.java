@@ -49,6 +49,7 @@ import org.pixelexperience.recorder.screen.ScreencastService;
 import org.pixelexperience.recorder.sounds.RecorderBinder;
 import org.pixelexperience.recorder.sounds.SoundRecorderService;
 import org.pixelexperience.recorder.ui.SoundVisualizer;
+import org.pixelexperience.recorder.utils.LastRecordHelper;
 import org.pixelexperience.recorder.utils.OnBoardingHelper;
 import org.pixelexperience.recorder.utils.PermissionUtils;
 import org.pixelexperience.recorder.utils.PreferenceUtils;
@@ -276,6 +277,7 @@ public class RecorderActivity extends AppCompatActivity {
             mSoundService.createShareNotification();
             stopService(new Intent(this, SoundRecorderService.class));
             Utils.setStatus(Utils.UiStatus.NOTHING, this);
+            openLast(true);
         } else {
             // Start
             startService(new Intent(this, SoundRecorderService.class));
@@ -295,6 +297,7 @@ public class RecorderActivity extends AppCompatActivity {
             Utils.setStatus(Utils.UiStatus.NOTHING, this);
             startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
                     .setClass(this, ScreencastService.class));
+            openLast(false);
         } else {
             if (mPreferenceUtils.getAudioRecordingType() == PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
                 if (!Utils.isInternalAudioRecordingAllowed(this, true)) {
@@ -452,5 +455,15 @@ public class RecorderActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SettingsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private void openLast(boolean isSound) {
+        new Handler().postDelayed(() -> {
+            try {
+                String path = LastRecordHelper.getLastItemPath(RecorderActivity.this, isSound);
+                startActivity(LastRecordHelper.getOpenIntent(RecorderActivity.this, path, isSound ? "audio/wav" : "video/mp4"));
+            } catch (Exception ignored) {
+            }
+        }, 500);
     }
 }
