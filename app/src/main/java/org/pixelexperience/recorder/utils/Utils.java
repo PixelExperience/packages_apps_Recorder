@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioSystem;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
@@ -189,15 +190,17 @@ public class Utils {
         SCREEN
     }
 
-    public static void collapseStatusBar(Context context) {
-        try{
-            Object sbservice = context.getSystemService( "statusbar" );
-            Class<?> statusbarManager = Class.forName( "android.app.StatusBarManager" );
-            Method collapse2 = statusbarManager.getMethod("collapsePanels");
-            collapse2.setAccessible(true);
-            collapse2.invoke(sbservice);
-        }catch (Exception ignored){
-        }
+    public static void collapseStatusBar(Context context, boolean delayed) {
+        new Handler().postDelayed(() -> {
+            try{
+                Object sbservice = context.getSystemService( "statusbar" );
+                Class<?> statusbarManager = Class.forName( "android.app.StatusBarManager" );
+                Method collapse2 = statusbarManager.getMethod("collapsePanels");
+                collapse2.setAccessible(true);
+                collapse2.invoke(sbservice);
+            }catch (Exception ignored){
+            }
+        }, delayed ? 500 : 0);
     }
 
     public static void setShowTouches(Context context, boolean show){

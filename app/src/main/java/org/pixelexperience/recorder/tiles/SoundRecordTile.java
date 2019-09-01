@@ -26,10 +26,12 @@ public class SoundRecordTile extends TileService {
 
     @Override
     public void onClick() {
-        Intent intent = new Intent(this, RecorderActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(RecorderActivity.EXTRA_UI_TYPE, Utils.UiStatus.SOUND.toString());
-        startActivityAndCollapse(intent);
+        unlockAndRun(() -> {
+            Intent intent = new Intent(this, RecorderActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(RecorderActivity.EXTRA_UI_TYPE, Utils.UiStatus.SOUND.toString());
+            startActivityAndCollapse(intent);
+        });
     }
 
     @Override

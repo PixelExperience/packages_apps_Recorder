@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
@@ -35,23 +36,26 @@ public class ScreenRecordTile extends TileService {
 
     @Override
     public void onClick() {
-        if (Utils.isScreenRecording()) {
-            Utils.collapseStatusBar(this);
-            Utils.setStatus(Utils.UiStatus.NOTHING, this);
-            startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
-                    .setClass(this, ScreencastService.class));
-        } else if (hasPerms()) {
-            Utils.collapseStatusBar(this);
-            LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Utils.ACTION_HIDE_ACTIVITY));
-            Utils.stopOverlayService(this);
-            Intent intent = new Intent(this, OverlayService.class);
-            startService(intent);
-        } else {
-            Intent intent = new Intent(this, RecorderActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(RecorderActivity.EXTRA_UI_TYPE, Utils.UiStatus.SCREEN.toString());
-            startActivityAndCollapse(intent);
-        }
+        boolean wasLocked = isLocked();
+        unlockAndRun(() -> {
+            if (Utils.isScreenRecording()) {
+                Utils.collapseStatusBar(this, wasLocked);
+                Utils.setStatus(Utils.UiStatus.NOTHING, this);
+                startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
+                        .setClass(this, ScreencastService.class));
+            } else if (hasPerms()) {
+                Utils.collapseStatusBar(this, wasLocked);
+                LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Utils.ACTION_HIDE_ACTIVITY));
+                Utils.stopOverlayService(this);
+                Intent intent = new Intent(this, OverlayService.class);
+                startService(intent);
+            } else {
+                Intent intent = new Intent(this, RecorderActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(RecorderActivity.EXTRA_UI_TYPE, Utils.UiStatus.SCREEN.toString());
+                startActivityAndCollapse(intent);
+            }
+        });
     }
 
     @Override
