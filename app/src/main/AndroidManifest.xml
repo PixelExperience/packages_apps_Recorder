@@ -53,10 +53,14 @@
         </activity>
         <activity
             android:name=".screen.StartScreenRecorder"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask" />
         <activity
             android:name=".DeleteActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar.Dim" />
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar.Dim"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask" />
 
         <!-- Sound recorder -->
         <service android:name=".sounds.SoundRecorderService" />
