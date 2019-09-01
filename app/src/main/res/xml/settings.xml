@@ -26,6 +26,14 @@
             app:title="@string/screen_audio_recording_title" />
 
         <ListPreference
+            app:defaultValue="0"
+            app:entries="@array/screen_orientation_entries"
+            app:entryValues="@array/screen_orientation_values"
+            app:key="screen_orientation"
+            app:summary="%s"
+            app:title="@string/screen_orientation" />
+
+        <ListPreference
             app:defaultValue="30"
             app:entries="@array/frame_rates_entries"
             app:entryValues="@array/frame_rates_values"

@@ -58,6 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
         private static final int REQUEST_RECORD_AUDIO_PERMS = 213;
         private PreferenceCategory mScreenCategory;
         private ListPreference mAudioSource;
+        private ListPreference mScreenOrientation;
         private ListPreference mFramerate;
         private SwitchPreference mShowTouches;
         private SwitchPreference mStopRecordingWhenScreenOff;
@@ -71,10 +72,12 @@ public class SettingsActivity extends AppCompatActivity {
             mPreferenceUtils = new PreferenceUtils(getContext());
             mScreenCategory = findPreference(KEY_SCREEN_CATEGORY);
             mAudioSource = findPreference(PreferenceUtils.PREF_AUDIO_RECORDING_TYPE);
+            mScreenOrientation = findPreference(PreferenceUtils.PREF_SCREEN_ORIENTATION);
             mFramerate = findPreference(PreferenceUtils.PREF_FRAME_RATE);
             mShowTouches = findPreference(PreferenceUtils.PREF_SHOW_TOUCHES);
             mStopRecordingWhenScreenOff = findPreference(PreferenceUtils.PREF_STOP_SCREEN_OFF);
             mAudioSource.setOnPreferenceChangeListener(this);
+            mScreenOrientation.setOnPreferenceChangeListener(this);
             mFramerate.setOnPreferenceChangeListener(this);
             mShowTouches.setOnPreferenceChangeListener(this);
             mStopRecordingWhenScreenOff.setOnPreferenceChangeListener(this);
@@ -85,6 +88,7 @@ public class SettingsActivity extends AppCompatActivity {
                 mAudioSource.setEntryValues(values);
             }
             mAudioSource.setValueIndex(mPreferenceUtils.getAudioRecordingType());
+            mScreenOrientation.setValue(String.valueOf(mPreferenceUtils.getVideoRecordingOrientation()));
             mFramerate.setValue(String.valueOf(mPreferenceUtils.getVideoRecordingMaxFps()));
             mShowTouches.setChecked(mPreferenceUtils.getShouldShowTouches());
             mStopRecordingWhenScreenOff.setChecked(mPreferenceUtils.getShouldStopWhenScreenOff());
@@ -120,6 +124,9 @@ public class SettingsActivity extends AppCompatActivity {
                 if (!PermissionUtils.hasAudioPermission(getContext()) && value != PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_DISABLED) {
                     askAudioPermission();
                 }
+            }else if(preference == mScreenOrientation){
+                int value = Integer.valueOf((String) newValue);
+                mPreferenceUtils.setVideoRecordingOrientation(value);
             }else if(preference == mFramerate){
                 int value = Integer.valueOf((String) newValue);
                 mPreferenceUtils.setVideoRecordingMaxFps(value);

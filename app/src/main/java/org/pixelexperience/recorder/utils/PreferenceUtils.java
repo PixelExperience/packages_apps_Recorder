@@ -20,6 +20,11 @@ public class PreferenceUtils {
     public static final Boolean PREF_STOP_SCREEN_OFF_DEFAULT = false;
     public static final String PREF_FRAME_RATE = "frame_rate";
     public static final int PREF_FRAME_RATE_DEFAULT = 30;
+    public static final String PREF_SCREEN_ORIENTATION = "screen_orientation";
+    public static final int PREF_SCREEN_ORIENTATION_AUTOMATIC = 0;
+    public static final int PREF_SCREEN_ORIENTATION_PORTRAIT = 1;
+    public static final int PREF_SCREEN_ORIENTATION_LANDSCAPE = 2;
+    public static final int PREF_SCREEN_ORIENTATION_DEFAULT = PREF_SCREEN_ORIENTATION_AUTOMATIC;
 
     SharedPreferences mSharedPrefs;
     Context mContext;
@@ -40,6 +45,14 @@ public class PreferenceUtils {
 
     public void setAudioRecordingType(int type) {
         mSharedPrefs.edit().putInt(PREF_AUDIO_RECORDING_TYPE, type).apply();
+    }
+
+    public int getVideoRecordingOrientation() {
+        return mSharedPrefs.getInt(PREF_SCREEN_ORIENTATION, PREF_SCREEN_ORIENTATION_DEFAULT);
+    }
+
+    public void setVideoRecordingOrientation(int orientation) {
+        mSharedPrefs.edit().putInt(PREF_SCREEN_ORIENTATION, orientation).apply();
     }
 
     public int getVideoRecordingMaxFps() {

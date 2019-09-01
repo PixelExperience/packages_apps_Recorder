@@ -32,4 +32,8 @@
     <string name="frame_rate">Frame rate</string>
     <string name="frame_rate_30_fps">30 FPS</string>
     <string name="frame_rate_60_fps">60 FPS</string>
+    <string name="screen_orientation">Orientation</string>
+    <string name="screen_orientation_automatic">Automatic</string>
+    <string name="screen_orientation_portrait">Portrait</string>
+    <string name="screen_orientation_landscape">Landscape</string>
 </resources>
