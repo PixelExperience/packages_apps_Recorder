@@ -15,6 +15,9 @@
  */
 package org.pixelexperience.recorder.utils;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -44,6 +47,8 @@ public class Utils {
     public static final int SCREEN_RECORD_REQUEST_CODE = 1058;
     public static final String SCREEN_RECORD_INTENT_DATA = "recorder_intent_data";
     public static final String SCREEN_RECORD_INTENT_RESULT = "recorder_intent_result";
+    public static final String RECORDING_DONE_NOTIFICATION_CHANNEL =
+            "recording_done_notification_channel";
 
     private Utils() {
     }
@@ -227,6 +232,19 @@ public class Utils {
         }else if(shouldShowTouches){
             setShowTouches(context, isScreenRecording);
         }
+    }
+
+    public static void createShareNotificationChannel(Context mContext, NotificationManager manager){
+        if (manager.getNotificationChannel(RECORDING_DONE_NOTIFICATION_CHANNEL) != null){
+            return;
+        }
+        String name = mContext.getString(R.string.screen_notification_message_done);
+        NotificationChannel notificationChannel =
+                new NotificationChannel(RECORDING_DONE_NOTIFICATION_CHANNEL,
+                        name, NotificationManager.IMPORTANCE_HIGH);
+        String description = mContext.getString(R.string.ready_channel_desc);
+        notificationChannel.setDescription(description);
+        manager.createNotificationChannel(notificationChannel);
     }
 
 }

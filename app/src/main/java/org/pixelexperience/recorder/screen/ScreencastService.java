@@ -30,7 +30,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.StatFs;
-import android.os.SystemClock;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -143,7 +142,9 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
 
         mNotificationManager = getSystemService(NotificationManager.class);
 
-        if (mNotificationManager == null || mNotificationManager.getNotificationChannel(
+        Utils.createShareNotificationChannel(this, mNotificationManager);
+
+        if (mNotificationManager.getNotificationChannel(
                 SCREENCAST_NOTIFICATION_CHANNEL) != null) {
             return;
         }
@@ -321,7 +322,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
 
         Log.i(LOGTAG, "Video complete: " + file);
 
-        return new NotificationCompat.Builder(this, SCREENCAST_NOTIFICATION_CHANNEL)
+        return new NotificationCompat.Builder(this, Utils.RECORDING_DONE_NOTIFICATION_CHANNEL)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_notification_screen)
                 .setContentTitle(getString(R.string.screen_notification_message_done))

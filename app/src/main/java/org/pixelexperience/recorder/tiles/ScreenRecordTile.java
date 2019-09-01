@@ -40,9 +40,11 @@ public class ScreenRecordTile extends TileService {
         unlockAndRun(() -> {
             if (Utils.isScreenRecording()) {
                 Utils.collapseStatusBar(this, wasLocked);
-                Utils.setStatus(Utils.UiStatus.NOTHING, this);
-                startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
-                        .setClass(this, ScreencastService.class));
+                new Handler().postDelayed(() -> {
+                    Utils.setStatus(Utils.UiStatus.NOTHING, this);
+                    startService(new Intent(ScreencastService.ACTION_STOP_SCREENCAST)
+                            .setClass(this, ScreencastService.class));
+                }, wasLocked ? 1000 : 500);
             } else if (hasPerms()) {
                 Utils.collapseStatusBar(this, wasLocked);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Utils.ACTION_HIDE_ACTIVITY));

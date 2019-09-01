@@ -116,6 +116,8 @@ public class SoundRecorderService extends Service {
 
         mNotificationManager = getSystemService(NotificationManager.class);
 
+        Utils.createShareNotificationChannel(this, mNotificationManager);
+
         if (mNotificationManager.getNotificationChannel(
                         SOUNDRECORDER_NOTIFICATION_CHANNEL) != null) {
             return;
@@ -321,7 +323,7 @@ public class SoundRecorderService extends Service {
         LastRecordHelper.setLastItem(this, mOutFilePath, mElapsedTime, true);
 
         Notification notification = new NotificationCompat.Builder(
-                this, SOUNDRECORDER_NOTIFICATION_CHANNEL)
+                this, Utils.RECORDING_DONE_NOTIFICATION_CHANNEL)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_notification_sound)
                 .setContentTitle(getString(R.string.sound_notification_title))
