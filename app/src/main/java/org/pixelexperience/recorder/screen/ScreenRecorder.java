@@ -24,8 +24,6 @@ import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.AudioManager;
 import android.media.EncoderCapabilities;
-import android.media.MediaCodecList;
-import android.media.MediaFormat;
 import android.media.MediaRecorder;
 import android.media.MediaScannerConnection;
 import android.media.projection.MediaProjection;
@@ -161,7 +159,7 @@ public class ScreenRecorder {
             mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             mMediaRecorder.setOutputFile(mPath.getPath());
             mMediaRecorder.setVideoSize(mWidth, mHeight);
-            mMediaRecorder.setVideoEncoder(getBestVideoEncoder());
+            mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
             mMediaRecorder.setMaxFileSize(getFreeSpaceInBytes());
             if (mustRecAudio)
                 mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
@@ -198,31 +196,6 @@ public class ScreenRecorder {
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
                 mMediaRecorder.getSurface(), null /*Callbacks*/, null
                 /*Handler*/);
-    }
-
-    private boolean getMediaCodecFor(String format) {
-        MediaCodecList list = new MediaCodecList(MediaCodecList.REGULAR_CODECS);
-        MediaFormat mediaFormat = MediaFormat.createVideoFormat(
-                format,
-                mWidth,
-                mHeight
-        );
-        String encoder = list.findEncoderForFormat(mediaFormat);
-        if (encoder == null) {
-            Log.d("Null Encoder: ", format);
-            return false;
-        }
-        Log.d("Encoder", encoder);
-        return !encoder.startsWith("OMX.google");
-    }
-
-    private int getBestVideoEncoder() {
-        int videoCodec = MediaRecorder.VideoEncoder.DEFAULT;
-        if (getMediaCodecFor(MediaFormat.MIMETYPE_VIDEO_HEVC)) {
-            videoCodec = MediaRecorder.VideoEncoder.HEVC;
-        } else if (getMediaCodecFor(MediaFormat.MIMETYPE_VIDEO_AVC))
-            videoCodec = MediaRecorder.VideoEncoder.H264;
-        return videoCodec;
     }
 
     private long getFreeSpaceInBytes() {
