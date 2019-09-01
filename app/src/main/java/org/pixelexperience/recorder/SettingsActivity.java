@@ -68,6 +68,12 @@ public class SettingsActivity extends AppCompatActivity {
                 }
                 return true;
             });
+            if (!mPreferenceUtils.isInternalAudioRecordingSupported()){
+                String[] entries = getContext().getResources().getStringArray(R.array.screen_audio_recording_entries_alt);
+                String[] values = getContext().getResources().getStringArray(R.array.screen_audio_recording_values_alt);
+                mAudioSource.setEntries(entries);
+                mAudioSource.setEntryValues(values);
+            }
             mAudioSource.setValueIndex(mPreferenceUtils.getAudioRecordingType());
             if (Utils.isScreenRecording()) {
                 mAudioSource.setEnabled(false);

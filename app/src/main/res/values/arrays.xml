@@ -6,10 +6,18 @@
         <item>@string/screen_audio_recording_internal</item>
         <item>@string/screen_audio_recording_microphone</item>
     </string-array>
+    <string-array name="screen_audio_recording_entries_alt" translatable="false">
+        <item>@string/screen_audio_recording_off</item>
+        <item>@string/screen_audio_recording_microphone</item>
+    </string-array>
     <!-- Audio recorder values -->
     <string-array name="screen_audio_recording_values" translatable="false">
         <item>0</item>
         <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="screen_audio_recording_values_alt" translatable="false">
+        <item>0</item>
         <item>2</item>
     </string-array>
 </resources>

@@ -3,6 +3,8 @@ package org.pixelexperience.recorder.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.android.internal.util.custom.recorder.InternalAudioRecorder;
+
 public class PreferenceUtils {
 
     public static final String PREFS = "preferences";
@@ -21,7 +23,12 @@ public class PreferenceUtils {
     }
 
     public int getAudioRecordingType() {
-        return mSharedPrefs.getInt(PREF_AUDIO_RECORDING_TYPE, PREF_AUDIO_RECORDING_TYPE_DEFAULT);
+        int type = mSharedPrefs.getInt(PREF_AUDIO_RECORDING_TYPE, PREF_AUDIO_RECORDING_TYPE_DEFAULT);
+        if (!isInternalAudioRecordingSupported() && type == PREF_AUDIO_RECORDING_TYPE_INTERNAL){
+            setAudioRecordingType(PREF_AUDIO_RECORDING_TYPE_DISABLED);
+            return PREF_AUDIO_RECORDING_TYPE_DISABLED;
+        }
+        return type;
     }
 
     public void setAudioRecordingType(int type) {
@@ -30,6 +37,10 @@ public class PreferenceUtils {
 
     public int getVideoRecordingMaxFps() {
         return 30;
+    }
+
+    public boolean isInternalAudioRecordingSupported(){
+        return InternalAudioRecorder.isSupported(mContext);
     }
 
 
