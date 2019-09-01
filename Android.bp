@@ -1,0 +1,26 @@
+android_library_import {
+    name: "androidx.preference_pixel-nodeps",
+    aars: ["app/aar/androidx-preference-pixel.aar"],
+    sdk_version: "current",
+    static_libs: [
+        "androidx.core_core",
+        "androidx.fragment_fragment",
+        "androidx.appcompat_appcompat",
+        "androidx.recyclerview_recyclerview",
+    ],
+}
+
+android_library {
+    name: "androidx.preference_pixel",
+    sdk_version: "current",
+    manifest: "app/aar/androidx-preference-pixel-AndroidManifest.xml",
+    static_libs: [
+        "androidx.preference_pixel-nodeps",
+        "androidx.collection_collection",
+        "androidx.core_core",
+        "androidx.fragment_fragment",
+        "androidx.appcompat_appcompat",
+        "androidx.recyclerview_recyclerview",
+    ],
+    java_version: "1.7",
+}

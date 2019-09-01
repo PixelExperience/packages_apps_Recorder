@@ -25,6 +25,8 @@ LOCAL_SRC_FILES := \
 
 LOCAL_USE_AAPT2 := true
 
+LOCAL_PROGUARD_ENABLED := disabled
+
 LOCAL_STATIC_ANDROID_LIBRARIES += \
     androidx.annotation_annotation \
     androidx-constraintlayout_constraintlayout \
@@ -33,6 +35,7 @@ LOCAL_STATIC_ANDROID_LIBRARIES += \
     androidx.cardview_cardview \
     androidx.recyclerview_recyclerview \
     com.google.android.material_material \
+    androidx.preference_pixel
 
 LOCAL_PACKAGE_NAME := Recorder
 LOCAL_CERTIFICATE := platform
