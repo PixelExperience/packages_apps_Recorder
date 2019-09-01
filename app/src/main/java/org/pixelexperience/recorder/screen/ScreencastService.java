@@ -46,7 +46,7 @@ import org.pixelexperience.recorder.utils.Utils;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ScreencastService extends Service {
+public class ScreencastService extends Service implements ScreenRecorder.ScreenRecorderResultCallback {
 
     private static final String SCREENCAST_NOTIFICATION_CHANNEL =
             "screencast_notification_channel";
@@ -57,7 +57,7 @@ public class ScreencastService extends Service {
             "org.pixelexperience.recorder.screen.ACTION_STOP_SCREENCAST";
     public static final int NOTIFICATION_ID = 61;
     private static final String LOGTAG = "ScreencastService";
-    private long mStartTime;
+    private long mElapsedTimeInSeconds;
     private Timer mTimer;
     private NotificationCompat.Builder mBuilder;
     private ScreenRecorder mRecorder;
@@ -166,6 +166,27 @@ public class ScreencastService extends Service {
         super.onDestroy();
     }
 
+    private void startTimer(boolean reset){
+        if (reset){
+            mElapsedTimeInSeconds = 0;
+        }
+        mTimer = new Timer();
+        mTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                mElapsedTimeInSeconds++;
+                updateNotification();
+            }
+        }, 1000, 1000);
+    }
+
+    private void stopTimer(){
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+    }
+
     private int startRecording(Intent intent) {
         try {
             mPreferenceUtils = new PreferenceUtils(this);
@@ -183,22 +204,16 @@ public class ScreencastService extends Service {
 
             mCurrentDevices = 0;
 
-            mStartTime = SystemClock.elapsedRealtime();
             mAudioSource = mPreferenceUtils.getAudioRecordingType();
             mStopOnScreenOff = mPreferenceUtils.getShouldStopWhenScreenOff();
 
             assert mRecorder == null;
             mRecorder = new ScreenRecorder(this, intent.getParcelableExtra(Utils.SCREEN_RECORD_INTENT_DATA),
-                    intent.getIntExtra(Utils.SCREEN_RECORD_INTENT_RESULT, Activity.RESULT_OK), this::stopRecording);
+                    intent.getIntExtra(Utils.SCREEN_RECORD_INTENT_RESULT, Activity.RESULT_OK), this);
             mRecorder.startRecording();
             mBuilder = createNotificationBuilder();
-            mTimer = new Timer();
-            mTimer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    updateNotification();
-                }
-            }, 100, 1000);
+
+            startTimer(true);
 
             Utils.setStatus(Utils.PREF_RECORDING_SCREEN, this);
 
@@ -238,9 +253,8 @@ public class ScreencastService extends Service {
     }
 
     private void updateNotification() {
-        long timeElapsed = SystemClock.elapsedRealtime() - mStartTime;
         mBuilder.setContentText(getString(R.string.screen_notification_message,
-                DateUtils.formatElapsedTime(timeElapsed / 1000)));
+                DateUtils.formatElapsedTime(mElapsedTimeInSeconds)));
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 
@@ -254,10 +268,7 @@ public class ScreencastService extends Service {
             mRecorder.stopRecording(false);
             mRecorder = null;
         }
-        if (mTimer != null) {
-            mTimer.cancel();
-            mTimer = null;
-        }
+        stopTimer();
         stopForeground(true);
         if (recorderPath != null) {
             sendShareNotification(recorderPath);
@@ -306,8 +317,7 @@ public class ScreencastService extends Service {
                 LastRecordHelper.getDeleteIntent(this, false),
                 PendingIntent.FLAG_CANCEL_CURRENT);
 
-        long timeElapsed = SystemClock.elapsedRealtime() - mStartTime;
-        LastRecordHelper.setLastItem(this, file, timeElapsed, false);
+        LastRecordHelper.setLastItem(this, file, mElapsedTimeInSeconds, false);
 
         Log.i(LOGTAG, "Video complete: " + file);
 
@@ -316,10 +326,25 @@ public class ScreencastService extends Service {
                 .setSmallIcon(R.drawable.ic_notification_screen)
                 .setContentTitle(getString(R.string.screen_notification_message_done))
                 .setContentText(getString(R.string.screen_notification_message,
-                        DateUtils.formatElapsedTime(timeElapsed / 1000)))
+                        DateUtils.formatElapsedTime(mElapsedTimeInSeconds)))
                 .addAction(R.drawable.ic_play, getString(R.string.play), playPIntent)
                 .addAction(R.drawable.ic_share, getString(R.string.share), sharePIntent)
                 .addAction(R.drawable.ic_delete, getString(R.string.delete), deletePIntent)
                 .setContentIntent(playPIntent);
+    }
+
+    @Override
+    public void onRecordingError() {
+        stopRecording();
+    }
+
+    @Override
+    public void onRecordingPaused() {
+        stopTimer();
+    }
+
+    @Override
+    public void onRecordingResumed() {
+        startTimer(false);
     }
 }

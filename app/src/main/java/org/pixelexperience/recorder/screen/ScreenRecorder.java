@@ -96,13 +96,14 @@ public class ScreenRecorder {
     private MediaProjectionManager mProjectionManager;
     private AudioManager mAudioManager;
     private PreferenceUtils mPreferenceUtils;
-    private ScreenRecorderResultCallback mScreenRecorderErrorCallback;
+    private ScreenRecorderResultCallback mScreenRecorderCallback;
     private Intent mIntentData;
     private int mIntentResult;
     private MediaProjection mMediaProjection;
     private VirtualDisplay mVirtualDisplay;
     private MediaProjectionCallback mMediaProjectionCallback;
     private MediaRecorder mMediaRecorder;
+    private boolean mIsPaused = false;
 
     ScreenRecorder(Context context, Intent intentData, int intentResult, ScreenRecorderResultCallback callback) {
         mContext = context;
@@ -118,7 +119,7 @@ public class ScreenRecorder {
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         mPreferenceUtils = new PreferenceUtils(context);
         mMediaProjectionCallback = new MediaProjectionCallback();
-        mScreenRecorderErrorCallback = callback;
+        mScreenRecorderCallback = callback;
         mIntentData = intentData;
         mIntentResult = intentResult;
     }
@@ -128,7 +129,7 @@ public class ScreenRecorder {
         recordingDir.mkdirs();
         if (!(recordingDir.exists() && recordingDir.canWrite())) {
             Log.e(TAG, "Cannot write to " + recordingDir);
-            mScreenRecorderErrorCallback.onRecordingError();
+            mScreenRecorderCallback.onRecordingError();
             return;
         }
 
@@ -167,7 +168,7 @@ public class ScreenRecorder {
             mMediaRecorder.setVideoFrameRate(mPreferenceUtils.getVideoRecordingMaxFps());
             mMediaRecorder.prepare();
         } catch (IOException e) {
-            mScreenRecorderErrorCallback.onRecordingError();
+            mScreenRecorderCallback.onRecordingError();
             e.printStackTrace();
         }
 
@@ -191,10 +192,37 @@ public class ScreenRecorder {
 
     //Virtual display created by mirroring the actual physical display
     private VirtualDisplay createVirtualDisplay() {
+        mIsPaused = false;
         return mMediaProjection.createVirtualDisplay("Screen recorder",
                 mWidth, mHeight, mDensityDpi,
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                mMediaRecorder.getSurface(), null /*Callbacks*/, null
+                mMediaRecorder.getSurface(), new VirtualDisplay.Callback() {
+                    @Override
+                    public void onPaused() {
+                        super.onPaused();
+                        if (!mIsPaused){
+                            mIsPaused = true;
+                            mMediaRecorder.pause();
+                            mScreenRecorderCallback.onRecordingPaused();
+                        }
+                    }
+
+                    @Override
+                    public void onResumed() {
+                        super.onResumed();
+                        if (mIsPaused){
+                            mIsPaused = false;
+                            mMediaRecorder.resume();
+                            mScreenRecorderCallback.onRecordingResumed();
+                        }
+                    }
+
+                    @Override
+                    public void onStopped() {
+                        super.onStopped();
+                        mIsPaused = false;
+                    }
+                } /*Callbacks*/, null
                 /*Handler*/);
     }
 
@@ -305,6 +333,7 @@ public class ScreenRecorder {
     }
 
     void stopRecording(boolean fireErrorCallback) {
+        mIsPaused = false;
         try {
             mMediaRecorder.stop();
             indexFile();
@@ -324,7 +353,7 @@ public class ScreenRecorder {
             }
         }
         if (fireErrorCallback) {
-            mScreenRecorderErrorCallback.onRecordingError();
+            mScreenRecorderCallback.onRecordingError();
         }
     }
 
@@ -352,6 +381,8 @@ public class ScreenRecorder {
 
     public interface ScreenRecorderResultCallback {
         void onRecordingError();
+        void onRecordingPaused();
+        void onRecordingResumed();
     }
 
     private class MediaProjectionCallback extends MediaProjection.Callback {
