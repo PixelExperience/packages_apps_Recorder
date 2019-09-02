@@ -15,7 +15,6 @@
  */
 package org.pixelexperience.recorder.utils;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
@@ -25,12 +24,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioSystem;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.pixelexperience.recorder.R;
@@ -52,7 +52,9 @@ public class Utils {
     public static final String SCREEN_RECORD_INTENT_RESULT = "recorder_intent_result";
     public static final String RECORDING_DONE_NOTIFICATION_CHANNEL =
             "recording_done_notification_channel";
-    private static long sLastClickTime = 0;
+    public static final String RECORDING_ERROR_NOTIFICATION_CHANNEL =
+            "recording_error_notification_channel";
+    public static final int NOTIFICATION_ERROR_ID = 6592;
 
     private Utils() {
     }
@@ -79,27 +81,40 @@ public class Utils {
         if (isBluetoothHeadsetConnected()) {
             return false;
         }
-        int devices = AudioSystem.getDevicesForStream(AudioSystem.STREAM_MUSIC);
-        devices &= ~AudioSystem.DEVICE_OUT_REMOTE_SUBMIX; // Remove submix
+        int devices = filterDevices(AudioSystem.getDevicesForStream(AudioSystem.STREAM_MUSIC));
         return (devices == AudioSystem.DEVICE_OUT_SPEAKER || devices == AudioSystem.DEVICE_OUT_SPEAKER_SAFE ||
                 devices == AudioSystem.DEVICE_OUT_WIRED_HEADPHONE || devices == AudioSystem.DEVICE_OUT_WIRED_HEADSET ||
                 devices == AudioSystem.DEVICE_OUT_USB_HEADSET);
     }
 
-    public static boolean isInternalAudioRecordingAllowed(Context context, boolean checkSubmix) {
+    public static boolean isDeviceInCall(Context context){
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK;
+    }
+
+    public static boolean isInternalAudioRecordingAllowed(Context context, boolean checkSubmix, boolean ui) {
         if (isWifiDisplaySessionRunning()) {
-            Toast.makeText(context, R.string.screen_audio_recording_disabled_wfd, Toast.LENGTH_LONG).show();
+            Utils.notifyError(context.getString(R.string.screen_audio_recording_disabled_wfd), true, context, ui);
             return false;
         }
         if (checkSubmix && isRoutedToSubmix()) {
-            Toast.makeText(context, R.string.screen_audio_recording_disabled_others_apps, Toast.LENGTH_LONG).show();
+            Utils.notifyError(context.getString(R.string.screen_audio_recording_disabled_others_apps), true, context, ui);
+            return false;
+        }
+        if (isDeviceInCall(context)) {
+            Utils.notifyError(context.getString(R.string.screen_audio_recording_not_allowed_in_call), true, context, ui);
             return false;
         }
         if (!isRoutedOnlyToSpeakerOrHeadset()) {
-            Toast.makeText(context, R.string.screen_audio_recording_not_allowed, Toast.LENGTH_LONG).show();
+            Utils.notifyError(context.getString(R.string.screen_audio_recording_not_allowed), true, context, ui);
             return false;
         }
         return true;
+    }
+
+    public static int filterDevices(int devices) {
+        devices &= ~AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
+        return devices;
     }
 
     private static String getStatus() {
@@ -250,6 +265,38 @@ public class Utils {
         String description = mContext.getString(R.string.ready_channel_desc);
         notificationChannel.setDescription(description);
         manager.createNotificationChannel(notificationChannel);
+    }
+
+    public static void notifyError(String message, boolean isScreenIcon, Context mContext, boolean fromUi) {
+        NotificationManager manager = mContext.getSystemService(NotificationManager.class);
+        notifyError(message, isScreenIcon, mContext, manager, fromUi);
+    }
+
+    public static void notifyError(String message, boolean isScreenIcon, Context mContext, NotificationManager manager, boolean fromUi) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+        if (fromUi){
+            return;
+        }
+        if (manager.getNotificationChannel(RECORDING_ERROR_NOTIFICATION_CHANNEL) == null) {
+            String name = mContext.getString(R.string.recording_error);
+            NotificationChannel notificationChannel =
+                    new NotificationChannel(RECORDING_ERROR_NOTIFICATION_CHANNEL,
+                            name, NotificationManager.IMPORTANCE_DEFAULT);
+            String description = mContext.getString(R.string.recording_error_channel_desc);
+            notificationChannel.setDescription(description);
+            manager.createNotificationChannel(notificationChannel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, Utils.RECORDING_ERROR_NOTIFICATION_CHANNEL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(isScreenIcon ? R.drawable.ic_notification_screen : R.drawable.ic_notification_sound)
+                .setContentTitle(mContext.getString(R.string.recording_error))
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
+                .setContentText(message);
+
+        manager.cancel(NOTIFICATION_ERROR_ID);
+        manager.notify(NOTIFICATION_ERROR_ID, builder.build());
     }
 
     public static void preventTwoClick(final View view){

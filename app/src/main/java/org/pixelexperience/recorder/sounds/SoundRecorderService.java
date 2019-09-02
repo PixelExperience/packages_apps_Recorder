@@ -157,6 +157,7 @@ public class SoundRecorderService extends Service {
         if (file == null) {
             return;
         }
+        mNotificationManager.cancel(Utils.NOTIFICATION_ERROR_ID);
 
         mFilePath = file.getAbsolutePath();
         String fileName = file.getName().replace(EXTENSION, "");
@@ -338,7 +339,6 @@ public class SoundRecorderService extends Service {
                 .addAction(R.drawable.ic_delete, getString(R.string.delete), deletePIntent)
                 .setContentIntent(playPIntent)
                 .build();
-
         mNotificationManager.notify(NOTIFICATION_ID, notification);
     }
 

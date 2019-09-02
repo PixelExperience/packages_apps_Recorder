@@ -58,6 +58,7 @@ public class OverlayService extends Service {
     private int mUiMode;
     private LocalBroadcastManager mLocalBroadcastManager;
     private PreferenceUtils mPreferenceUtils;
+    private NotificationManager mNotificationManager;
 
     private final BroadcastReceiver mRecordingStateChanged = new BroadcastReceiver() {
         @Override
@@ -99,6 +100,7 @@ public class OverlayService extends Service {
         if (Utils.isScreenRecording()) {
             stopForeground(true);
         }else{
+            mNotificationManager.cancel(Utils.NOTIFICATION_ERROR_ID);
             startForeground(FG_ID, notification);
         }
         isRunning = true;
@@ -145,9 +147,9 @@ public class OverlayService extends Service {
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
         mPreferenceUtils = new PreferenceUtils(this);
 
-        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        mNotificationManager = getSystemService(NotificationManager.class);
 
-        if (notificationManager
+        if (mNotificationManager
                 .getNotificationChannel(SCREENCAST_OVERLAY_NOTIFICATION_CHANNEL) != null) {
             return;
         }
@@ -158,7 +160,7 @@ public class OverlayService extends Service {
                 new NotificationChannel(SCREENCAST_OVERLAY_NOTIFICATION_CHANNEL,
                         name, NotificationManager.IMPORTANCE_LOW);
         notificationChannel.setDescription(description);
-        notificationManager.createNotificationChannel(notificationChannel);
+        mNotificationManager.createNotificationChannel(notificationChannel);
     }
 
     private void registerReceiver(){

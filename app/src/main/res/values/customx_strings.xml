@@ -22,9 +22,10 @@
     <string name="screen_audio_recording_disabled_wfd">System internal audio recording does not work during transmission to remote screens.</string>
     <string name="screen_audio_recording_disabled_others_apps">System internal audio recording does not work when using another recorder simultaneously.</string>
     <string name="screen_audio_recording_not_allowed">System internal audio recording works only when using speaker or wired headphones.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">System internal audio recording is not allowed during a call.</string>
     <string name="screen_audio_recording_route_changed">Recording ended because audio output changed.</string>
     <!-- Notifications -->
-    <string name="ready_channel_desc">Notification when recording complete</string>
+    <string name="ready_channel_desc">Notification when recording complete.</string>
     <!-- Extra settings -->
     <string name="title_activity_settings">Settings</string>
     <string name="show_touches">Show taps</string>
@@ -40,4 +41,8 @@
     <string name="screen_orientation_landscape">Landscape</string>
     <string name="show_floating_window">Show floating window</string>
     <string name="show_floating_window_summary">Show floating window when recording</string>
+    <!-- Unknow error -->
+    <string name="recording_error">Recording stopped</string>
+    <string name="recording_error_channel_desc">Notification when recording is stopped due to an error.</string>
+    <string name="unknow_error">Unknown error, recording has been stopped.</string>
 </resources>

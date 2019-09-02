@@ -30,9 +30,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.StatFs;
+import android.telephony.TelephonyManager;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -62,6 +62,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
     private NotificationCompat.Builder mBuilder;
     private ScreenRecorder mRecorder;
     private NotificationManager mNotificationManager;
+    private boolean mAlreadyNotified = false;
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -72,9 +73,18 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
             } else if ("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED".equals(action) &&
                     mAudioSource == PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL && Utils.isBluetoothHeadsetConnected()) {
                 stopRecording();
-                Toast.makeText(context, R.string.screen_audio_recording_not_allowed, Toast.LENGTH_LONG).show();
+                Utils.notifyError(getString(R.string.screen_audio_recording_not_allowed), true, ScreencastService.this, mNotificationManager, false);
+                mAlreadyNotified = true;
             } else if (Intent.ACTION_SCREEN_OFF.equals(action) && mStopOnScreenOff) {
                 stopRecording();
+            } else if (TelephonyManager.ACTION_PHONE_STATE_CHANGED.equals(action)) {
+                String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+                if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK) &&
+                        mAudioSource == PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
+                    stopRecording();
+                    Utils.notifyError(getString(R.string.screen_audio_recording_not_allowed_in_call), true, ScreencastService.this, mNotificationManager, false);
+                    mAlreadyNotified = true;
+                }
             }
         }
     };
@@ -89,8 +99,9 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
         if (Utils.isBluetoothHeadsetConnected()) {
             return;
         }
-        if (Utils.isInternalAudioRecordingAllowed(ScreencastService.this, false)) {
-            Toast.makeText(ScreencastService.this, R.string.screen_audio_recording_route_changed, Toast.LENGTH_SHORT).show();
+        mAlreadyNotified = true;
+        if (Utils.isInternalAudioRecordingAllowed(ScreencastService.this, false, false)) {
+            Utils.notifyError(getString(R.string.screen_audio_recording_route_changed), true, ScreencastService.this, mNotificationManager, false);
         }
         stopRecording();
     };
@@ -100,9 +111,11 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
             if (Utils.isBluetoothHeadsetConnected()) {
                 return;
             }
-            int currentDevices = AudioSystem.getDevicesForStream(AudioSystem.STREAM_MUSIC);
-            currentDevices &= ~AudioSystem.DEVICE_OUT_REMOTE_SUBMIX; // Remove submix
+            int currentDevices = Utils.filterDevices(AudioSystem.getDevicesForStream(AudioSystem.STREAM_MUSIC));
             if (mCurrentDevices != currentDevices) {
+                if (mRecorder != null){
+                    mRecorder.setStopping(true);
+                }
                 mHandler.postDelayed(stopCastRunnable, 500);
                 return;
             }
@@ -151,6 +164,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
         filter.addAction(Intent.ACTION_SHUTDOWN);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED");
+        filter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         registerReceiver(mBroadcastReceiver, filter);
 
         if (mNotificationManager.getNotificationChannel(
@@ -169,7 +183,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
 
     @Override
     public void onDestroy() {
-        stopRecording();
+        stopRecording(true);
         unregisterReceiver(mBroadcastReceiver);
         super.onDestroy();
     }
@@ -200,19 +214,20 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
         try {
             mPreferenceUtils = new PreferenceUtils(this);
             if (hasNoAvailableSpace()) {
-                Toast.makeText(this, R.string.screen_insufficient_storage,
-                        Toast.LENGTH_LONG).show();
+                Utils.notifyError(getString(R.string.screen_insufficient_storage), true, ScreencastService.this, mNotificationManager, false);
                 return START_NOT_STICKY;
             }
 
             if (mPreferenceUtils.getAudioRecordingType() == PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
-                if (!Utils.isInternalAudioRecordingAllowed(this, true)) {
+                if (!Utils.isInternalAudioRecordingAllowed(this, true, true)) {
                     return START_NOT_STICKY;
                 }
             }
 
-            mCurrentDevices = 0;
+            mNotificationManager.cancel(Utils.NOTIFICATION_ERROR_ID);
 
+            mCurrentDevices = 0;
+            mAlreadyNotified = false;
             mAudioSource = mPreferenceUtils.getAudioRecordingType();
             mStopOnScreenOff = mPreferenceUtils.getShouldStopWhenScreenOff();
 
@@ -228,8 +243,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
 
             startForeground(NOTIFICATION_ID, mBuilder.build());
 
-            mCurrentDevices = AudioSystem.getDevicesForStream(AudioSystem.STREAM_MUSIC);
-            mCurrentDevices &= ~AudioSystem.DEVICE_OUT_REMOTE_SUBMIX; // Remove submix
+            mCurrentDevices = Utils.filterDevices(AudioSystem.getDevicesForStream(AudioSystem.STREAM_MUSIC));
 
             if (mAudioSource == PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
                 mHandler.postDelayed(currentDevicesCheckerRunnable, 100);
@@ -259,28 +273,32 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 
-    private void cleanup() {
+    private void stopRecording() {
+        stopRecording(false);
+    }
+
+    private void stopRecording(boolean fromOnDestroy) {
+        Utils.stopOverlayService(this);
+        Utils.setStatus(Utils.PREF_RECORDING_NOTHING, this);
+        mHandler.removeCallbacksAndMessages(null);
+
         String recorderPath = null;
         if (mRecorder != null) {
+            mRecorder.setStopping(true);
             recorderPath = mRecorder.getRecordingFilePath();
-            mRecorder.stopRecording(false);
+            mRecorder.stopRecording();
             mRecorder = null;
         }
         stopTimer();
         stopForeground(true);
-        if (recorderPath != null) {
+        if (!fromOnDestroy && recorderPath != null) {
             sendShareNotification(recorderPath);
+        } else if (!fromOnDestroy && !mAlreadyNotified) {
+            Utils.notifyError(getString(R.string.unknow_error), true, ScreencastService.this, mNotificationManager, false);
         }
-    }
 
-    private void stopRecording() {
-        Utils.stopOverlayService(this);
-        mHandler.removeCallbacksAndMessages(null);
-        Utils.setStatus(Utils.PREF_RECORDING_NOTHING, this);
-        cleanup();
-
-        if (hasNoAvailableSpace()) {
-            Toast.makeText(this, R.string.screen_not_enough_storage, Toast.LENGTH_LONG).show();
+        if (!fromOnDestroy && hasNoAvailableSpace()) {
+            Utils.notifyError(getString(R.string.screen_not_enough_storage), true, ScreencastService.this, mNotificationManager, false);
         }
         Utils.refreshShowTouchesState(this);
     }

@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
-import android.media.AudioManager;
 import android.media.EncoderCapabilities;
 import android.media.MediaRecorder;
 import android.media.MediaScannerConnection;
@@ -37,7 +36,6 @@ import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
 
-import org.pixelexperience.recorder.R;
 import org.pixelexperience.recorder.utils.PreferenceUtils;
 
 import java.io.File;
@@ -72,6 +70,7 @@ public class ScreenRecorder {
     private MediaProjectionCallback mMediaProjectionCallback;
     private MediaRecorder mMediaRecorder;
     private boolean mIsPaused = false;
+    private boolean mIsStopping;
 
     ScreenRecorder(Context context, Intent intentData, int intentResult, ScreenRecorderResultCallback callback) {
         mContext = context;
@@ -103,7 +102,7 @@ public class ScreenRecorder {
         updateDisplayParams();
 
         mMediaRecorder = new MediaRecorder();
-        mMediaRecorder.setOnErrorListener((mr, what, extra) -> stopRecording(true));
+        mMediaRecorder.setOnErrorListener((mr, what, extra) -> fireErrorCallback());
 
         boolean mustRecAudio = false;
         try {
@@ -147,13 +146,13 @@ public class ScreenRecorder {
          * and pass it on to MediaRecorder to start recording */
         mVirtualDisplay = createVirtualDisplay();
         if (mVirtualDisplay == null) {
-            stopRecording(true);
+            fireErrorCallback();
         }
         try {
             mMediaRecorder.start();
         } catch (IllegalStateException e) {
             Log.e(TAG, "Mediarecorder reached Illegal state exception. Did you start the recording twice?");
-            stopRecording(true);
+            fireErrorCallback();
         }
     }
 
@@ -167,7 +166,7 @@ public class ScreenRecorder {
                     @Override
                     public void onPaused() {
                         super.onPaused();
-                        if (!mIsPaused){
+                        if (!mIsPaused && !mIsStopping){
                             mIsPaused = true;
                             mMediaRecorder.pause();
                             mScreenRecorderCallback.onRecordingPaused();
@@ -177,7 +176,7 @@ public class ScreenRecorder {
                     @Override
                     public void onResumed() {
                         super.onResumed();
-                        if (mIsPaused){
+                        if (mIsPaused && !mIsStopping){
                             mIsPaused = false;
                             mMediaRecorder.resume();
                             mScreenRecorderCallback.onRecordingResumed();
@@ -255,28 +254,42 @@ public class ScreenRecorder {
         }
     }
 
-    void stopRecording(boolean fireErrorCallback) {
+    private void fireErrorCallback() {
+        if (mPath != null) {
+            mPath.delete();
+            mPath = null;
+        }
+        mScreenRecorderCallback.onRecordingError();
+    }
+
+    void stopRecording() {
         mIsPaused = false;
         try {
             mMediaRecorder.stop();
             indexFile();
         } catch (RuntimeException e) {
             Log.e(TAG, "Fatal exception! Destroying media projection failed." + "\n" + e.getMessage());
-            mPath.delete();
+            if (mPath != null) {
+                mPath.delete();
+                mPath = null;
+            }
         } finally {
-            mMediaRecorder.reset();
+            try {
+                mMediaRecorder.reset();
+            } catch (Exception ignored) {
+            }
             if (mVirtualDisplay != null) {
                 mVirtualDisplay.release();
             }
-            mMediaRecorder.release();
+            try {
+                mMediaRecorder.release();
+            } catch (Exception ignored) {
+            }
             if (mMediaProjection != null) {
                 mMediaProjection.unregisterCallback(mMediaProjectionCallback);
                 mMediaProjection.stop();
                 mMediaProjection = null;
             }
-        }
-        if (fireErrorCallback) {
-            mScreenRecorderCallback.onRecordingError();
         }
     }
 
@@ -299,7 +312,11 @@ public class ScreenRecorder {
     }
 
     String getRecordingFilePath() {
-        return mPath.getAbsolutePath();
+        return mPath == null ? null : mPath.getAbsolutePath();
+    }
+
+    void setStopping(boolean isStopping){
+        mIsStopping = isStopping;
     }
 
     public interface ScreenRecorderResultCallback {
@@ -311,7 +328,7 @@ public class ScreenRecorder {
     private class MediaProjectionCallback extends MediaProjection.Callback {
         @Override
         public void onStop() {
-            stopRecording(false);
+            stopRecording();
         }
     }
 }

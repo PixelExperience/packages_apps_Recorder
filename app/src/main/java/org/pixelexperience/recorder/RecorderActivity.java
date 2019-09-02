@@ -95,8 +95,8 @@ public class RecorderActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (TelephonyManager.ACTION_PHONE_STATE_CHANGED.equals(intent.getAction())) {
-                int state = intent.getIntExtra(TelephonyManager.EXTRA_STATE, -1);
-                if (state == TelephonyManager.CALL_STATE_OFFHOOK &&
+                String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+                if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK) &&
                         Utils.isSoundRecording()) {
                     toggleSoundRecorder();
                 }
@@ -314,7 +314,7 @@ public class RecorderActivity extends AppCompatActivity {
                     .setClass(this, ScreencastService.class));
         } else {
             if (mPreferenceUtils.getAudioRecordingType() == PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL) {
-                if (!Utils.isInternalAudioRecordingAllowed(this, true)) {
+                if (!Utils.isInternalAudioRecordingAllowed(this, true, true)) {
                     return;
                 }
             }
