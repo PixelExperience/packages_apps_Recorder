@@ -201,6 +201,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
                 mLocalBroadcastManager.sendBroadcast(new Intent(Utils.ACTION_RECORDING_TIME_TICK));
             }
         }, 1000, 1000);
+        updateNotification();
     }
 
     private void stopTimer(){
