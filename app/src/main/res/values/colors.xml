@@ -21,9 +21,9 @@
 
     <color name="screen">@color/colorPrimaryDark</color>
     <color name="sound">@color/colorPrimary</color>
-    <color name="overlay_bg">@color/colorPrimaryDark</color>
-    <color name="overlay_primary">@color/colorAccent2</color>
-    <color name="overlay_icon">#ff1e1f22</color>
+    <color name="overlay_bg">#ff1e1f22</color>
+    <color name="overlay_primary">#ff313235</color>
+    <color name="overlay_icon">#fafafa</color>
     <color name="fab_icon">@color/colorAccent2</color>
     <color name="icon">#56000000</color>
     <color name="ic_launcher_background">#1e1f22</color>

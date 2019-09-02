@@ -55,7 +55,6 @@ public class OverlayService extends Service {
 
     private int mDensity;
     private float mFontScale;
-    private int mUiMode;
     private LocalBroadcastManager mLocalBroadcastManager;
     private PreferenceUtils mPreferenceUtils;
     private NotificationManager mNotificationManager;
@@ -84,7 +83,6 @@ public class OverlayService extends Service {
         Configuration configuration = getResources().getConfiguration();
         mDensity = configuration.densityDpi;
         mFontScale = configuration.fontScale;
-        mUiMode = configuration.uiMode;
         createOverlayLayer();
         registerReceiver();
 
@@ -202,10 +200,6 @@ public class OverlayService extends Service {
         }
         if (mFontScale != newConfig.fontScale) {
             mFontScale = newConfig.fontScale;
-            shouldRefresh = true;
-        }
-        if (mUiMode != newConfig.uiMode) {
-            mUiMode = newConfig.uiMode;
             shouldRefresh = true;
         }
         if (shouldRefresh) {
