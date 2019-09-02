@@ -35,6 +35,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.pixelexperience.recorder.R;
 import org.pixelexperience.recorder.RecorderActivity;
@@ -56,7 +57,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
             "org.pixelexperience.recorder.screen.ACTION_STOP_SCREENCAST";
     public static final int NOTIFICATION_ID = 61;
     private static final String LOGTAG = "ScreencastService";
-    private long mElapsedTimeInSeconds;
+    public static long sElapsedTimeInSeconds;
     private Timer mTimer;
     private NotificationCompat.Builder mBuilder;
     private ScreenRecorder mRecorder;
@@ -84,6 +85,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
     private Handler mHandler = new Handler();
     private PreferenceUtils mPreferenceUtils;
     private boolean mReceiverRegistered;
+    private LocalBroadcastManager mLocalBroadcastManager;
     private Runnable stopCastRunnable = () -> {
         if (Utils.isBluetoothHeadsetConnected()) {
             return;
@@ -141,8 +143,16 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
         super.onCreate();
 
         mNotificationManager = getSystemService(NotificationManager.class);
+        mLocalBroadcastManager = LocalBroadcastManager.getInstance(ScreencastService.this);
 
         Utils.createShareNotificationChannel(this, mNotificationManager);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_USER_BACKGROUND);
+        filter.addAction(Intent.ACTION_SHUTDOWN);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED");
+        registerReceiver(mBroadcastReceiver, filter);
 
         if (mNotificationManager.getNotificationChannel(
                 SCREENCAST_NOTIFICATION_CHANNEL) != null) {
@@ -161,22 +171,21 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
     @Override
     public void onDestroy() {
         stopRecording();
-        if (mReceiverRegistered) {
-            unregisterReceiver(mBroadcastReceiver);
-        }
+        unregisterReceiver(mBroadcastReceiver);
         super.onDestroy();
     }
 
     private void startTimer(boolean reset){
         if (reset){
-            mElapsedTimeInSeconds = 0;
+            sElapsedTimeInSeconds = 0;
         }
         mTimer = new Timer();
         mTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                mElapsedTimeInSeconds++;
+                sElapsedTimeInSeconds++;
                 updateNotification();
+                mLocalBroadcastManager.sendBroadcast(new Intent(Utils.ACTION_RECORDING_TIME_TICK));
             }
         }, 1000, 1000);
     }
@@ -189,7 +198,6 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
     }
 
     private int startRecording(Intent intent) {
-        Utils.stopOverlayService(this);
         try {
             mPreferenceUtils = new PreferenceUtils(this);
             if (hasNoAvailableSpace()) {
@@ -228,12 +236,6 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
                 mHandler.postDelayed(currentDevicesCheckerRunnable, 100);
             }
 
-            IntentFilter filter = new IntentFilter();
-            filter.addAction(Intent.ACTION_USER_BACKGROUND);
-            filter.addAction(Intent.ACTION_SHUTDOWN);
-            filter.addAction(Intent.ACTION_SCREEN_OFF);
-            filter.addAction("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED");
-            registerReceiver(mBroadcastReceiver, filter);
             mReceiverRegistered = true;
 
             Utils.refreshShowTouchesState(this);
@@ -256,14 +258,11 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
 
     private void updateNotification() {
         mBuilder.setContentText(getString(R.string.screen_notification_message,
-                DateUtils.formatElapsedTime(mElapsedTimeInSeconds)));
+                DateUtils.formatElapsedTime(sElapsedTimeInSeconds)));
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 
     private void cleanup() {
-        if (mReceiverRegistered) {
-            unregisterReceiver(mBroadcastReceiver);
-        }
         String recorderPath = null;
         if (mRecorder != null) {
             recorderPath = mRecorder.getRecordingFilePath();
@@ -273,7 +272,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
         stopTimer();
         stopForeground(true);
         if (recorderPath != null) {
-            LastRecordHelper.setLastItem(this, recorderPath, mElapsedTimeInSeconds, false);
+            LastRecordHelper.setLastItem(this, recorderPath, sElapsedTimeInSeconds, false);
             sendShareNotification(recorderPath);
         }
     }
@@ -327,7 +326,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
                 .setSmallIcon(R.drawable.ic_notification_screen)
                 .setContentTitle(getString(R.string.screen_notification_message_done))
                 .setContentText(getString(R.string.screen_notification_message,
-                        DateUtils.formatElapsedTime(mElapsedTimeInSeconds)))
+                        DateUtils.formatElapsedTime(sElapsedTimeInSeconds)))
                 .addAction(R.drawable.ic_play, getString(R.string.play), playPIntent)
                 .addAction(R.drawable.ic_share, getString(R.string.share), sharePIntent)
                 .addAction(R.drawable.ic_delete, getString(R.string.delete), deletePIntent)

@@ -192,6 +192,15 @@ public class RecorderActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause(){
+        if (Utils.isScreenRecording() && mPreferenceUtils.getShouldShowFloatingWindow()){
+            Intent intent = new Intent(this, OverlayService.class);
+            startService(intent);
+        }
+        super.onPause();
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] results) {
         if (requestCode == REQUEST_SCREEN_REC_PERMS && PermissionUtils.hasAllScreenRecorderPermissions(this) ||
@@ -304,13 +313,9 @@ public class RecorderActivity extends AppCompatActivity {
                     return;
                 }
             }
-            // Start
-            new Handler().postDelayed(() -> {
-                Utils.stopOverlayService(this);
-                Intent intent = new Intent(this, OverlayService.class);
-                startService(intent);
-                onBackPressed();
-            }, 500);
+            Intent intent = new Intent(this, OverlayService.class);
+            startService(intent);
+            onBackPressed();
         }
     }
 

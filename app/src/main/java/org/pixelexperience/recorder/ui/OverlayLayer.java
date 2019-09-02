@@ -18,6 +18,7 @@ package org.pixelexperience.recorder.ui;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import org.pixelexperience.recorder.R;
 
@@ -37,16 +39,19 @@ public class OverlayLayer extends View implements View.OnTouchListener {
     private final ImageButton mButton;
     private final ImageButton mSettingsButton;
     private final ImageButton mCloseButton;
+    private final TextView mTimerView;
     private int origX;
     private int origY;
     private int touchX;
     private int touchY;
     private final float movimentThreshold = 10;
     private boolean isClick;
+    private Context mContext;
 
     @SuppressLint("ClickableViewAccessibility")
     public OverlayLayer(Context context) {
         super(context);
+        mContext = context;
 
         LayoutInflater inflater = context.getSystemService(LayoutInflater.class);
         mLayout = new FrameLayout(context);
@@ -69,10 +74,31 @@ public class OverlayLayer extends View implements View.OnTouchListener {
         mButton = mLayout.findViewById(R.id.overlay_button);
         mSettingsButton = mLayout.findViewById(R.id.overlay_settings);
         mCloseButton = mLayout.findViewById(R.id.overlay_close);
+        mTimerView = mLayout.findViewById(R.id.timer_view);
         mLayout.setOnTouchListener(this);
         mButton.setOnTouchListener(this);
         mSettingsButton.setOnTouchListener(this);
         mCloseButton.setOnTouchListener(this);
+        mTimerView.setOnTouchListener(this);
+    }
+
+    public void setIsRecording(boolean isRecording) {
+        if (isRecording) {
+            mSettingsButton.setVisibility(View.GONE);
+            mCloseButton.setVisibility(View.GONE);
+            mTimerView.setVisibility(View.VISIBLE);
+            mButton.setImageDrawable(mContext.getDrawable(R.drawable.ic_stop_screen));
+        } else {
+            mSettingsButton.setVisibility(View.VISIBLE);
+            mCloseButton.setVisibility(View.VISIBLE);
+            mTimerView.setVisibility(View.GONE);
+            mButton.setImageDrawable(mContext.getDrawable(R.drawable.ic_action_screen_record));
+        }
+        updateTimerView(0);
+    }
+
+    public void updateTimerView(long sec) {
+        mTimerView.setText(DateUtils.formatElapsedTime(sec));
     }
 
     public void destroy() {

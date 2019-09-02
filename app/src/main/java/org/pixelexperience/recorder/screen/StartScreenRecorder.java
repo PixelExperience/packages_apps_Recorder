@@ -11,6 +11,7 @@ import org.pixelexperience.recorder.utils.Utils;
 public class StartScreenRecorder extends Activity {
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MediaProjectionManager mProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
@@ -20,6 +21,7 @@ public class StartScreenRecorder extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_CANCELED || requestCode != Utils.SCREEN_RECORD_REQUEST_CODE) {
+            Utils.setStatus(Utils.UiStatus.NOTHING, this);
             finish();
             return;
         }

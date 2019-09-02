@@ -42,6 +42,12 @@
             app:title="@string/frame_rate" />
 
         <SwitchPreference
+            app:title="@string/show_floating_window"
+            app:summary="@string/show_floating_window_summary"
+            app:key="show_floating_window"
+            app:defaultValue="false" />
+
+        <SwitchPreference
             app:title="@string/show_touches"
             app:summary="@string/show_touches_summary"
             app:key="show_touches"

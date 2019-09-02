@@ -48,7 +48,6 @@ public class ScreenRecordTile extends TileService {
             } else if (hasPerms()) {
                 Utils.collapseStatusBar(this, wasLocked);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Utils.ACTION_HIDE_ACTIVITY));
-                Utils.stopOverlayService(this);
                 Intent intent = new Intent(this, OverlayService.class);
                 startService(intent);
             } else {

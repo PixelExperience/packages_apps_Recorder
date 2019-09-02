@@ -38,4 +38,6 @@
     <string name="screen_orientation_automatic">Automatic</string>
     <string name="screen_orientation_portrait">Portrait</string>
     <string name="screen_orientation_landscape">Landscape</string>
+    <string name="show_floating_window">Show floating window</string>
+    <string name="show_floating_window_summary">Show floating window when recording</string>
 </resources>

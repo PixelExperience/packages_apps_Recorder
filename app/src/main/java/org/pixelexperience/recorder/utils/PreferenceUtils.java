@@ -25,6 +25,8 @@ public class PreferenceUtils {
     public static final int PREF_SCREEN_ORIENTATION_PORTRAIT = 1;
     public static final int PREF_SCREEN_ORIENTATION_LANDSCAPE = 2;
     public static final int PREF_SCREEN_ORIENTATION_DEFAULT = PREF_SCREEN_ORIENTATION_AUTOMATIC;
+    public static final String PREF_SHOW_FLOATING_WINDOW = "show_floating_window";
+    public static final Boolean PREF_SHOW_FLOATING_WINDOW_DEFAULT = false;
 
     SharedPreferences mSharedPrefs;
     Context mContext;
@@ -86,5 +88,13 @@ public class PreferenceUtils {
 
     public void setShouldStopWhenScreenOff(boolean value){
         mSharedPrefs.edit().putBoolean(PREF_STOP_SCREEN_OFF, value).apply();
+    }
+
+    public boolean getShouldShowFloatingWindow(){
+        return mSharedPrefs.getBoolean(PREF_SHOW_FLOATING_WINDOW, PREF_SHOW_FLOATING_WINDOW_DEFAULT);
+    }
+
+    public void setShouldShowFloatingWindow(boolean value){
+        mSharedPrefs.edit().putBoolean(PREF_SHOW_FLOATING_WINDOW, value).apply();
     }
 }

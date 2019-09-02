@@ -65,6 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
         private ListPreference mFramerate;
         private SwitchPreference mShowTouches;
         private SwitchPreference mStopRecordingWhenScreenOff;
+        private SwitchPreference mShowFloatingWindow;
         private PreferenceUtils mPreferenceUtils;
 
         private String KEY_SCREEN_CATEGORY = "screen_category";
@@ -85,11 +86,13 @@ public class SettingsActivity extends AppCompatActivity {
             mFramerate = findPreference(PreferenceUtils.PREF_FRAME_RATE);
             mShowTouches = findPreference(PreferenceUtils.PREF_SHOW_TOUCHES);
             mStopRecordingWhenScreenOff = findPreference(PreferenceUtils.PREF_STOP_SCREEN_OFF);
+            mShowFloatingWindow = findPreference(PreferenceUtils.PREF_SHOW_FLOATING_WINDOW);
             mAudioSource.setOnPreferenceChangeListener(this);
             mScreenOrientation.setOnPreferenceChangeListener(this);
             mFramerate.setOnPreferenceChangeListener(this);
             mShowTouches.setOnPreferenceChangeListener(this);
             mStopRecordingWhenScreenOff.setOnPreferenceChangeListener(this);
+            mShowFloatingWindow.setOnPreferenceChangeListener(this);
             if (!mPreferenceUtils.isInternalAudioRecordingSupported()){
                 String[] entries = getContext().getResources().getStringArray(R.array.screen_audio_recording_entries_alt);
                 String[] values = getContext().getResources().getStringArray(R.array.screen_audio_recording_values_alt);
@@ -101,6 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
             mFramerate.setValue(String.valueOf(mPreferenceUtils.getVideoRecordingMaxFps()));
             mShowTouches.setChecked(mPreferenceUtils.getShouldShowTouches());
             mStopRecordingWhenScreenOff.setChecked(mPreferenceUtils.getShouldStopWhenScreenOff());
+            mShowFloatingWindow.setChecked(mPreferenceUtils.getShouldShowFloatingWindow());
             if (!mPreferenceUtils.canControlShowTouches()){
                 getPreferenceScreen().removePreference(mShowTouches);
             }
@@ -166,6 +170,9 @@ public class SettingsActivity extends AppCompatActivity {
             }else if(preference == mStopRecordingWhenScreenOff){
                 boolean value = (Boolean) newValue;
                 mPreferenceUtils.setShouldStopWhenScreenOff(value);
+            }else if (preference == mShowFloatingWindow){
+                boolean value = (Boolean) newValue;
+                mPreferenceUtils.setShouldShowFloatingWindow(value);
             }
             return true;
         }
