@@ -117,9 +117,9 @@ public class ScreenRecorder {
                     break;
                 case PreferenceUtils.PREF_AUDIO_RECORDING_TYPE_INTERNAL:
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.REMOTE_SUBMIX);
-                    mMediaRecorder.setAudioEncodingBitRate(192000);
+                    mMediaRecorder.setAudioEncodingBitRate(128000);
                     mMediaRecorder.setAudioSamplingRate(48000);
-                    mMediaRecorder.setAudioChannels(2);
+                    mMediaRecorder.setAudioChannels(1);
                     mustRecAudio = true;
                     break;
             }
