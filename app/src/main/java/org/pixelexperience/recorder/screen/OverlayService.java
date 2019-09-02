@@ -121,6 +121,9 @@ public class OverlayService extends Service {
                 Intent intent_ = new Intent(this, StartScreenRecorder.class);
                 intent_.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_);
+                if (!mPreferenceUtils.getShouldShowFloatingWindow()){
+                    onDestroy();
+                }
             }
         });
         mLayer.setSettingsButtonOnClickListener(() -> {
