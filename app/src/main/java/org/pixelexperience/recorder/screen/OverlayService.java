@@ -66,8 +66,6 @@ public class OverlayService extends Service {
                 if (Utils.isScreenRecording() && mPreferenceUtils.getShouldShowFloatingWindow()){
                     mLayer.setIsRecording(true);
                     stopForeground(true);
-                }else{
-                    onDestroy();
                 }
             }else if (Utils.ACTION_RECORDING_TIME_TICK.equals(intent.getAction()) && mLayer != null) {
                 mLayer.updateTimerView(ScreencastService.sElapsedTimeInSeconds);
@@ -116,6 +114,7 @@ public class OverlayService extends Service {
                         .setClass(this, ScreencastService.class));
                 onDestroy();
             }else {
+                Utils.preventTwoClick(mLayer.mButton);
                 registerReceiver();
                 Intent intent_ = new Intent(this, StartScreenRecorder.class);
                 intent_.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -123,6 +122,7 @@ public class OverlayService extends Service {
             }
         });
         mLayer.setSettingsButtonOnClickListener(() -> {
+            Utils.preventTwoClick(mLayer.mSettingsButton);
             Intent intent_ = new Intent(this, SettingsActivity.class);
             intent_.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent_);

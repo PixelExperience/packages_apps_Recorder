@@ -25,8 +25,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioSystem;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -50,6 +52,7 @@ public class Utils {
     public static final String SCREEN_RECORD_INTENT_RESULT = "recorder_intent_result";
     public static final String RECORDING_DONE_NOTIFICATION_CHANNEL =
             "recording_done_notification_channel";
+    private static long sLastClickTime = 0;
 
     private Utils() {
     }
@@ -247,6 +250,11 @@ public class Utils {
         String description = mContext.getString(R.string.ready_channel_desc);
         notificationChannel.setDescription(description);
         manager.createNotificationChannel(notificationChannel);
+    }
+
+    public static void preventTwoClick(final View view){
+        view.setEnabled(false);
+        view.postDelayed(() -> view.setEnabled(true), 500);
     }
 
 }

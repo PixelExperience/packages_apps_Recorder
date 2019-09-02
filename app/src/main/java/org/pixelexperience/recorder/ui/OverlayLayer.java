@@ -37,8 +37,8 @@ public class OverlayLayer extends View implements View.OnTouchListener {
     private final FrameLayout mLayout;
     private final WindowManager mManager;
     private final WindowManager.LayoutParams mParams;
-    private final ImageButton mButton;
-    private final ImageButton mSettingsButton;
+    public final ImageButton mButton;
+    public final ImageButton mSettingsButton;
     private final ImageButton mCloseButton;
     private final TextView mTimerView;
     private LinearLayout mBg;

@@ -276,6 +276,7 @@ public class RecorderActivity extends AppCompatActivity {
     }
 
     private void toggleSoundRecorder() {
+        Utils.preventTwoClick(mSoundFab);
         if (checkSoundRecPermissions()) {
             return;
         }
@@ -301,6 +302,7 @@ public class RecorderActivity extends AppCompatActivity {
     }
 
     private void toggleScreenRecorder() {
+        Utils.preventTwoClick(mScreenFab);
         if (checkScreenRecPermissions()) {
             return;
         }

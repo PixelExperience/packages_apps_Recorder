@@ -84,7 +84,6 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
     private boolean mStopOnScreenOff;
     private Handler mHandler = new Handler();
     private PreferenceUtils mPreferenceUtils;
-    private boolean mReceiverRegistered;
     private LocalBroadcastManager mLocalBroadcastManager;
     private Runnable stopCastRunnable = () -> {
         if (Utils.isBluetoothHeadsetConnected()) {
@@ -236,8 +235,6 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
                 mHandler.postDelayed(currentDevicesCheckerRunnable, 100);
             }
 
-            mReceiverRegistered = true;
-
             Utils.refreshShowTouchesState(this);
 
             return START_STICKY;
@@ -277,6 +274,7 @@ public class ScreencastService extends Service implements ScreenRecorder.ScreenR
     }
 
     private void stopRecording() {
+        Utils.stopOverlayService(this);
         mHandler.removeCallbacksAndMessages(null);
         Utils.setStatus(Utils.PREF_RECORDING_NOTHING, this);
         cleanup();
