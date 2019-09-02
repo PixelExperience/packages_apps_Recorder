@@ -50,6 +50,9 @@ public class OverlayLayer extends View implements View.OnTouchListener {
     private boolean isClick;
     private Context mContext;
     private float mTransparentAmount = 0.75f;
+    private boolean mIsMoving = false;
+    private long mElapsed;
+    private boolean mNeedRefreshTimerView = false;
 
     public OverlayLayer(Context context) {
         super(context);
@@ -120,7 +123,12 @@ public class OverlayLayer extends View implements View.OnTouchListener {
     }
 
     public void updateTimerView(long sec) {
-        mTimerView.setText(DateUtils.formatElapsedTime(sec));
+        mElapsed = sec;
+        if (mIsMoving) {
+            mNeedRefreshTimerView = true;
+            return;
+        }
+        mTimerView.setText(DateUtils.formatElapsedTime(mElapsed));
     }
 
     public void destroy() {
@@ -165,13 +173,18 @@ public class OverlayLayer extends View implements View.OnTouchListener {
                         Math.abs(origY - mParams.y) > movimentThreshold)) {
                     isClick = false;
                 }
+                mIsMoving = true;
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
+                setAlpha(mTransparentAmount);
+                mIsMoving = false;
+                if (mNeedRefreshTimerView){
+                    mNeedRefreshTimerView = false;
+                    updateTimerView(mElapsed);
+                }
                 if (isClick) {
                     v.performClick();
-                }else{
-                    setAlpha(mTransparentAmount);
                 }
                 break;
             default:
