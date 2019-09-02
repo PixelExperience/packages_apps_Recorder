@@ -44,11 +44,25 @@
             android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/timer_tick_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/icon"
+            android:fontFamily="google-sans-medium"
+            android:layout_below="@id/main_recording_text"
+            android:textSize="16sp" />
+
         <org.pixelexperience.recorder.ui.SoundVisualizer
             android:id="@+id/main_recording_visualizer"
             android:layout_width="match_parent"
             android:layout_height="128dp"
-            android:layout_below="@id/main_recording_text"
+            android:layout_below="@id/timer_tick_text"
             android:visibility="gone" />
     </RelativeLayout>
 

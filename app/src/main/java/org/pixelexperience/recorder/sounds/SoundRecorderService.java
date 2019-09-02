@@ -34,6 +34,7 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.pixelexperience.recorder.R;
 import org.pixelexperience.recorder.RecorderActivity;
@@ -71,7 +72,6 @@ public class SoundRecorderService extends Service {
             CHANNEL_IN, FORMAT);
     public static final int NOTIFICATION_ID = 60;
     private final IBinder mBinder = new RecorderBinder(this);
-    private int mElapsedTime;
     private TimerTask mTask;
     private OnTimerUpdatedListener mTimerListener;
     private OnAudioLevelUpdatedListener mAudioListener;
@@ -89,6 +89,8 @@ public class SoundRecorderService extends Service {
             stopRecording();
         }
     };
+    public static long sElapsedTimeInSeconds;
+    private LocalBroadcastManager mLocalBroadcastManager;
 
     @Override
     public IBinder onBind(Intent mIntent) {
@@ -115,6 +117,7 @@ public class SoundRecorderService extends Service {
         registerReceiver(mShutdownReceiver, new IntentFilter(Intent.ACTION_SHUTDOWN));
 
         mNotificationManager = getSystemService(NotificationManager.class);
+        mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
 
         Utils.createShareNotificationChannel(this, mNotificationManager);
 
@@ -144,7 +147,7 @@ public class SoundRecorderService extends Service {
 
     public void startRecording() {
         Log.d(TAG, "Sound recorder service started recording\u2026");
-        mElapsedTime = 0;
+        sElapsedTimeInSeconds = 0;
 
         if (mRecord != null) {
             return;
@@ -283,10 +286,11 @@ public class SoundRecorderService extends Service {
         mTask = new TimerTask() {
             @Override
             public void run() {
-                mElapsedTime += 1000;
+                sElapsedTimeInSeconds++;
                 if (mTimerListener != null) {
-                    mTimerListener.onTimerUpdated(mElapsedTime);
+                    mTimerListener.onTimerUpdated(sElapsedTimeInSeconds);
                 }
+                mLocalBroadcastManager.sendBroadcast(new Intent(Utils.ACTION_RECORDING_TIME_TICK));
             }
         };
         timer.scheduleAtFixedRate(mTask, 1000, 1000);
@@ -300,7 +304,7 @@ public class SoundRecorderService extends Service {
                 this, SOUNDRECORDER_NOTIFICATION_CHANNEL)
                 .setContentTitle(getString(R.string.sound_notification_title))
                 .setContentText(getString(R.string.sound_notification_message,
-                        DateUtils.formatElapsedTime(mElapsedTime / 1000)))
+                        DateUtils.formatElapsedTime(sElapsedTimeInSeconds)))
                 .setOngoing(true)
                 .setSmallIcon(R.drawable.ic_notification_sound)
                 .setContentIntent(pi)
@@ -320,7 +324,7 @@ public class SoundRecorderService extends Service {
                 LastRecordHelper.getDeleteIntent(this, true),
                 PendingIntent.FLAG_CANCEL_CURRENT);
 
-        LastRecordHelper.setLastItem(this, mOutFilePath, mElapsedTime, true);
+        LastRecordHelper.setLastItem(this, mOutFilePath, sElapsedTimeInSeconds, true);
 
         Notification notification = new NotificationCompat.Builder(
                 this, Utils.RECORDING_DONE_NOTIFICATION_CHANNEL)
@@ -328,7 +332,7 @@ public class SoundRecorderService extends Service {
                 .setSmallIcon(R.drawable.ic_notification_sound)
                 .setContentTitle(getString(R.string.sound_notification_title))
                 .setContentText(getString(R.string.sound_notification_message,
-                        DateUtils.formatElapsedTime(mElapsedTime / 1000)))
+                        DateUtils.formatElapsedTime(sElapsedTimeInSeconds)))
                 .addAction(R.drawable.ic_play, getString(R.string.play), playPIntent)
                 .addAction(R.drawable.ic_share, getString(R.string.share), sharePIntent)
                 .addAction(R.drawable.ic_delete, getString(R.string.delete), deletePIntent)

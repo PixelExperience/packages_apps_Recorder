@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -86,6 +87,7 @@ public class RecorderActivity extends AppCompatActivity {
 
     private RelativeLayout mRecordingLayout;
     private TextView mRecordingText;
+    private TextView mTimerTickText;
     private SoundVisualizer mRecordingVisualizer;
     private PreferenceUtils mPreferenceUtils;
 
@@ -109,6 +111,8 @@ public class RecorderActivity extends AppCompatActivity {
                 refresh();
             }else if (Utils.ACTION_HIDE_ACTIVITY.equals(intent.getAction())) {
                 onBackPressed();
+            } else if (Utils.ACTION_RECORDING_TIME_TICK.equals(intent.getAction())) {
+                updateTimerTickText();
             }
         }
     };
@@ -129,6 +133,7 @@ public class RecorderActivity extends AppCompatActivity {
 
         mRecordingLayout = findViewById(R.id.main_recording);
         mRecordingText = findViewById(R.id.main_recording_text);
+        mTimerTickText = findViewById(R.id.timer_tick_text);
         mRecordingVisualizer = findViewById(R.id.main_recording_visualizer);
 
         mScreenFab.setOnClickListener(v -> toggleScreenRecorder());
@@ -146,10 +151,6 @@ public class RecorderActivity extends AppCompatActivity {
         }else if (getUiParam().equals(Utils.UiStatus.SCREEN.toString())) {
             new Handler().postDelayed(this::toggleScreenRecorder, 500);
         }
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Utils.ACTION_RECORDING_STATE_CHANGED);
-        filter.addAction(Utils.ACTION_HIDE_ACTIVITY);
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRecordingStateChanged,filter);
     }
 
     private String getUiParam() {
@@ -163,7 +164,6 @@ public class RecorderActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRecordingStateChanged);
         if (mConnection != null) {
             unbindService(mConnection);
         }
@@ -173,14 +173,11 @@ public class RecorderActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(mTelephonyReceiver,
-                new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED));
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(mTelephonyReceiver);
     }
 
     @Override
@@ -188,6 +185,13 @@ public class RecorderActivity extends AppCompatActivity {
         super.onResume();
         Utils.stopOverlayService(this);
         refresh();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Utils.ACTION_RECORDING_STATE_CHANGED);
+        filter.addAction(Utils.ACTION_RECORDING_TIME_TICK);
+        filter.addAction(Utils.ACTION_HIDE_ACTIVITY);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRecordingStateChanged, filter);
+        registerReceiver(mTelephonyReceiver,
+                new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED));
     }
 
     @Override
@@ -196,6 +200,8 @@ public class RecorderActivity extends AppCompatActivity {
             Intent intent = new Intent(this, OverlayService.class);
             startService(intent);
         }
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRecordingStateChanged);
+        unregisterReceiver(mTelephonyReceiver);
         super.onPause();
     }
 
@@ -316,7 +322,15 @@ public class RecorderActivity extends AppCompatActivity {
         }
     }
 
+    private void updateTimerTickText(){
+        if (Utils.isRecording()){
+            mTimerTickText.setText(DateUtils.formatElapsedTime(Utils.isScreenRecording() ?
+                    ScreencastService.sElapsedTimeInSeconds : SoundRecorderService.sElapsedTimeInSeconds));
+        }
+    }
+
     private void refresh() {
+        updateTimerTickText();
         ConstraintSet set = new ConstraintSet();
         if (Utils.isRecording()) {
             boolean screenRec = Utils.isScreenRecording();
