@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.pixelexperience.recorder.R;
@@ -40,6 +41,7 @@ public class OverlayLayer extends View implements View.OnTouchListener {
     private final ImageButton mSettingsButton;
     private final ImageButton mCloseButton;
     private final TextView mTimerView;
+    private LinearLayout mBg;
     private int origX;
     private int origY;
     private int touchX;
@@ -47,8 +49,8 @@ public class OverlayLayer extends View implements View.OnTouchListener {
     private final float movimentThreshold = 10;
     private boolean isClick;
     private Context mContext;
+    private float mTransparentAmount = 0.75f;
 
-    @SuppressLint("ClickableViewAccessibility")
     public OverlayLayer(Context context) {
         super(context);
         mContext = context;
@@ -71,15 +73,34 @@ public class OverlayLayer extends View implements View.OnTouchListener {
             inflater.inflate(R.layout.window_screen_recorder_overlay, mLayout);
         }
 
+        mBg = mLayout.findViewById(R.id.bg);
         mButton = mLayout.findViewById(R.id.overlay_button);
         mSettingsButton = mLayout.findViewById(R.id.overlay_settings);
         mCloseButton = mLayout.findViewById(R.id.overlay_close);
         mTimerView = mLayout.findViewById(R.id.timer_view);
-        mLayout.setOnTouchListener(this);
-        mButton.setOnTouchListener(this);
-        mSettingsButton.setOnTouchListener(this);
-        mCloseButton.setOnTouchListener(this);
-        mTimerView.setOnTouchListener(this);
+        setOnTouchListener(this);
+        setAlpha(mTransparentAmount);
+    }
+
+    @Override
+    public void setAlpha(float alpha){
+        super.setAlpha(alpha);
+        mButton.setAlpha(alpha);
+        mSettingsButton.setAlpha(alpha);
+        mCloseButton.setAlpha(alpha);
+        mTimerView.setAlpha(alpha);
+        mBg.setAlpha(alpha);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void setOnTouchListener(OnTouchListener listener){
+        super.setOnTouchListener(listener);
+        mButton.setOnTouchListener(listener);
+        mSettingsButton.setOnTouchListener(listener);
+        mCloseButton.setOnTouchListener(listener);
+        mTimerView.setOnTouchListener(listener);
+        mBg.setOnTouchListener(listener);
     }
 
     public void setIsRecording(boolean isRecording) {
@@ -95,6 +116,7 @@ public class OverlayLayer extends View implements View.OnTouchListener {
             mButton.setImageDrawable(mContext.getDrawable(R.drawable.ic_action_screen_record));
         }
         updateTimerView(0);
+        setAlpha(mTransparentAmount);
     }
 
     public void updateTimerView(long sec) {
@@ -131,6 +153,7 @@ public class OverlayLayer extends View implements View.OnTouchListener {
                 touchX = x;
                 touchY = y;
                 isClick = true;
+                setAlpha(1f);
                 break;
             case MotionEvent.ACTION_MOVE:
                 mParams.x = origX + x - touchX;
@@ -147,6 +170,8 @@ public class OverlayLayer extends View implements View.OnTouchListener {
             case MotionEvent.ACTION_UP:
                 if (isClick) {
                     v.performClick();
+                }else{
+                    setAlpha(mTransparentAmount);
                 }
                 break;
             default:
