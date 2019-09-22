@@ -104,6 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (!mPreferenceUtils.canControlShowTouches()){
                 mScreenCategory.removePreference(mShowTouches);
             }
+            mScreenCategory.removePreference(mFramerate);
             refreshState();
         }
 
