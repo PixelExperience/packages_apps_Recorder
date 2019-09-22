@@ -61,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
         private static final int REQUEST_RECORD_AUDIO_PERMS = 213;
         private PreferenceCategory mScreenCategory;
         private ListPreference mAudioSource;
-        private ListPreference mFramerate;
+        //private ListPreference mFramerate;
         private SwitchPreference mShowTouches;
         private SwitchPreference mStopRecordingWhenScreenOff;
         private SwitchPreference mShowFloatingWindow;
@@ -104,6 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (!mPreferenceUtils.canControlShowTouches()){
                 getPreferenceScreen().removePreference(mShowTouches);
             }
+            getPreferenceScreen().removePreference(mFrameRate);
             refreshState();
         }
 

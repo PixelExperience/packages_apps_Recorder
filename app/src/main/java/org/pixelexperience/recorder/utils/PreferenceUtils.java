@@ -45,7 +45,8 @@ public class PreferenceUtils {
     }
 
     public int getVideoRecordingMaxFps() {
-        return mSharedPrefs.getInt(PREF_FRAME_RATE, PREF_FRAME_RATE_DEFAULT);
+        return PREF_FRAME_RATE_DEFAULT;
+        //return mSharedPrefs.getInt(PREF_FRAME_RATE, PREF_FRAME_RATE_DEFAULT);
     }
 
     public void setVideoRecordingMaxFps(int fps) {
