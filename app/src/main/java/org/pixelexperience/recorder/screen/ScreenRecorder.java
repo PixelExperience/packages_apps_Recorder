@@ -33,7 +33,6 @@ import android.os.StatFs;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
-import android.view.Surface;
 import android.view.WindowManager;
 
 import org.pixelexperience.recorder.utils.PreferenceUtils;
@@ -54,6 +53,38 @@ public class ScreenRecorder {
     private static final List<EncoderCapabilities.VideoEncoderCap> videoEncoders =
             EncoderCapabilities.getVideoEncoders();
     private static final String TAG = "ScreeRecorder";
+    // Standard resolution tables, removed values that aren't multiples of 8
+    private final int[][] validResolutions = {
+            // CEA Resolutions
+            {640, 480},
+            {720, 480},
+            {720, 576},
+            {1280, 720},
+            {1920, 1080},
+            // VESA Resolutions
+            {800, 600},
+            {1024, 768},
+            {1152, 864},
+            {1280, 768},
+            {1280, 800},
+            {1360, 768},
+            {1366, 768},
+            {1280, 1024},
+            //{ 1400, 1050 },
+            //{ 1440, 900 },
+            //{ 1600, 900 },
+            {1600, 1200},
+            //{ 1680, 1024 },
+            //{ 1680, 1050 },
+            {1920, 1200},
+            // HH Resolutions
+            {800, 480},
+            {854, 480},
+            {864, 480},
+            {640, 360},
+            //{ 960, 540 },
+            {848, 480}
+    };
     private int mWidth, mHeight, mDensityDpi;
     private int mBitrate;
     private File mPath;
@@ -61,6 +92,7 @@ public class ScreenRecorder {
     private DisplayManager mDisplayManager;
     private WindowManager mWindowManager;
     private MediaProjectionManager mProjectionManager;
+    private AudioManager mAudioManager;
     private PreferenceUtils mPreferenceUtils;
     private ScreenRecorderResultCallback mScreenRecorderCallback;
     private Intent mIntentData;
@@ -83,6 +115,7 @@ public class ScreenRecorder {
         mDisplayManager = mContext.getSystemService(DisplayManager.class);
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         mProjectionManager = (MediaProjectionManager) mContext.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         mPreferenceUtils = new PreferenceUtils(context);
         mMediaProjectionCallback = new MediaProjectionCallback();
         mScreenRecorderCallback = callback;
@@ -222,36 +255,80 @@ public class ScreenRecorder {
 
         int width = size.x;
         int height = size.y;
+        int maxWidth = 640;
+        int maxHeight = 480;
         int bitrate = 2000000;
 
         for (EncoderCapabilities.VideoEncoderCap cap : videoEncoders) {
             if (cap.mCodec == MediaRecorder.VideoEncoder.H264) {
+                maxWidth = cap.mMaxFrameWidth;
+                maxHeight = cap.mMaxFrameHeight;
                 bitrate = cap.mMaxBitRate;
             }
         }
 
-        mBitrate = bitrate;
+        int max = Math.max(maxWidth, maxHeight);
+        int min = Math.min(maxWidth, maxHeight);
+        int resConstraint = mContext.getResources().getInteger(
+                R.integer.config_maxDimension);
 
-        int screenOrientation = mWindowManager.getDefaultDisplay().getRotation();
-        switch (mPreferenceUtils.getVideoRecordingOrientation()) {
-            case PreferenceUtils.PREF_SCREEN_ORIENTATION_AUTOMATIC:
-                if (screenOrientation == Surface.ROTATION_0 || screenOrientation == Surface.ROTATION_180) {
-                    mWidth = width;
-                    mHeight = height;
-                } else {
-                    mWidth = height;
-                    mHeight = width;
-                }
-                break;
-            case PreferenceUtils.PREF_SCREEN_ORIENTATION_PORTRAIT:
-                mWidth = width;
-                mHeight = height;
-                break;
-            case PreferenceUtils.PREF_SCREEN_ORIENTATION_LANDSCAPE:
-                mWidth = height;
-                mHeight = width;
-                break;
+        double ratio;
+        boolean landscape = false;
+        boolean resizeNeeded = false;
+
+        // see if we need to resize
+
+        // Figure orientation and ratio first
+        if (width > height) {
+            // landscape
+            landscape = true;
+            ratio = (double) width / (double) height;
+            if (resConstraint >= 0 && height > resConstraint) {
+                min = resConstraint;
+            }
+            if (width > max || height > min) {
+                resizeNeeded = true;
+            }
+        } else {
+            // portrait
+            ratio = (double) height / (double) width;
+            if (resConstraint >= 0 && width > resConstraint) {
+                min = resConstraint;
+            }
+            if (height > max || width > min) {
+                resizeNeeded = true;
+            }
         }
+
+        if (resizeNeeded) {
+            boolean matched = false;
+            for (int[] resolution : validResolutions) {
+                // All res are in landscape. Find the highest match
+                if (resolution[0] <= max && resolution[1] <= min &&
+                        (!matched || (resolution[0] > (landscape ? width : height)))) {
+                    if (((double) resolution[0] / (double) resolution[1]) == ratio) {
+                        // Got a valid one
+                        if (landscape) {
+                            width = resolution[0];
+                            height = resolution[1];
+                        } else {
+                            height = resolution[0];
+                            width = resolution[1];
+                        }
+                        matched = true;
+                    }
+                }
+            }
+            if (!matched) {
+                // No match found. Go for the lowest... :(
+                width = landscape ? 640 : 480;
+                height = landscape ? 480 : 640;
+            }
+        }
+
+        mWidth = width;
+        mHeight = height;
+        mBitrate = bitrate;
     }
 
     private void fireErrorCallback() {
