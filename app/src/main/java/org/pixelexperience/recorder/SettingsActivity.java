@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
             mStopRecordingWhenScreenOff.setChecked(mPreferenceUtils.getShouldStopWhenScreenOff());
             mShowFloatingWindow.setChecked(mPreferenceUtils.getShouldShowFloatingWindow());
             if (!mPreferenceUtils.canControlShowTouches()){
-                getPreferenceScreen().removePreference(mShowTouches);
+                mScreenCategory.removePreference(mShowTouches);
             }
             refreshState();
         }
