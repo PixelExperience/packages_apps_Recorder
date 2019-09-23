@@ -35,20 +35,22 @@
 
     <ImageButton
         android:id="@+id/overlay_settings"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:background="@null"
         android:padding="12dp"
-        android:scaleType="center"
+        android:layout_margin="12dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_settings_overlay" />
 
     <ImageButton
         android:id="@+id/overlay_close"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:background="@null"
         android:padding="12dp"
-        android:scaleType="center"
+        android:layout_margin="12dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_close_overlay" />
 
     <TextView
