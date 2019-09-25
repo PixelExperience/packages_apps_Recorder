@@ -98,9 +98,6 @@ public class ScreenRecordTile extends TileService {
             return false;
         }
 
-        if (!PermissionUtils.hasStoragePermission(this)) {
-            return false;
-        }
         return true;
     }
 }
