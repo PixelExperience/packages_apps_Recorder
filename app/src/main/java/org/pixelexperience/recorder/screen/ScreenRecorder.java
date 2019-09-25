@@ -48,9 +48,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class ScreenRecorder {
-    private static final File RECORDINGS_DIR =
-            new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES),
-                    "ScreenRecords");
     private static final List<EncoderCapabilities.VideoEncoderCap> videoEncoders =
             EncoderCapabilities.getVideoEncoders();
     private static final String TAG = "ScreeRecorder";
@@ -78,7 +75,8 @@ public class ScreenRecorder {
         String videoDate = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault())
                 .format(new Date());
         // the directory which holds all recording files
-        mPath = new File(RECORDINGS_DIR, "ScreenRecord-" + videoDate + ".mp4");
+        mPath = new File(context.getExternalFilesDir(Environment.DIRECTORY_MOVIES),
+                "ScreenRecords/ScreenRecord-" + videoDate + ".mp4");
 
         mDisplayManager = mContext.getSystemService(DisplayManager.class);
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
