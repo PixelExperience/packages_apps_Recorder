@@ -16,7 +16,34 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">Sumber audio</string>
+    <string name="screen_audio_recording_internal">Audio sistem</string>
+    <string name="screen_audio_recording_microphone">Mikrofon</string>
+    <string name="screen_audio_recording_off">Dimatikan</string>
+    <string name="screen_audio_recording_disabled_wfd">Rakaman audio dalaman sistem tidak berfungsi semasa penghantaran ke skrin jauh.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Rakaman audio dalaman sistem tidak berfungsi apabila menggunakan perakam lain pada masa yang sama.</string>
+    <string name="screen_audio_recording_not_allowed">Rakaman audio dalaman sistem hanya berfungsi apabila menggunakan speaker atau fon kepala berwayar.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Rakaman audio dalaman sistem tidak dibenarkan semasa panggilan.</string>
+    <string name="screen_audio_recording_route_changed">Rakaman berakhir kerana output audio berubah.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Pemberitahuan apabila rakaman selesai.</string>
     <!-- Extra settings -->
+    <string name="title_activity_settings">Tetapan</string>
+    <string name="show_touches">Paparkan klikan</string>
+    <string name="show_touches_summary">Tunjukkan maklum balas visual untuk klikan</string>
+    <string name="stop_recording_screen_off">Hentikan apabila mematikan skrin</string>
+    <string name="stop_recording_screen_off_summary">Hentikan rakaman apabila mematikan skrin</string>
+    <string name="frame_rate">Kadar bingkai</string>
+    <string name="frame_rate_30_fps">30 FPS</string>
+    <string name="frame_rate_60_fps">60 FPS</string>
+    <string name="screen_orientation">Orientasi</string>
+    <string name="screen_orientation_automatic">Automatik</string>
+    <string name="screen_orientation_portrait">Potret</string>
+    <string name="screen_orientation_landscape">Landskap</string>
+    <string name="show_floating_window">Tunjukkan tingkap terapung</string>
+    <string name="show_floating_window_summary">Tunjukkan tingkap terapung apabila merakam</string>
     <!-- Unknow error -->
+    <string name="recording_error">Rakaman berhenti</string>
+    <string name="recording_error_channel_desc">Pemberitahuan apabila rakaman dihentikan kerana ralat.</string>
+    <string name="unknow_error">Ralat yang tidak diketahui, rakaman telah dihentikan.</string>
 </resources>

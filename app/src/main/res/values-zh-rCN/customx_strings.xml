@@ -31,14 +31,14 @@
     <string name="title_activity_settings">设置</string>
     <string name="show_touches">显示点按操作反馈</string>
     <string name="show_touches_summary">显示点按操作的视觉反馈</string>
-    <string name="stop_recording_screen_off">息屏后停止</string>
+    <string name="stop_recording_screen_off">息屏后停止录制</string>
     <string name="stop_recording_screen_off_summary">息屏后停止录制</string>
     <string name="frame_rate">帧率</string>
     <string name="frame_rate_30_fps">30 FPS</string>
     <string name="frame_rate_60_fps">60 FPS</string>
     <string name="screen_orientation">屏幕方向</string>
     <string name="screen_orientation_automatic">自动</string>
-    <string name="screen_orientation_portrait">纵向</string>
+    <string name="screen_orientation_portrait">竖向</string>
     <string name="screen_orientation_landscape">横向</string>
     <string name="show_floating_window">启用悬浮窗</string>
     <string name="show_floating_window_summary">在录制时启用悬浮窗</string>

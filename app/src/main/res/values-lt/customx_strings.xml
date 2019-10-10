@@ -17,31 +17,31 @@
 <resources>
     <!-- Audio recorder strings -->
     <string name="screen_audio_recording_title">Garso šaltinis</string>
-    <string name="screen_audio_recording_internal">Sistemos garsas</string>
+    <string name="screen_audio_recording_internal">Sistemos garsai</string>
     <string name="screen_audio_recording_microphone">Mikrofonas</string>
-    <string name="screen_audio_recording_off">Išjungta</string>
-    <string name="screen_audio_recording_disabled_wfd">Sistemos vidinis garso įrašymas neveikia perduodant į nuotolinius ekranus.</string>
-    <string name="screen_audio_recording_disabled_others_apps">Sistemos vidinis garso įrašymas neveikia, kai tuo pačiu metu naudojate kitą įrašymo įrenginį.</string>
-    <string name="screen_audio_recording_not_allowed">Sistemos vidinis garso įrašymas veikia tik naudojant garsiakalbius ar laidines ausines.</string>
-    <string name="screen_audio_recording_not_allowed_in_call">Skambučio metu neleidžiama įrašyti vidinio sistemos garso.</string>
+    <string name="screen_audio_recording_off">Išjungtas</string>
+    <string name="screen_audio_recording_disabled_wfd">Perdavimo į nuotolinius ekranus metu sistemos vidinių garsų įrašymas neveikia.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Sistemos vidinių garsų įrašymas neveikia, kai tuo pačiu metu naudojate kitą įrašymo įrenginį.</string>
+    <string name="screen_audio_recording_not_allowed">Sistemos vidinių garsų įrašymas veikia tik naudojant garsiakalbius arba laidines ausines.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Skambučio metu neleidžiama įrašyti vidinių sistemos garsų.</string>
     <string name="screen_audio_recording_route_changed">Įrašymas baigėsi, nes pasikeitė garso išvestis.</string>
     <!-- Notifications -->
-    <string name="ready_channel_desc">Pranešimas, kai įrašas baigtas.</string>
+    <string name="ready_channel_desc">Pranešimas, kai įrašymas baigtas.</string>
     <!-- Extra settings -->
     <string name="title_activity_settings">Nustatymai</string>
-    <string name="show_touches">Rodyti bakstelėjimą</string>
-    <string name="show_touches_summary">Rodyti vaizdinį atsiliepimą apie palietimus</string>
-    <string name="stop_recording_screen_off">Sustabdykite išjungdami ekraną</string>
-    <string name="stop_recording_screen_off_summary">Nustokite įrašyti, kai ekranas yra išjungtas</string>
+    <string name="show_touches">Rodyti palietimus</string>
+    <string name="show_touches_summary">Rodyti vaizdinius atsiliepimus apie prilietimus</string>
+    <string name="stop_recording_screen_off">Stabdyti, kai ekranas išjungiamas</string>
+    <string name="stop_recording_screen_off_summary">Stabdyti įrašymą, kai ekranas išjungiamas</string>
     <string name="frame_rate">Kadrų dažnis</string>
     <string name="frame_rate_30_fps">30 kadrų / sek</string>
-    <string name="frame_rate_60_fps">60 kadrų / sek</string>
+    <string name="frame_rate_60_fps">60 FPS</string>
     <string name="screen_orientation">Orientacija</string>
-    <string name="screen_orientation_automatic">Automatiškai</string>
-    <string name="screen_orientation_portrait">Stačias</string>
+    <string name="screen_orientation_automatic">Automatinis</string>
+    <string name="screen_orientation_portrait">Portretas</string>
     <string name="screen_orientation_landscape">Gulsčias</string>
-    <string name="show_floating_window">Rodyti plaukiojantį langą</string>
-    <string name="show_floating_window_summary">Įrašydami rodykite slankųjį langą</string>
+    <string name="show_floating_window">Rodyti slankųjį langą</string>
+    <string name="show_floating_window_summary">Įrašymo metu rodyti slankųjį langą</string>
     <!-- Unknow error -->
     <string name="recording_error">Įrašymas sustabdytas</string>
     <string name="recording_error_channel_desc">Pranešimas, kai įrašymas sustabdomas dėl klaidos.</string>

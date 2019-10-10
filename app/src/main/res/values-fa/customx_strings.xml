@@ -23,8 +23,27 @@
     <string name="screen_audio_recording_disabled_wfd">ضبط کننده‌ی صدای داخلی سیستم در هنگام ارسال به نمایشگر راه دور کار نمیکند.</string>
     <string name="screen_audio_recording_disabled_others_apps">ضبط کننده‌ی صدای داخل سیستمی هنگام استفاده از ضبط کننده‌ی دیگر بصورت همزمان کار نمیکند.</string>
     <string name="screen_audio_recording_not_allowed">ضبط کننده‌ی داخل سیستمی فقط در زمانی که از بلندگو یا هدفون سیمی استفاده میکنید کار میکند.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">ضبط خودکار مکالمات در هنگام مکالمه مجاز نیست.</string>
     <string name="screen_audio_recording_route_changed">ضبط کردن بعلت تغییر خروجی صدا متوقف شد.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">اعلان هنگام پایان مکالمه.</string>
     <!-- Extra settings -->
+    <string name="title_activity_settings">تنظیمات</string>
+    <string name="show_touches">نمایش ضربه‌ها</string>
+    <string name="show_touches_summary">نمایش بازخورد قابل دیدن برای ضربه‌ها</string>
+    <string name="stop_recording_screen_off">توقف به هنگام خاموش شدن صفحه</string>
+    <string name="stop_recording_screen_off_summary">توقف ضبط به هنگام خاموش شدن صفحه</string>
+    <string name="frame_rate">نرخ فریم</string>
+    <string name="frame_rate_30_fps">30 فریم در ثانیه</string>
+    <string name="frame_rate_60_fps">60 فریم در ثانیه</string>
+    <string name="screen_orientation">جهت</string>
+    <string name="screen_orientation_automatic">خودکار</string>
+    <string name="screen_orientation_portrait">عمودی</string>
+    <string name="screen_orientation_landscape">افقی</string>
+    <string name="show_floating_window">نمایش پنجره‌های شناور</string>
+    <string name="show_floating_window_summary">نمایش پنجره های شناور هنگام ضبط</string>
     <!-- Unknow error -->
+    <string name="recording_error">ضبط متوقف شد</string>
+    <string name="recording_error_channel_desc">اعلان هنگام توقف ضبط مکالمه به علت خطا.</string>
+    <string name="unknow_error">خطای نامشخص، ضبط متوقف شد.</string>
 </resources>

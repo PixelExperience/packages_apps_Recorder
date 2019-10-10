@@ -23,7 +23,7 @@
     <string name="screen_audio_recording_disabled_wfd">Запись системных звуков не работает во время трансляции экрана.</string>
     <string name="screen_audio_recording_disabled_others_apps">Запись системных звуков не работает во время работы другого приложения записи экрана.</string>
     <string name="screen_audio_recording_not_allowed">Запись системных звуков работает только во время использования громкоговорителя или проводных наушников.</string>
-    <string name="screen_audio_recording_not_allowed_in_call">Система внутренней аудиозаписи не поддерживается во время разговора.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Запись звука не поддерживается во время звонка.</string>
     <string name="screen_audio_recording_route_changed">Запись завершена из-за изменения источника звука.</string>
     <!-- Notifications -->
     <string name="ready_channel_desc">Уведомление после завершения записи.</string>
@@ -38,12 +38,12 @@
     <string name="frame_rate_60_fps">60 к/с</string>
     <string name="screen_orientation">Ориентация</string>
     <string name="screen_orientation_automatic">Автоматически</string>
-    <string name="screen_orientation_portrait">Портреная ориентация</string>
+    <string name="screen_orientation_portrait">Вертикальная ориентация</string>
     <string name="screen_orientation_landscape">Горизонтальная ориентация</string>
     <string name="show_floating_window">Показывать плавающее окно</string>
     <string name="show_floating_window_summary">Показывать плавающее окно во время записи</string>
     <!-- Unknow error -->
-    <string name="recording_error">Запись завершена</string>
+    <string name="recording_error">Запись остановлена</string>
     <string name="recording_error_channel_desc">Уведомление при остановке записи из-за ошибки.</string>
     <string name="unknow_error">Неизвестная ошибка, запись остановлена.</string>
 </resources>

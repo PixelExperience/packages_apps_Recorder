@@ -16,7 +16,14 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_microphone">ஒலிவாங்கி</string>
+    <string name="screen_audio_recording_off">முடக்கப்பட்டது</string>
     <!-- Notifications -->
     <!-- Extra settings -->
+    <string name="title_activity_settings">அமைப்புகள்</string>
+    <string name="screen_orientation">சார்புநிலை</string>
+    <string name="screen_orientation_automatic">தானியங்கு</string>
+    <string name="screen_orientation_portrait">நேரான</string>
+    <string name="screen_orientation_landscape">நிலைபரப்பு</string>
     <!-- Unknow error -->
 </resources>

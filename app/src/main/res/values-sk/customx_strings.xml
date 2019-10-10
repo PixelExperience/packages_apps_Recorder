@@ -16,6 +16,12 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">Zdroj zvuku</string>
+    <string name="screen_audio_recording_internal">Systémový zvuk</string>
+    <string name="screen_audio_recording_microphone">Mikrofón</string>
+    <string name="screen_audio_recording_off">Vypnuté</string>
+    <string name="screen_audio_recording_disabled_wfd">Záznam interných systémových zvukov nefunguje počas prenosu na vzdialené obrazovky.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Záznam interných systémových zvukov nefunguje pri súčasnom použití iného nahrávacieho softvéru.</string>
     <!-- Notifications -->
     <!-- Extra settings -->
     <!-- Unknow error -->

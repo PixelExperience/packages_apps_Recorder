@@ -19,14 +19,23 @@
     <string name="screen_audio_recording_title">Äänilähde</string>
     <string name="screen_audio_recording_internal">Järjestelmän ääni</string>
     <string name="screen_audio_recording_microphone">Mikrofoni</string>
+    <string name="screen_audio_recording_off">Ei käytössä</string>
     <!-- Notifications -->
     <!-- Extra settings -->
     <string name="title_activity_settings">Asetukset</string>
     <string name="show_touches">Näytä kosketus</string>
+    <string name="show_touches_summary">Näytä visuaalinen palaute kosketuksille</string>
+    <string name="stop_recording_screen_off">Lopeta kun näyttö suljetaan</string>
+    <string name="stop_recording_screen_off_summary">Lopeta nauhoitus kun näyttö suljetaan</string>
+    <string name="frame_rate">Kuvataajuus</string>
     <string name="frame_rate_30_fps">30 FPS</string>
     <string name="frame_rate_60_fps">60 FPS</string>
+    <string name="screen_orientation">Näytön asento</string>
     <string name="screen_orientation_automatic">Automaattinen</string>
     <string name="screen_orientation_portrait">Pysty</string>
     <string name="screen_orientation_landscape">Vaaka</string>
+    <string name="show_floating_window">Näytä kelluva ikkuna</string>
+    <string name="show_floating_window_summary">Näytä kelluva ikkuna nauhoitettaessa</string>
     <!-- Unknow error -->
+    <string name="recording_error">Nauhoitus lopetettu</string>
 </resources>

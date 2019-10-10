@@ -16,7 +16,34 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">Izvor audiozapisa</string>
+    <string name="screen_audio_recording_internal">Zvuk sustava</string>
+    <string name="screen_audio_recording_microphone">Mikrofon</string>
+    <string name="screen_audio_recording_off">Onemogućeno</string>
+    <string name="screen_audio_recording_disabled_wfd">Unutarnji audio zapis sustava ne radi tijekom prijenosa na udaljene zaslone.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Unutarnji audio zapis sustava ne radi ako istovremeno upotrebljavate drugi snimač.</string>
+    <string name="screen_audio_recording_not_allowed">Unutarnji audio zapis sustava funkcionira samo kad se koriste zvučnici ili žičane slušalice.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Unutarnji zvučni zapis sustava nije dopušten tijekom poziva.</string>
+    <string name="screen_audio_recording_route_changed">Snimanje je završeno jer se audio izlaz promijenio.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Obavijest kada je snimanje dovršeno.</string>
     <!-- Extra settings -->
+    <string name="title_activity_settings">Postavke</string>
+    <string name="show_touches">Prikaži dodire</string>
+    <string name="show_touches_summary">Prikaži vizualne povratne informacije za dodire</string>
+    <string name="stop_recording_screen_off">Zaustavite kad isključite zaslon</string>
+    <string name="stop_recording_screen_off_summary">Zaustavite snimanje kad isključite zaslon</string>
+    <string name="frame_rate">Sličice po sekundi</string>
+    <string name="frame_rate_30_fps">30 FPS</string>
+    <string name="frame_rate_60_fps">60 FPS</string>
+    <string name="screen_orientation">Orijentacija</string>
+    <string name="screen_orientation_automatic">Automatski</string>
+    <string name="screen_orientation_portrait">Portret</string>
+    <string name="screen_orientation_landscape">Pejzaž</string>
+    <string name="show_floating_window">Prikaži plutajući prozor</string>
+    <string name="show_floating_window_summary">Prikaži plutajući prozor prilikom snimanja</string>
     <!-- Unknow error -->
+    <string name="recording_error">Snimanje je prekinuto</string>
+    <string name="recording_error_channel_desc">Obavijest o zaustavljanju snimanja zbog pogreške.</string>
+    <string name="unknow_error">Nepoznata pogreška, snimanje je zaustavljeno.</string>
 </resources>

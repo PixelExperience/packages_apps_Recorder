@@ -22,7 +22,7 @@
     <string name="screen_audio_recording_off">Desativado</string>
     <string name="screen_audio_recording_disabled_wfd">A gravação de áudio interno do sistema não funciona durante a transmissão para telas remotas.</string>
     <string name="screen_audio_recording_disabled_others_apps">A gravação de áudio interno do sistema não funciona ao usar outro gravador simultaneamente.</string>
-    <string name="screen_audio_recording_not_allowed">A gravação de áudio interno do sistema funciona apenas ao usar alto-falante ou fones de ouvido com fio.</string>
+    <string name="screen_audio_recording_not_allowed">A gravação de áudio interno do sistema funciona apenas ao usar alto-falantes ou fones de ouvido com fio.</string>
     <string name="screen_audio_recording_not_allowed_in_call">A gravação de áudio interno do sistema não é permitido durante uma chamada.</string>
     <string name="screen_audio_recording_route_changed">A gravação foi finalizada porque a saída de áudio foi alterada.</string>
     <!-- Notifications -->

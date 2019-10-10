@@ -16,6 +16,9 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">Fonte de son</string>
+    <string name="screen_audio_recording_internal">Son do sistema</string>
+    <string name="screen_audio_recording_microphone">Micrófono</string>
     <!-- Notifications -->
     <!-- Extra settings -->
     <!-- Unknow error -->

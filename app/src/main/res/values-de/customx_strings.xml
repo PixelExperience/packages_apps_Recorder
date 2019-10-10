@@ -16,7 +16,34 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">Audioquelle</string>
+    <string name="screen_audio_recording_internal">System-Ton</string>
+    <string name="screen_audio_recording_microphone">Mikrofon</string>
+    <string name="screen_audio_recording_off">Deaktiviert</string>
+    <string name="screen_audio_recording_disabled_wfd">Die systeminterne Audioaufzeichnung funktioniert nicht während der Übertragung an entfernte Bildschirme.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Die systeminterne Audioaufzeichnung funktioniert nicht, wenn Sie einen anderen Recorder gleichzeitig verwenden.</string>
+    <string name="screen_audio_recording_not_allowed">Die systeminterne Audioaufzeichnung funktioniert nur bei Verwendung von Lautsprechern oder kabelgebundenen Kopfhörern.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Systeminterne Audioaufzeichnung ist während eines Anrufs nicht erlaubt.</string>
+    <string name="screen_audio_recording_route_changed">Die Aufnahme wurde beendet, weil sich die Audioausgabe geändert hat.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Benachrichtigung bei vollständiger Aufzeichnung.</string>
     <!-- Extra settings -->
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="show_touches">Berührungen anzeigen</string>
+    <string name="show_touches_summary">Visuelles Feedback bei Berührungen anzeigen</string>
+    <string name="stop_recording_screen_off">Stopp beim Ausschalten des Bildschirms</string>
+    <string name="stop_recording_screen_off_summary">Beenden der Aufzeichnung beim Ausschalten des Bildschirms</string>
+    <string name="frame_rate">Bildrate</string>
+    <string name="frame_rate_30_fps">30 FPS</string>
+    <string name="frame_rate_60_fps">60 FPS</string>
+    <string name="screen_orientation">Bildschirmausrichtung</string>
+    <string name="screen_orientation_automatic">Automatisch</string>
+    <string name="screen_orientation_portrait">Hochformat</string>
+    <string name="screen_orientation_landscape">Querformat</string>
+    <string name="show_floating_window">Schwebendes Fenster anzeigen</string>
+    <string name="show_floating_window_summary">Schwebendes Fenster bei der Aufnahme anzeigen</string>
     <!-- Unknow error -->
+    <string name="recording_error">Aufnahme gestoppt</string>
+    <string name="recording_error_channel_desc">Benachrichtigung, wenn die Aufzeichnung aufgrund eines Fehlers gestoppt wird.</string>
+    <string name="unknow_error">Unbekannter Fehler, die Aufzeichnung wurde gestoppt.</string>
 </resources>

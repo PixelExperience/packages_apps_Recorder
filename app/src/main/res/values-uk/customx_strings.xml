@@ -31,8 +31,8 @@
     <string name="title_activity_settings">Налаштування</string>
     <string name="show_touches">Показувати дотики</string>
     <string name="show_touches_summary">Показувати візуальну реакцію на дотики</string>
-    <string name="stop_recording_screen_off">Зупинити коли відключається екран</string>
-    <string name="stop_recording_screen_off_summary">Зупинити запис коли відключається екран</string>
+    <string name="stop_recording_screen_off">Зупинити коли вимикається екран</string>
+    <string name="stop_recording_screen_off_summary">Зупинити запис коли вимикається екран</string>
     <string name="frame_rate">Частота кадрів</string>
     <string name="frame_rate_30_fps">30 кадр/с</string>
     <string name="frame_rate_60_fps">60 кадр/с</string>

@@ -16,7 +16,34 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">Крыніца аўдыя</string>
+    <string name="screen_audio_recording_internal">Сістэма аўдыя</string>
+    <string name="screen_audio_recording_microphone">Мікрафон</string>
+    <string name="screen_audio_recording_off">Адключана</string>
+    <string name="screen_audio_recording_disabled_wfd">Сістэма ўнутранай аўдыёзапісы не працуе падчас перадачы на выдаленыя экраны.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Сістэма ўнутранай аўдыёзапісы не працуе пры адначасовым выкарыстанні іншага дыктафона.</string>
+    <string name="screen_audio_recording_not_allowed">Унутраная аўдыёзапіс сістэмы працуе толькі пры выкарыстанні дынамікаў ці правадных навушнікаў.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Унутраная аўдыязапіс сістэмы не дазволена падчас размовы.</string>
+    <string name="screen_audio_recording_route_changed">Запіс скончыўся, таму што змяніўся выхад гуку.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Апавяшчэнне аб завяршэнні запісу.</string>
     <!-- Extra settings -->
+    <string name="title_activity_settings">Налады</string>
+    <string name="show_touches">Паказваць дотыкі</string>
+    <string name="show_touches_summary">Паказваць візуалізацыю дотыкаў</string>
+    <string name="stop_recording_screen_off">Прыпыняць пры адключэнні экрана</string>
+    <string name="stop_recording_screen_off_summary">Спыніць запіс пры адключэнні экрана</string>
+    <string name="frame_rate">Частата кадраў</string>
+    <string name="frame_rate_30_fps">30 FPS</string>
+    <string name="frame_rate_60_fps">60 FPS</string>
+    <string name="screen_orientation">Арыентацыя</string>
+    <string name="screen_orientation_automatic">Аўтаматычна</string>
+    <string name="screen_orientation_portrait">Партрэтная</string>
+    <string name="screen_orientation_landscape">Альбомная</string>
+    <string name="show_floating_window">Паказаць акно, якое плавае</string>
+    <string name="show_floating_window_summary">Паказаць акно, якое плавае падчас запісу</string>
     <!-- Unknow error -->
+    <string name="recording_error">Запіс спыненая</string>
+    <string name="recording_error_channel_desc">Апавяшчэнне аб спыненні запісу з-за памылкі.</string>
+    <string name="unknow_error">Невядомая памылка, запіс быў спынены.</string>
 </resources>

@@ -16,7 +16,34 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">แหล่งที่มาของเสียง</string>
+    <string name="screen_audio_recording_internal">เสียงระบบ</string>
+    <string name="screen_audio_recording_microphone">ไมโครโฟน</string>
+    <string name="screen_audio_recording_off">ปิดการใช้งาน</string>
+    <string name="screen_audio_recording_disabled_wfd">การบันทึกเสียงภายในระบบไม่ทำงานในระหว่างการส่งไปยังหน้าจอระยะไกล</string>
+    <string name="screen_audio_recording_disabled_others_apps">การบันทึกเสียงภายในระบบไม่ทำงานเมื่อใช้เครื่องบันทึกอื่นพร้อมกัน</string>
+    <string name="screen_audio_recording_not_allowed">การบันทึกเสียงภายในระบบใช้งานได้เฉพาะเมื่อใช้ลำโพงหรือหูฟังแบบมีสาย</string>
+    <string name="screen_audio_recording_not_allowed_in_call">ไม่อนุญาตการบันทึกเสียงภายในระบบในระหว่างการโทร</string>
+    <string name="screen_audio_recording_route_changed">การบันทึกสิ้นสุดลงเนื่องจากสัญญาณเสียงเปลี่ยนไป</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">แจ้งเตือนเมื่อบันทึกเสร็จสมบูรณ์</string>
     <!-- Extra settings -->
+    <string name="title_activity_settings">การตั้งค่า</string>
+    <string name="show_touches">แสดงการแตะ</string>
+    <string name="show_touches_summary">แสดงความคิดเห็นด้วยภาพสำหรับการแตะ</string>
+    <string name="stop_recording_screen_off">หยุดเมื่อปิดหน้าจอ</string>
+    <string name="stop_recording_screen_off_summary">หยุดการบันทึกเมื่อปิดหน้าจอ</string>
+    <string name="frame_rate">อัตราเฟรมเรท</string>
+    <string name="frame_rate_30_fps">30 เฟรม/วินาที</string>
+    <string name="frame_rate_60_fps">60 เฟรม/วินาที</string>
+    <string name="screen_orientation">หมุนหน้าจอ</string>
+    <string name="screen_orientation_automatic">อัตโนมัติ</string>
+    <string name="screen_orientation_portrait">แนวตั้ง</string>
+    <string name="screen_orientation_landscape">แนวนอน</string>
+    <string name="show_floating_window">แสดงหน้าต่างลอย</string>
+    <string name="show_floating_window_summary">แสดงหน้าต่างลอยเมื่อทำการบันทึก</string>
     <!-- Unknow error -->
+    <string name="recording_error">หยุดบันทึกแล้ว</string>
+    <string name="recording_error_channel_desc">การแจ้งเตือนเมื่อการบันทึกหยุดลงเนื่องจากข้อผิดพลาด</string>
+    <string name="unknow_error">ข้อผิดพลาดที่ไม่รู้จักการบันทึกหยุดลง</string>
 </resources>
