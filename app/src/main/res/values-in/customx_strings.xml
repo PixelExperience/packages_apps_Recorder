@@ -19,31 +19,31 @@
     <string name="screen_audio_recording_title">Sumber suara</string>
     <string name="screen_audio_recording_internal">Sistem suara</string>
     <string name="screen_audio_recording_microphone">Mikrofon</string>
-    <string name="screen_audio_recording_off">Tidak aktif</string>
-    <string name="screen_audio_recording_disabled_wfd">Sistem perekaman suara tidak berfungsi selama transmisi ke layar jarak jauh.</string>
-    <string name="screen_audio_recording_disabled_others_apps">Sistem perekaman tidak berfungsi saat menggunakan perekam lain secara bersamaan.</string>
-    <string name="screen_audio_recording_not_allowed">Sistem perekaman hanya berfungsi bila menggunakan speaker atau headphone.</string>
-    <string name="screen_audio_recording_not_allowed_in_call">Perekam suara tidak diperbolehkan saat panggilan berlangsung.</string>
+    <string name="screen_audio_recording_off">Nonaktif</string>
+    <string name="screen_audio_recording_disabled_wfd">Perekamam suara internal tidak berfungsi selama transmisi ke layar jarak jauh.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Perekaman suara internal tidak berfungsi saat menggunakan perekam lain secara bersamaan.</string>
+    <string name="screen_audio_recording_not_allowed">Perekaman suara internal hanya berfungsi bila menggunakan speaker atau headphone.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Perekam suara internal tidak diperbolehkan saat panggilan berlangsung.</string>
     <string name="screen_audio_recording_route_changed">Perekaman berakhir karena keluaran suara diganti.</string>
     <!-- Notifications -->
-    <string name="ready_channel_desc">Akan diberitahukan setelah perekaman selesai.</string>
+    <string name="ready_channel_desc">Pemberitahuan saat perekaman selesai.</string>
     <!-- Extra settings -->
     <string name="title_activity_settings">Pengaturan</string>
     <string name="show_touches">Tampilkan sentuhan</string>
     <string name="show_touches_summary">Tampilkan umpan balik sentuhan</string>
     <string name="stop_recording_screen_off">Berhenti ketika layar mati</string>
     <string name="stop_recording_screen_off_summary">Berhenti merekam saat layar mati</string>
-    <string name="frame_rate">Frekuensi gambar</string>
+    <string name="frame_rate">Frame rate</string>
     <string name="frame_rate_30_fps">30 FPS</string>
     <string name="frame_rate_60_fps">60 FPS</string>
     <string name="screen_orientation">Orientasi</string>
     <string name="screen_orientation_automatic">Otomatis</string>
-    <string name="screen_orientation_portrait">Potret</string>
+    <string name="screen_orientation_portrait">Tegak</string>
     <string name="screen_orientation_landscape">Lanskap</string>
-    <string name="show_floating_window">Tampilkan jendela lain</string>
-    <string name="show_floating_window_summary">Tampilkan jendela lain saat merekam</string>
+    <string name="show_floating_window">Tampilkan jendela mengambang</string>
+    <string name="show_floating_window_summary">Tampilkan jendela mengambang saat merekam</string>
     <!-- Unknow error -->
-    <string name="recording_error">Berhenti merekam</string>
-    <string name="recording_error_channel_desc">Pemberitahuan ketika berhenti merekam karena kerusakan.</string>
-    <string name="unknow_error">Anomali, perekaman dihentikan.</string>
+    <string name="recording_error">Perekaman dihentikan</string>
+    <string name="recording_error_channel_desc">Pemberitahuan ketika rekaman dihentikan karena kerusakan.</string>
+    <string name="unknow_error">Ada masalah, perekaman dihentikan.</string>
 </resources>

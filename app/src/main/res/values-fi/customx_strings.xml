@@ -20,7 +20,13 @@
     <string name="screen_audio_recording_internal">Järjestelmän ääni</string>
     <string name="screen_audio_recording_microphone">Mikrofoni</string>
     <string name="screen_audio_recording_off">Ei käytössä</string>
+    <string name="screen_audio_recording_disabled_wfd">Sisäinen musiikin tallennus ei toimi lähettäessä muille näytöille tilassa.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Järjestelmän sisäinen audiotallennus ei toimi käytettäessä toista tallenninta.</string>
+    <string name="screen_audio_recording_not_allowed">Järjestelmän sisäinen audiotallennus toimii ainoastaan kaiuttimia tai langallisia kuulokkeita käytettäessä.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Järjestelmän sisäinen audiotallennus ei ole sallittu kesken puhelun.</string>
+    <string name="screen_audio_recording_route_changed">Nauhoitus loppui, koska äänen ulostulo vaihtui.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Ilmoitus kun nauhoitus on valmis.</string>
     <!-- Extra settings -->
     <string name="title_activity_settings">Asetukset</string>
     <string name="show_touches">Näytä kosketus</string>
@@ -38,4 +44,6 @@
     <string name="show_floating_window_summary">Näytä kelluva ikkuna nauhoitettaessa</string>
     <!-- Unknow error -->
     <string name="recording_error">Nauhoitus lopetettu</string>
+    <string name="recording_error_channel_desc">Ilmoitus kun nauhoitus on pysäytetty virheen takia.</string>
+    <string name="unknow_error">Tuntematon virhe, nauhoittaminen on pysäytetty.</string>
 </resources>

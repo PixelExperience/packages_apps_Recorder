@@ -22,7 +22,28 @@
     <string name="screen_audio_recording_off">Vypnuté</string>
     <string name="screen_audio_recording_disabled_wfd">Záznam interných systémových zvukov nefunguje počas prenosu na vzdialené obrazovky.</string>
     <string name="screen_audio_recording_disabled_others_apps">Záznam interných systémových zvukov nefunguje pri súčasnom použití iného nahrávacieho softvéru.</string>
+    <string name="screen_audio_recording_not_allowed">Nahrávanie systémových zvukov funguje iba ak sa používa reproduktor alebo káblové slúchadlá.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Nahrávanie systémových zvukov nie je povolené počas telefonovania.</string>
+    <string name="screen_audio_recording_route_changed">Nahrávanie ukončené z dôvodu zmeny audio výstupu.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Notifikácia po dokončení nahrávania.</string>
     <!-- Extra settings -->
+    <string name="title_activity_settings">Nastavenia</string>
+    <string name="show_touches">Zobraziť dotyky</string>
+    <string name="show_touches_summary">Zobraziť vizuálnu spätnú väzbu pre dotyky</string>
+    <string name="stop_recording_screen_off">Zastaviť po vypnutí obrazovky</string>
+    <string name="stop_recording_screen_off_summary">Zastaviť nahrávanie po vypnutí obrazovky</string>
+    <string name="frame_rate">Snímkovacia frekvencia</string>
+    <string name="frame_rate_30_fps">30 snímkov za sekundu</string>
+    <string name="frame_rate_60_fps">60 snímkov za sekundu</string>
+    <string name="screen_orientation">Orientácia</string>
+    <string name="screen_orientation_automatic">Automatický</string>
+    <string name="screen_orientation_portrait">Na výšku</string>
+    <string name="screen_orientation_landscape">Na šírku</string>
+    <string name="show_floating_window">Zobraziť plávajúce okno</string>
+    <string name="show_floating_window_summary">Počas nahrávania zobraziť plávajúce okno</string>
     <!-- Unknow error -->
+    <string name="recording_error">Nahrávanie zastavené</string>
+    <string name="recording_error_channel_desc">Notifikácia po zastavení nahrávania kvôli chybe.</string>
+    <string name="unknow_error">Neznáma chyba, nahrávanie bolo zastavené.</string>
 </resources>

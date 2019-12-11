@@ -20,10 +20,10 @@
     <string name="screen_audio_recording_internal">صوت النظام</string>
     <string name="screen_audio_recording_microphone">الميكروفون</string>
     <string name="screen_audio_recording_off">معطل</string>
-    <string name="screen_audio_recording_disabled_wfd">لا يعمل تسجيل الصوت الداخلي للنظام أثناء النقل إلى الشاشات البعيدة.</string>
+    <string name="screen_audio_recording_disabled_wfd">لا يعمل تسجيل الصوت الداخلي للنظام أثناء البث إلى الشاشات البعيدة.</string>
     <string name="screen_audio_recording_disabled_others_apps">لا يعمل تسجيل الصوت الداخلي للنظام عند استخدام مسجل آخر في وقت واحد.</string>
     <string name="screen_audio_recording_not_allowed">يعمل تسجيل الصوت الداخلي للنظام فقط عند استخدام سماعات خارجية أو سماعات الرأس السلكية.</string>
-    <string name="screen_audio_recording_not_allowed_in_call">تسجيل الصوت الداخلي للنظام غير مسموح به أثناء المكالمة.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">تسجيل الصوت الداخلي للنظام غير مسموح أثناء المكالمة.</string>
     <string name="screen_audio_recording_route_changed">انتهى التسجيل بسبب تغيير إخراج الصوت.</string>
     <!-- Notifications -->
     <string name="ready_channel_desc">الإشعار عند اكتمال التسجيل.</string>
@@ -31,11 +31,11 @@
     <string name="title_activity_settings">الإعدادات</string>
     <string name="show_touches">إظهار النقرات</string>
     <string name="show_touches_summary">عرض الملاحظات المرئية للنقرات</string>
-    <string name="stop_recording_screen_off">توقف عند إيقاف تشغيل الشاشة</string>
+    <string name="stop_recording_screen_off">إيقاف التسجيل عند إيقاف تشغيل الشاشة</string>
     <string name="stop_recording_screen_off_summary">إيقاف التسجيل عند إيقاف تشغيل الشاشة</string>
-    <string name="frame_rate">معدل الإطار</string>
-    <string name="frame_rate_30_fps">30 إطار في الثانية</string>
-    <string name="frame_rate_60_fps">60 إطار في الثانية</string>
+    <string name="frame_rate">سرعة الإطار</string>
+    <string name="frame_rate_30_fps">30 إطارا في الثانية</string>
+    <string name="frame_rate_60_fps">60 إطارا في الثانية</string>
     <string name="screen_orientation">التدوير</string>
     <string name="screen_orientation_automatic">تلقائي</string>
     <string name="screen_orientation_portrait">عمودي</string>
@@ -44,6 +44,6 @@
     <string name="show_floating_window_summary">عرض نافذة عائمة عند التسجيل</string>
     <!-- Unknow error -->
     <string name="recording_error">تم إيقاف التسجيل</string>
-    <string name="recording_error_channel_desc">إشعار عند إيقاف التسجيل بسبب خطأ.</string>
-    <string name="unknow_error">خطأ غير معروف ، تم إيقاف التسجيل.</string>
+    <string name="recording_error_channel_desc">إظهار إشعار عند إيقاف التسجيل بسبب خطأ.</string>
+    <string name="unknow_error">خطأ غير معروف ، توقف التسجيل.</string>
 </resources>

@@ -16,7 +16,34 @@
 -->
 <resources>
     <!-- Audio recorder strings -->
+    <string name="screen_audio_recording_title">Audio iturria</string>
+    <string name="screen_audio_recording_internal">Audio sistema</string>
+    <string name="screen_audio_recording_microphone">Mikrofonoa</string>
+    <string name="screen_audio_recording_off">Ezgaituta</string>
+    <string name="screen_audio_recording_disabled_wfd">Sistemaren barneko audio grabaketa ez du funtzionatzen beste pantailetara igortzean.</string>
+    <string name="screen_audio_recording_disabled_others_apps">Sistemaren barne audio grabaketa ez du ibiltzenbeste grabagailua aldi berean erabiltzen denean.</string>
+    <string name="screen_audio_recording_not_allowed">Sistemaren barne grabaketa audioak ibiltzen du bozgorailuak edo kable aurikularrak erabiltzen direnean soilik.</string>
+    <string name="screen_audio_recording_not_allowed_in_call">Sistemaren barne audio grabaketa ezin da erabili deian zehar.</string>
+    <string name="screen_audio_recording_route_changed">Grabaketa bukatu egin da zeren soinuaren irteera aldatu egin da.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Grabaketa amaitzean jakinarazpena.</string>
     <!-- Extra settings -->
+    <string name="title_activity_settings">Ezarpenak</string>
+    <string name="show_touches">Erakutsi ukitutako elementuak</string>
+    <string name="show_touches_summary">Feedback bisuala erakutsi ukitutako elementuetarako</string>
+    <string name="stop_recording_screen_off">Pantaila itzaritakoan Gelditu</string>
+    <string name="stop_recording_screen_off_summary">Pantaila itzaritakoan gelditu grabaketa</string>
+    <string name="frame_rate">Irudi frekuentzia</string>
+    <string name="frame_rate_30_fps">30 FPS</string>
+    <string name="frame_rate_60_fps">60 FPS</string>
+    <string name="screen_orientation">Orientazioa</string>
+    <string name="screen_orientation_automatic">Automatikoa</string>
+    <string name="screen_orientation_portrait">Erretratua</string>
+    <string name="screen_orientation_landscape">Horizontala</string>
+    <string name="show_floating_window">Leiho flotatzailea erakutzi</string>
+    <string name="show_floating_window_summary">Leiho flotatzailea erakutzi grabaketa bitartean</string>
     <!-- Unknow error -->
+    <string name="recording_error">Grabaketa gelditu da</string>
+    <string name="recording_error_channel_desc">Grabazioa gelditzen denean errorea dela eta jakinaraztea.</string>
+    <string name="unknow_error">Akats ezezaguna, grabazioa gelditu da.</string>
 </resources>
