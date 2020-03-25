@@ -22,8 +22,7 @@ public class PreferenceUtils {
 
     public boolean canControlShowTouches() {
         UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        //return userManager.isAdminUser();
-        return true;
+        return userManager.isAdminUser();
     }
 
     public boolean getShouldShowTouches() {
