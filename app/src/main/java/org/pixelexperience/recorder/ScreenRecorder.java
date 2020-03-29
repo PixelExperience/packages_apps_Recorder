@@ -149,7 +149,7 @@ public class ScreenRecorder {
             // create encoder and input surface
             prepareVideoEncoder();
             prepareAudioEncoder();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
