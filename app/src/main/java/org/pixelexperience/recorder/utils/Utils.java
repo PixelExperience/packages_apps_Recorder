@@ -58,19 +58,6 @@ public class Utils {
         return PREF_RECORDING_SCREEN.equals(getStatus());
     }
 
-    public static void collapseStatusBar(Context context, boolean delayed) {
-        new Handler().postDelayed(() -> {
-            try {
-                Object sbservice = context.getSystemService("statusbar");
-                Class<?> statusbarManager = Class.forName("android.app.StatusBarManager");
-                Method collapse2 = statusbarManager.getMethod("collapsePanels");
-                collapse2.setAccessible(true);
-                collapse2.invoke(sbservice);
-            } catch (Exception ignored) {
-            }
-        }, delayed ? 500 : 0);
-    }
-
     public static void setShowTouches(Context context, boolean show) {
         try {
             Settings.System.putInt(context.getContentResolver(), "show_touches", show ? 1 : 0);
