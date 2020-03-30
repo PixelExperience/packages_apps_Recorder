@@ -63,7 +63,6 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
     private NotificationCompat.Builder mBuilder;
     private ScreenRecorder mRecorder;
     private NotificationManager mNotificationManager;
-    private boolean mStopOnScreenOff;
     private Handler mHandler;
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -72,7 +71,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
             if (Intent.ACTION_USER_BACKGROUND.equals(action) ||
                     Intent.ACTION_SHUTDOWN.equals(action)) {
                 stopRecording(true);
-            } else if (Intent.ACTION_SCREEN_OFF.equals(action) && mStopOnScreenOff) {
+            } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                 stopRecording(true);
             }
         }
@@ -168,8 +167,6 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
 
             mNotificationManager.cancel(NOTIFICATION_ID);
             mNotificationManager.cancel(Utils.NOTIFICATION_ERROR_ID);
-
-            mStopOnScreenOff = mPreferenceUtils.getShouldStopWhenScreenOff();
 
             assert mRecorder == null;
 

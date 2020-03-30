@@ -22,10 +22,4 @@
         android:summary="@string/show_touches_summary"
         android:title="@string/show_touches" />
 
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="stop_recording_screen_off"
-        android:summary="@string/stop_recording_screen_off_summary"
-        android:title="@string/stop_recording_screen_off" />
-
 </PreferenceScreen>

@@ -46,8 +46,6 @@
     <!-- Extra settings -->
     <string name="show_touches">Show taps</string>
     <string name="show_touches_summary">Show visual feedback for taps</string>
-    <string name="stop_recording_screen_off">Stop when turning off screen</string>
-    <string name="stop_recording_screen_off_summary">Stop recording when turning off screen</string>
     <!-- Unknown error -->
     <string name="recording_error">Recording stopped</string>
     <string name="recording_error_channel_desc">Notification when recording is stopped due to an error.</string>
