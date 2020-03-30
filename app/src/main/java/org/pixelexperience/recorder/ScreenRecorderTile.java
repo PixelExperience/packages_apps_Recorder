@@ -12,6 +12,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.pixelexperience.recorder.utils.Utils;
 
+import java.lang.reflect.Method;
+
 public class ScreenRecorderTile extends TileService {
 
     private final BroadcastReceiver mRecordingStateChanged = new BroadcastReceiver() {
@@ -30,24 +32,42 @@ public class ScreenRecorderTile extends TileService {
 
     @Override
     public void onClick() {
-        boolean wasLocked = isLocked();
-        unlockAndRun(() -> {
-            if (Utils.isScreenRecording()) {
-                Utils.collapseStatusBar(this, wasLocked);
-                new Handler().postDelayed(() -> {
-                    Utils.setStatus(Utils.PREF_RECORDING_NOTHING, this);
-                    startService(new Intent(ScreenRecorderService.ACTION_STOP_SCREENCAST)
-                            .setClass(this, ScreenRecorderService.class));
-                }, wasLocked ? 1000 : 500);
-            } else {
-                Utils.collapseStatusBar(this, wasLocked);
-                Intent intent = new Intent(this, StartScreenRecorder.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                startActivity(intent);
+        if (isLocked()){
+            unlockAndRun(() -> clickEvent(true));
+        }else{
+            clickEvent(false);
+        }
+    }
+
+    private void collapseStatusBar(boolean delayed) {
+        new Handler().postDelayed(() -> {
+            try {
+                Object sbservice = getSystemService("statusbar");
+                Class<?> statusbarManager = Class.forName("android.app.StatusBarManager");
+                Method collapse2 = statusbarManager.getMethod("collapsePanels");
+                collapse2.setAccessible(true);
+                collapse2.invoke(sbservice);
+            } catch (Exception ignored) {
             }
-        });
+        }, delayed ? 500 : 0);
+    }
+
+    private void clickEvent(final boolean locked){
+        if (Utils.isScreenRecording()) {
+            collapseStatusBar(locked);
+            new Handler().postDelayed(() -> {
+                Utils.setStatus(Utils.PREF_RECORDING_NOTHING, this);
+                startService(new Intent(ScreenRecorderService.ACTION_STOP_SCREENCAST)
+                        .setClass(this, ScreenRecorderService.class));
+            }, locked ? 1000 : 500);
+        } else {
+            collapseStatusBar(locked);
+            Intent intent = new Intent(this, StartScreenRecorder.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            startActivity(intent);
+        }
     }
 
     @Override
