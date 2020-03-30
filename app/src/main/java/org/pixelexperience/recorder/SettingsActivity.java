@@ -23,6 +23,10 @@ public class SettingsActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PreferenceUtils preferenceUtils = new PreferenceUtils(this);
+        if (!preferenceUtils.canControlShowTouches()){ // Remove if more prefs added
+            finish();
+        }
         setContentView(R.layout.settings_activity);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -44,7 +48,6 @@ public class SettingsActivity extends FragmentActivity {
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
-        private static final int REQUEST_RECORD_AUDIO_PERMS = 213;
         private PreferenceCategory mScreenCategory;
         private final BroadcastReceiver mRecordingStateChanged = new BroadcastReceiver() {
             @Override
@@ -63,11 +66,9 @@ public class SettingsActivity extends FragmentActivity {
             mPreferenceUtils = new PreferenceUtils(getContext());
             mScreenCategory = findPreference(KEY_SCREEN_CATEGORY);
             mShowTouches = findPreference(PreferenceUtils.PREF_SHOW_TOUCHES);
-            mStopRecordingWhenScreenOff = findPreference(PreferenceUtils.PREF_STOP_SCREEN_OFF);
             mShowTouches.setOnPreferenceChangeListener(this);
             mStopRecordingWhenScreenOff.setOnPreferenceChangeListener(this);
             mShowTouches.setChecked(mPreferenceUtils.getShouldShowTouches());
-            mStopRecordingWhenScreenOff.setChecked(mPreferenceUtils.getShouldStopWhenScreenOff());
             if (!mPreferenceUtils.canControlShowTouches()) {
                 mScreenCategory.removePreference(mShowTouches);
             }
@@ -100,9 +101,6 @@ public class SettingsActivity extends FragmentActivity {
             if (preference == mShowTouches) {
                 boolean value = (Boolean) newValue;
                 mPreferenceUtils.setShouldShowTouches(value);
-            } else if (preference == mStopRecordingWhenScreenOff) {
-                boolean value = (Boolean) newValue;
-                mPreferenceUtils.setShouldStopWhenScreenOff(value);
             }
             return true;
         }
