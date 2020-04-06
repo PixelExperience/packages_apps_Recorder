@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Inspelare</string>
+    <!-- Share action for notification -->
+    <string name="share">Dela</string>
+    <!-- Stop action for notification -->
+    <string name="stop">Avbryt</string>
+    <!-- Play action -->
+    <string name="play">Spela upp</string>
+    <!-- Delete action -->
+    <string name="delete">Radera</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Otillräckligt med utrymme</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Inte tillräckligt med lagringsutrymme ledigt</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Skärminspelare</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Videolängd: %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Redo att dela</string>
+    <!-- Screen settings dialog title -->
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Skärminspelning</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <!-- Screen record title -->
+    <string name="main_screen_action">Spela in skärmen</string>
+    <!-- Extra settings -->
+    <!-- Unknown error -->
+    <!-- Notifications -->
+    <!-- Qs tile -->
+    <!-- Permission -->
+    <!-- Notification -->
+</resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Felvevő</string>
+    <!-- Share action for notification -->
+    <string name="share">Megosztás</string>
+    <!-- Stop action for notification -->
+    <string name="stop">Leállítás</string>
+    <!-- Play action -->
+    <string name="play">Lejátszás</string>
+    <!-- Delete action -->
+    <string name="delete">Törlés</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Nincs elég tárhely</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Nincs elég tárhely</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Képernyőfelvevő</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Videó hossza: %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Megosztásra kész</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">A Képernyővideó-felvevő beállításai</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Képernyőfelvétel</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Állandó értesítés képernyőfelvétel közben és értesítés befejezéskor</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">Képernyővideó-felvétel</string>
+    <!-- Extra settings -->
+    <string name="show_touches">Képernyőérintések megjelenítése</string>
+    <string name="show_touches_summary">Jelenítse meg vizuálisan is az érintéseket</string>
+    <!-- Unknown error -->
+    <string name="recording_error">A felvétel megállítva</string>
+    <string name="recording_error_channel_desc">Ha egy hiba miatt leáll a felvétel, értesítést küld róla.</string>
+    <string name="unknow_error">Ismeretlen hiba, a felvétel leállt.</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">Jelenítsen meg értesítést a felvétel végéről.</string>
+    <!-- Qs tile -->
+    <string name="touch_to_stop_message">Érintésre leáll</string>
+    <!-- Permission -->
+    <string name="no_permission_error_message">Hangfelvételi engedély szükséges az indításhoz.</string>
+    <!-- Notification -->
+    <string name="saving_video_notification">Videómentés…</string>
+</resources>

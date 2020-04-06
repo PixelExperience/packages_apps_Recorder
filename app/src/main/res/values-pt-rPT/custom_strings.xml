@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Gravador</string>
+    <!-- Share action for notification -->
+    <string name="share">Partilhar</string>
+    <!-- Stop action for notification -->
+    <string name="stop">Parar</string>
+    <!-- Play action -->
+    <string name="play">Reproduzir</string>
+    <!-- Delete action -->
+    <string name="delete">Apagar</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Armazenamento insuficiente</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Armazenamento disponível insuficiente</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Gravador de ecrã</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Tamanho do vídeo: %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Pronto para partilhar</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Definições do gravador de ecrã</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Gravação de ecrã</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Notificação persistente durante a gravação do ecrã e notificação depois de completa</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">Gravar ecrã</string>
+    <!-- Extra settings -->
+    <string name="show_touches">Mostrar toques</string>
+    <string name="show_touches_summary">Mostrar feedback visual para toques</string>
+    <!-- Unknown error -->
+    <string name="recording_error">Gravação interrompida</string>
+    <string name="recording_error_channel_desc">Notificação quando a gravação é interrompida devido a um erro.</string>
+    <string name="unknow_error">Erro desconhecido, a gravação foi interrompida.</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">Notificação ao concluir a gravação.</string>
+    <!-- Qs tile -->
+    <string name="touch_to_stop_message">Toque para parar</string>
+    <!-- Permission -->
+    <string name="no_permission_error_message">Conceda permissão de gravação de áudio para iniciar.</string>
+    <!-- Notification -->
+    <string name="saving_video_notification">Salvando vídeo ...</string>
+</resources>

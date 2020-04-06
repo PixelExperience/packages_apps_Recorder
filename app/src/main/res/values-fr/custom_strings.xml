@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Magnétophone</string>
+    <!-- Share action for notification -->
+    <string name="share">Partager</string>
+    <!-- Stop action for notification -->
+    <string name="stop">Arrêter</string>
+    <!-- Play action -->
+    <string name="play">Lecture</string>
+    <!-- Delete action -->
+    <string name="delete">Supprimer</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Espace de stockage insuffisant</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Espace de stockage insuffisant</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Enregistreur d\'écran</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Durée de la vidéo : %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Prêt à partager</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Paramètres de capture vidéo</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Enregistrement d\'écran</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Notification persistante lors de l\'enregistrement d\'écran et notification après la fin de ce dernier</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">Enregistrer l\'écran</string>
+    <!-- Extra settings -->
+    <string name="show_touches">Afficher éléments sélect</string>
+    <string name="show_touches_summary">Afficher un repère visuel pour éléments sélectionnés</string>
+    <!-- Unknown error -->
+    <string name="recording_error">Enregistrement arrêté</string>
+    <string name="recording_error_channel_desc">Notification lorsque l\'enregistrement est arrêté en raison d\'une erreur.</string>
+    <string name="unknow_error">Erreur inconnue, l\'enregistrement a été arrêté.</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">Notification à la fin de l\'enregistrement.</string>
+    <!-- Qs tile -->
+    <string name="touch_to_stop_message">Appuyez pour arrêter</string>
+    <!-- Permission -->
+    <string name="no_permission_error_message">Accordez l\'autorisation d\'enregistrement audio pour démarrer.</string>
+    <!-- Notification -->
+    <string name="saving_video_notification">Enregistrement de la vidéo…</string>
+</resources>

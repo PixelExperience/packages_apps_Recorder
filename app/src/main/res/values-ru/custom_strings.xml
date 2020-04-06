@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Рекордер</string>
+    <!-- Share action for notification -->
+    <string name="share">Отправить</string>
+    <!-- Stop action for notification -->
+    <string name="stop">Остановить</string>
+    <!-- Play action -->
+    <string name="play">Воспроизвести</string>
+    <!-- Delete action -->
+    <string name="delete">Удалить</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Недостаточно памяти</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Недостаточно свободной памяти</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Запись экрана</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Длительность видео: %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Готово к отправке</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Настройки записи экрана</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Запись экрана</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Постоянное уведомление при записи экрана и уведомление после его завершения</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">Запись экрана</string>
+    <!-- Extra settings -->
+    <string name="show_touches">Показать касания экрана</string>
+    <string name="show_touches_summary">Показать отклик для касания экрана</string>
+    <!-- Unknown error -->
+    <string name="recording_error">Запись остановлена</string>
+    <string name="recording_error_channel_desc">Уведомление при остановке записи из-за ошибки.</string>
+    <string name="unknow_error">Неизвестная ошибка, запись остановлена.</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">Уведомление после завершения записи.</string>
+    <!-- Qs tile -->
+    <string name="touch_to_stop_message">Коснитесь для остановки</string>
+    <!-- Permission -->
+    <string name="no_permission_error_message">Предоставьте разрешение на запись аудио чтобы начать</string>
+    <!-- Notification -->
+    <string name="saving_video_notification">Сохранение видео...</string>
+</resources>

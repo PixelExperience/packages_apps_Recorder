@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Diktofonas</string>
+    <!-- Share action for notification -->
+    <string name="share">Bendrinti</string>
+    <!-- Stop action for notification -->
+    <string name="stop">Stabdyti</string>
+    <!-- Play action -->
+    <string name="play">Groti</string>
+    <!-- Delete action -->
+    <string name="delete">Ištrinti</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Nepakanka atminties</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Nepakanka saugyklos atminties</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Ekrano įrašymas</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Vaizdo įrašo trukmė: %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Pasirengęs bendrinti</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Ekrano įrašymo nustatymai</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Ekrano įrašymas</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Nuolatinis pranešimas, kai įrašomas ekranas, ir pranešimas, kai jis bus baigtas</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">Įrašyti ekraną</string>
+    <!-- Extra settings -->
+    <string name="show_touches">Rodyti palietimus</string>
+    <string name="show_touches_summary">Rodyti vaizdinius atsiliepimus apie prilietimus</string>
+    <!-- Unknown error -->
+    <string name="recording_error">Įrašymas sustabdytas</string>
+    <string name="recording_error_channel_desc">Pranešimas, kai įrašymas sustabdomas dėl klaidos.</string>
+    <string name="unknow_error">Nežinoma klaida, įrašymas buvo sustabdytas.</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">Pranešimas, kai įrašymas baigtas.</string>
+    <!-- Qs tile -->
+    <string name="touch_to_stop_message">Norėdami sustabdyti, palieskite</string>
+    <!-- Permission -->
+    <!-- Notification -->
+    <string name="saving_video_notification">Išsaugoti vaizdo įrašą</string>
+</resources>

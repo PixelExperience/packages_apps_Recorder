@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Salvesti</string>
+    <!-- Share action for notification -->
+    <string name="share">Jaga</string>
+    <!-- Stop action for notification -->
+    <string name="stop">Lõpeta</string>
+    <!-- Play action -->
+    <string name="play">Esita</string>
+    <!-- Delete action -->
+    <string name="delete">Kustuta</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Pole piisavalt mälu</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Talletusruumi pole piisavalt</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Ekraanisalvesti</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Video pikkus: %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Osalemiseks valmis</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Ekraani salvesti seaded</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Ekraanikuva salvestamine</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Püsiv teade ekraanikuva salvestamisel ja teade kui salvestamine on lõppenud</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">Jäädvusta ekraani</string>
+    <!-- Extra settings -->
+    <string name="show_touches">Näita puuteid</string>
+    <string name="show_touches_summary">Näita visuaalset tagasisidet puudete jaoks</string>
+    <!-- Unknown error -->
+    <string name="recording_error">Salvestamine peatatud</string>
+    <string name="recording_error_channel_desc">Salvestuse peatamine tõrke tõttu.</string>
+    <string name="unknow_error">Tundmatu viga, salvestamine peatatud.</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">Teatis pärast salvestamise lõpetamist.</string>
+    <!-- Qs tile -->
+    <string name="touch_to_stop_message">Puuduta peatamiseks</string>
+    <!-- Permission -->
+    <string name="no_permission_error_message">Andke alustamiseks helisalvestamise luba.</string>
+    <!-- Notification -->
+    <string name="saving_video_notification">Video salvestamine...</string>
+</resources>

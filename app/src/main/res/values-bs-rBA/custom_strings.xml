@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <!-- Share action for notification -->
+    <!-- Stop action for notification -->
+    <!-- Play action -->
+    <!-- Delete action -->
+    <!-- Screen recorder notification storage error title -->
+    <!-- Screen recorder notification storage error message -->
+    <!-- Screen recorder notification title -->
+    <!-- Screen recorder notification message -->
+    <!-- Screen recorder notification share title -->
+    <!-- Screen settings dialog title -->
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Snimanje ekrana</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <!-- Screen record title -->
+    <!-- Extra settings -->
+    <string name="show_touches">Prikaži dodire</string>
+    <string name="show_touches_summary">Prikaži vizuelne povratne informacije za dodire</string>
+    <!-- Unknown error -->
+    <string name="recording_error">Snimanje je zaustavljeno</string>
+    <string name="recording_error_channel_desc">Obaveštenje kada je snimanje zaustavljeno usled greške.</string>
+    <string name="unknow_error">Nepoznata greška, snimanje je zaustavljeno.</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">Obaveštenje kad je snimanje završeno.</string>
+    <!-- Qs tile -->
+    <!-- Permission -->
+    <!-- Notification -->
+</resources>

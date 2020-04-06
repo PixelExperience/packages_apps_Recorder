@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">রেকর্ডার</string>
+    <!-- Share action for notification -->
+    <string name="share">কাউকে পাঠান</string>
+    <!-- Stop action for notification -->
+    <string name="stop">বন্ধ হ</string>
+    <!-- Play action -->
+    <string name="play">চালু হ</string>
+    <!-- Delete action -->
+    <string name="delete">মুছে ফেলবো</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">জায়গা খালি নাই</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">পর্যাপ্ত জায়গা খালি নাই</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">স্ক্রিন রেকর্ডার</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">ভিডিওটির দৈঘ্য: %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">কাউকে পাঠানোর জন্য প্রস্তুত</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">স্ক্রীন রেকর্ডার সেটিংস</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">স্ক্রীন রেকর্ড হচ্ছে</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">রেকর্ড চলা কালে এবং শেষ হলে নোটিফিকেশন</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">স্ক্রীন রেকর্ড করুন</string>
+    <!-- Extra settings -->
+    <string name="show_touches">আঙ্গুলের টিপ দেখান</string>
+    <string name="show_touches_summary">আঙ্গুলের স্পর্শে প্রতিক্রিয়া দেখান</string>
+    <!-- Unknown error -->
+    <string name="recording_error">রেকর্ডিং বন্ধ হয়েছে</string>
+    <string name="recording_error_channel_desc">কোনো সমস্যার কারনে রেকর্ডিং বন্ধ হলে নোটিফিকেশন দিবে।</string>
+    <string name="unknow_error">অজ্ঞাত কারনে রেকর্ডিং বন্ধ হয়ে গেছে!</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">রেকর্ড সম্পূর্ণ হলে নোটিফিকেশন দিস।</string>
+    <!-- Qs tile -->
+    <string name="touch_to_stop_message">বন্ধ করতে স্পর্শ করুন</string>
+    <!-- Permission -->
+    <string name="no_permission_error_message">অডিও রেকর্ড করার জন্যে অনুমতি দিন।</string>
+    <!-- Notification -->
+    <string name="saving_video_notification">ভিডিও সেভ হচ্ছে...</string>
+</resources>

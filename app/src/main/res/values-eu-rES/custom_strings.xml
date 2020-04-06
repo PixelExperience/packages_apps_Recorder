@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Grabatzailea</string>
+    <!-- Share action for notification -->
+    <string name="share">Partekatu</string>
+    <!-- Stop action for notification -->
+    <string name="stop">Gelditu</string>
+    <!-- Play action -->
+    <string name="play">Erreproduzitu</string>
+    <!-- Delete action -->
+    <string name="delete">Ezabatu</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Ez dago biltegiratze nahikorik</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Ez dago biltegiratzeko leku nahikorik</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Pantaila grabatzailea</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Bideoaren iraupena: %s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Partekatzeko prest</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Pantaila grabatzailearen ezarpenaqk</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Pantaila-grabaketa</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Jakinarazpen iraunkorra pantaila grabatzean eta jakinarazpena behin burututa</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">Grabatu pantaila</string>
+    <!-- Extra settings -->
+    <string name="show_touches">Erakutsi ukitutako elementuak</string>
+    <string name="show_touches_summary">Feedback bisuala erakutsi ukitutako elementuetarako</string>
+    <!-- Unknown error -->
+    <string name="recording_error">Grabaketa gelditu da</string>
+    <string name="recording_error_channel_desc">Grabazioa gelditzen denean errorea dela eta jakinaraztea.</string>
+    <string name="unknow_error">Akats ezezaguna, grabazioa gelditu da.</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">Grabaketa amaitzean jakinarazpena.</string>
+    <!-- Qs tile -->
+    <!-- Permission -->
+    <!-- Notification -->
+</resources>

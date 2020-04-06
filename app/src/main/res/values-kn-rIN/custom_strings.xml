@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <!-- Share action for notification -->
+    <!-- Stop action for notification -->
+    <!-- Play action -->
+    <!-- Delete action -->
+    <!-- Screen recorder notification storage error title -->
+    <!-- Screen recorder notification storage error message -->
+    <!-- Screen recorder notification title -->
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">ದೃಶ್ಯಾವಧಿ: %s</string>
+    <!-- Screen recorder notification share title -->
+    <!-- Screen settings dialog title -->
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">ಪರದೆ ದಾಖಲತ್ತು</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">ಪರದೆಯನ್ನು ದಾಖಲಿಸುವಾಗ ನಿರಂತರ ಸೂಚನೆ ಮತ್ತು ಅಂತ್ಯವಾದಾಗ ಸೂಚನೆ</string>
+    <!-- Screen record title -->
+    <!-- Extra settings -->
+    <!-- Unknown error -->
+    <!-- Notifications -->
+    <!-- Qs tile -->
+    <!-- Permission -->
+    <!-- Notification -->
+</resources>

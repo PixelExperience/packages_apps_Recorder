@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">ریکارڈر</string>
+    <!-- Share action for notification -->
+    <string name="share">شئیر کریں</string>
+    <!-- Stop action for notification -->
+    <string name="stop">روکئے</string>
+    <!-- Play action -->
+    <string name="play">چلائیں</string>
+    <!-- Delete action -->
+    <string name="delete">حذف کریں</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">ناکافی جگہ</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">مناسب جگہ موجود نہیں</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">اسکرین ریکارڈر</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">وڈیو کا دورانیہ:%s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">شئیر کے لئے تیار</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">اسکرین ریکارڈر کی ترتیبات</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">اسکرین ریکارڈنگ</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">ریکارڈنگ ہونے کا مستقل نوٹیفیکیشن اور اس کےبعد مکمل ہونےکا نوٹیفیکیشن</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">اسکرین رکارڈ کریں</string>
+    <!-- Extra settings -->
+    <string name="show_touches">ٹیپ دکھائیں</string>
+    <string name="show_touches_summary">ٹچ کیلئے بصری تاثرات دکھائیں</string>
+    <!-- Unknown error -->
+    <string name="recording_error">ریکارڈنگ روک دی گئی</string>
+    <string name="recording_error_channel_desc">کسی مسئلے کی صورت میں ریکارڈنگ رکنے کا نوٹیفیکیشن</string>
+    <string name="unknow_error">نامعلوم مسئلہ، ریکارڈنگ رک گئی ہے</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">ریکارڈنگ مکمل ہونے کا نوٹیفیکیشن</string>
+    <!-- Qs tile -->
+    <string name="touch_to_stop_message">روکنے کے لئے دبائیں</string>
+    <!-- Permission -->
+    <!-- Notification -->
+    <string name="saving_video_notification">ویڈیو محفوظ ہو رہی ہے</string>
+</resources>

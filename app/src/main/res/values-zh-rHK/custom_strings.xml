@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">錄製工具</string>
+    <!-- Share action for notification -->
+    <string name="share">分享</string>
+    <!-- Stop action for notification -->
+    <string name="stop">停止</string>
+    <!-- Play action -->
+    <string name="play">播放</string>
+    <!-- Delete action -->
+    <string name="delete">刪除</string>
+    <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">儲存空間不足</string>
+    <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">可用的儲存空間不足</string>
+    <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">螢幕畫面錄影機</string>
+    <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">影片長度：%s</string>
+    <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">準備分享</string>
+    <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">螢幕錄製設定</string>
+    <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">螢幕錄製中</string>
+    <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">在螢幕錄製完後保持通知</string>
+    <!-- Screen record title -->
+    <string name="main_screen_action">錄製螢幕</string>
+    <!-- Extra settings -->
+    <string name="show_touches">顯示觸控回應</string>
+    <string name="show_touches_summary">顯示觸控位置的視覺回應</string>
+    <!-- Unknown error -->
+    <string name="recording_error">已停止錄製</string>
+    <string name="recording_error_channel_desc">由於錯誤導致錄製停止時通知</string>
+    <string name="unknow_error">未知錯誤，錄製停止</string>
+    <!-- Notifications -->
+    <string name="ready_channel_desc">錄製完成時通知</string>
+    <!-- Qs tile -->
+    <!-- Permission -->
+    <!-- Notification -->
+    <string name="saving_video_notification">影片儲存中</string>
+</resources>
