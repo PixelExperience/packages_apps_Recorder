@@ -56,7 +56,6 @@ public class SettingsActivity extends FragmentActivity {
             }
         };
         private SwitchPreference mShowTouches;
-        private SwitchPreference mStopRecordingWhenScreenOff;
         private PreferenceUtils mPreferenceUtils;
         private String KEY_SCREEN_CATEGORY = "screen_category";
 
@@ -67,7 +66,6 @@ public class SettingsActivity extends FragmentActivity {
             mScreenCategory = findPreference(KEY_SCREEN_CATEGORY);
             mShowTouches = findPreference(PreferenceUtils.PREF_SHOW_TOUCHES);
             mShowTouches.setOnPreferenceChangeListener(this);
-            mStopRecordingWhenScreenOff.setOnPreferenceChangeListener(this);
             mShowTouches.setChecked(mPreferenceUtils.getShouldShowTouches());
             if (!mPreferenceUtils.canControlShowTouches()) {
                 mScreenCategory.removePreference(mShowTouches);
