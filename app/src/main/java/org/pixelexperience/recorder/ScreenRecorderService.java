@@ -39,7 +39,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import org.pixelexperience.recorder.encoders.EncoderConfig;
 import org.pixelexperience.recorder.utils.LastRecordHelper;
 import org.pixelexperience.recorder.utils.MediaProviderHelper;
 import org.pixelexperience.recorder.utils.PreferenceUtils;
@@ -78,10 +77,10 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
     };
     private PreferenceUtils mPreferenceUtils;
     private MediaProjectionManager mProjectionManager;
-    private EncoderConfig mEncoderConfig;
     private File mVideoPath;
     private int mElapsedTimeInSeconds;
     private boolean mShouldUpdateNotification;
+    private boolean mVideoSaved = false;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -118,7 +117,6 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
         mHandler = new Handler(getApplicationContext().getMainLooper());
         mNotificationManager = getSystemService(NotificationManager.class);
         mProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-        mEncoderConfig = new EncoderConfig(this);
         mPreferenceUtils = new PreferenceUtils(this);
 
         Utils.createShareNotificationChannel(this, mNotificationManager);
@@ -196,7 +194,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
 
             MediaProjection mediaProjection = mProjectionManager.getMediaProjection(mediaProjectionIntentResult, mediaProjectionIntentData);
 
-            mRecorder = new ScreenRecorder(mEncoderConfig.getVideoConfig(), mEncoderConfig.getAudioConfig(), mVideoPath.getAbsolutePath(), mediaProjection);
+            mRecorder = new ScreenRecorder(this, mVideoPath.getAbsolutePath(), mediaProjection);
             mRecorder.setCallback(new ScreenRecorder.Callback() {
                 long startTime = 0;
 
@@ -207,7 +205,8 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
                         error.printStackTrace();
                         deleteRecording();
                         notifyError(getString(R.string.unknow_error));
-                    } else {
+                    } else if (!mVideoSaved){
+                        mVideoSaved = true;
                         showSavingNotification();
                         mHandler.postDelayed(() -> {
                             new Thread(() -> MediaProviderHelper.addVideoToContentProvider(getContentResolver(), mVideoPath, ScreenRecorderService.this)).start();
@@ -220,6 +219,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
                 public void onStart() {
                     mElapsedTimeInSeconds = 0;
                     mShouldUpdateNotification = true;
+                    mVideoSaved = false;
                 }
 
                 @Override
@@ -235,7 +235,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
                 }
             });
 
-            new Thread(() -> mRecorder.start()).start();
+            mRecorder.start();
 
             Utils.setStatus(Utils.PREF_RECORDING_SCREEN, this);
 
@@ -286,7 +286,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
         }
         Utils.refreshShowTouchesState(this);
         if (stopForReal && mRecorder != null) {
-            new Thread(() -> mRecorder.quit()).start();
+            mRecorder.stop(null);
         }
     }
 
