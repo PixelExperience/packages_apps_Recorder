@@ -51,6 +51,9 @@
     <!-- Notifications -->
     <string name="ready_channel_desc">Obavijest kada je snimanje dovršeno.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">Dotaći za stop</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Omogući dozvolu za početak audio snimanja. </string>
     <!-- Notification -->
+    <string name="saving_video_notification">Spremanje videozapisa...</string>
 </resources>

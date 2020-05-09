@@ -51,7 +51,9 @@
     <!-- Notifications -->
     <string name="ready_channel_desc">錄製完成時通知</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">觸摸來停止</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">授權錄音權限來開始</string>
     <!-- Notification -->
     <string name="saving_video_notification">影片儲存中</string>
 </resources>

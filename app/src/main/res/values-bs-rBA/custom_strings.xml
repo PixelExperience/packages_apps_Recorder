@@ -14,20 +14,33 @@
      limitations under the License.
 -->
 <resources>
+    <string name="app_name">Snimanje</string>
     <!-- Share action for notification -->
+    <string name="share">Podijelite</string>
     <!-- Stop action for notification -->
+    <string name="stop">Zaustavi</string>
     <!-- Play action -->
+    <string name="play">Pokreni</string>
     <!-- Delete action -->
+    <string name="delete">Obriši</string>
     <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Nema dovoljno prostora</string>
     <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Nema dovoljno slobodnog prostora</string>
     <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Snimanje ekrana</string>
     <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Dužina videa: %s</string>
     <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Spremno za dijeljenje</string>
     <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Postavke snimanja ekrana</string>
     <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Snimanje ekrana</string>
     <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Stalna obavijest pri snimanju zaslona i obavijest kad završi</string>
     <!-- Screen record title -->
+    <string name="main_screen_action">Snimanje ekrana</string>
     <!-- Extra settings -->
     <string name="show_touches">Prikaži dodire</string>
     <string name="show_touches_summary">Prikaži vizuelne povratne informacije za dodire</string>
@@ -38,6 +51,9 @@
     <!-- Notifications -->
     <string name="ready_channel_desc">Obaveštenje kad je snimanje završeno.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">Dotakni za stop</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Omogući dozvolu za početak audio snimanja. </string>
     <!-- Notification -->
+    <string name="saving_video_notification">Spremanje videozapisa...</string>
 </resources>

@@ -51,6 +51,9 @@
     <!-- Notifications -->
     <string name="ready_channel_desc">Notificació quan es completa la gravació.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">Toca per parar</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Concedeix el permís per iniciar l\'enregistrament d\'àudio.</string>
     <!-- Notification -->
+    <string name="saving_video_notification">S\'està desant el vídeo…</string>
 </resources>

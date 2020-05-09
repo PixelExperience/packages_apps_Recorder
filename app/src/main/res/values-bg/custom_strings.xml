@@ -42,9 +42,18 @@
     <!-- Screen record title -->
     <string name="main_screen_action">Запис на екрана</string>
     <!-- Extra settings -->
+    <string name="show_touches">Покажи докосване</string>
+    <string name="show_touches_summary">Показване на визуална обратна връзка за докозване.</string>
     <!-- Unknown error -->
+    <string name="recording_error">Записването спря</string>
+    <string name="recording_error_channel_desc">Известието при записване спря поради грешка. </string>
+    <string name="unknow_error">Незвестна грешка, записът беше спрян.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Известието при записване е завършено.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">Докоснете за спиране</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Разрешете правомощия за аудио запис за да стартирате</string>
     <!-- Notification -->
+    <string name="saving_video_notification">Запазване на видео...</string>
 </resources>

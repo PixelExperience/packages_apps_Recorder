@@ -53,6 +53,7 @@
     <!-- Qs tile -->
     <string name="touch_to_stop_message">Norėdami sustabdyti, palieskite</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Gaukite garso įrašymo leidimą pradėti.</string>
     <!-- Notification -->
     <string name="saving_video_notification">Išsaugoti vaizdo įrašą</string>
 </resources>
