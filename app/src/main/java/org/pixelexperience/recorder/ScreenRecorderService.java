@@ -235,7 +235,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
                 }
             });
 
-            new Thread(() -> mRecorder.start()).start();
+            mRecorder.start();
 
             Utils.setStatus(Utils.PREF_RECORDING_SCREEN, this);
 
@@ -286,7 +286,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
         }
         Utils.refreshShowTouchesState(this);
         if (stopForReal && mRecorder != null) {
-            new Thread(() -> mRecorder.quit()).start();
+            mRecorder.quit();
         }
     }
 
