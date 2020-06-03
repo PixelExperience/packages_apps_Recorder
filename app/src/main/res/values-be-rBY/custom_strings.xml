@@ -14,19 +14,33 @@
      limitations under the License.
 -->
 <resources>
+    <string name="app_name">Дыктафон</string>
     <!-- Share action for notification -->
+    <string name="share">Абагуліць</string>
     <!-- Stop action for notification -->
+    <string name="stop">Спыніць</string>
     <!-- Play action -->
+    <string name="play">Прайграць</string>
     <!-- Delete action -->
+    <string name="delete">Выдаліць</string>
     <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">Недастаткова месца</string>
     <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">Недастаткова месца на дыску</string>
     <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">Запіс экрана</string>
     <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">Працягласць відэа: %s</string>
     <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">Падрыхтавана да адпраўкі</string>
     <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Налады запісу экрана</string>
     <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Запіс экрана</string>
     <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Пастаяннае апавяшчэнне пры запісе экрана і апавяшчэнне пасля яго завяршэння</string>
     <!-- Screen record title -->
+    <string name="main_screen_action">Запіс экрана</string>
     <!-- Extra settings -->
     <string name="show_touches">Паказваць дотыкі</string>
     <string name="show_touches_summary">Паказваць візуалізацыю дотыкаў</string>
@@ -37,6 +51,9 @@
     <!-- Notifications -->
     <string name="ready_channel_desc">Апавяшчэнне аб завяршэнні запісу.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">Націсніце, каб спыніць</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Дайце дазвол на аўдыёзапіс, каб пачаць.</string>
     <!-- Notification -->
+    <string name="saving_video_notification">Захаванне відэа...</string>
 </resources>

@@ -51,6 +51,9 @@
     <!-- Notifications -->
     <string name="ready_channel_desc">Grabaketa amaitzean jakinarazpena.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">Touch to stop</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Grant audio recording permission to start.</string>
     <!-- Notification -->
+    <string name="saving_video_notification">Saving video…</string>
 </resources>

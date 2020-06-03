@@ -18,6 +18,7 @@
     <!-- Share action for notification -->
     <string name="share">Deel</string>
     <!-- Stop action for notification -->
+    <string name="stop">Stop</string>
     <!-- Play action -->
     <string name="play">Speel</string>
     <!-- Delete action -->
@@ -33,13 +34,26 @@
     <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Gereed om te deel</string>
     <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Screen recorder settings</string>
     <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Screen recording</string>
     <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Persistent notification when recording the screen and notification after it is complete</string>
     <!-- Screen record title -->
+    <string name="main_screen_action">Record screen</string>
     <!-- Extra settings -->
+    <string name="show_touches">Show taps</string>
+    <string name="show_touches_summary">Show visual feedback for taps</string>
     <!-- Unknown error -->
+    <string name="recording_error">Recording stopped</string>
+    <string name="recording_error_channel_desc">Notification when recording is stopped due to an error.</string>
+    <string name="unknow_error">Unknown error, recording has been stopped.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Notification when recording complete.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">Touch to stop</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Grant audio recording permission to start.</string>
     <!-- Notification -->
+    <string name="saving_video_notification">Saving video…</string>
 </resources>

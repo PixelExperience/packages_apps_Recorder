@@ -28,7 +28,7 @@
     <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">可用存储空间不足</string>
     <!-- Screen recorder notification title -->
-    <string name="screen_notification_title">屏幕录制器</string>
+    <string name="screen_notification_title">屏幕录制</string>
     <!-- Screen recorder notification message -->
     <string name="screen_notification_message">视频长度：%s</string>
     <!-- Screen recorder notification share title -->
@@ -38,22 +38,22 @@
     <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">屏幕录制</string>
     <!-- Screen recorder persistent notification channel description-->
-    <string name="screen_channel_desc">录屏至完成期间的持续通知</string>
+    <string name="screen_channel_desc">录屏至完成期间的保持通知</string>
     <!-- Screen record title -->
-    <string name="main_screen_action">录制屏幕</string>
+    <string name="main_screen_action">屏幕录制</string>
     <!-- Extra settings -->
     <string name="show_touches">显示点按操作反馈</string>
     <string name="show_touches_summary">显示点按操作的视觉反馈</string>
     <!-- Unknown error -->
-    <string name="recording_error">录制已停止</string>
+    <string name="recording_error">录制停止</string>
     <string name="recording_error_channel_desc">因错误而停止录制时通知</string>
-    <string name="unknow_error">未知错误，录制已暂停</string>
+    <string name="unknow_error">未知错误，录制已停止</string>
     <!-- Notifications -->
-    <string name="ready_channel_desc">录制结束时通知</string>
+    <string name="ready_channel_desc">录制完成时通知</string>
     <!-- Qs tile -->
-    <string name="touch_to_stop_message">触摸以停止</string>
+    <string name="touch_to_stop_message">点击停止</string>
     <!-- Permission -->
     <string name="no_permission_error_message">授权录音以启动</string>
     <!-- Notification -->
-    <string name="saving_video_notification">视频正在保存……</string>
+    <string name="saving_video_notification">视频保存中……</string>
 </resources>
