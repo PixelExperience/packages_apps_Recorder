@@ -50,7 +50,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class ScreenRecorderService extends Service implements MediaProviderHelper.OnContentWritten {
+public class ScreenRecorderService extends Service {
 
     public static final String ACTION_START_SCREENCAST =
             "org.pixelexperience.recorder.screen.ACTION_START_SCREENCAST";
@@ -80,8 +80,10 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
     private MediaProjectionManager mProjectionManager;
     private EncoderConfig mEncoderConfig;
     private File mVideoPath;
+    private File mTempVideoPath;
     private int mElapsedTimeInSeconds;
     private boolean mShouldUpdateNotification;
+    private boolean mVideoSaved = false;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -176,8 +178,10 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
             // the directory which holds all recording files
             mVideoPath = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES),
                     "ScreenRecords/ScreenRecord-" + videoDate + ".mp4");
+            mTempVideoPath = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES),
+                    "ScreenRecords/ScreenRecord-" + videoDate + "_temp.mp4");
 
-            File videoDir = mVideoPath.getParentFile();
+            File videoDir = mTempVideoPath.getParentFile();
             if (videoDir == null) {
                 throw new SecurityException("Cannot access scoped Movies/ScreenRecords directory");
             }
@@ -196,7 +200,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
 
             MediaProjection mediaProjection = mProjectionManager.getMediaProjection(mediaProjectionIntentResult, mediaProjectionIntentData);
 
-            mRecorder = new ScreenRecorder(mEncoderConfig.getVideoConfig(), mEncoderConfig.getAudioConfig(), mVideoPath.getAbsolutePath(), mediaProjection);
+            mRecorder = new ScreenRecorder(mEncoderConfig.getVideoConfig(), mEncoderConfig.getAudioConfig(), mTempVideoPath.getAbsolutePath(), mediaProjection);
             mRecorder.setCallback(new ScreenRecorder.Callback() {
                 long startTime = 0;
 
@@ -207,10 +211,11 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
                         error.printStackTrace();
                         deleteRecording();
                         notifyError(getString(R.string.unknow_error));
-                    } else {
+                    } else if (!mVideoSaved){
+                        mVideoSaved = true;
                         showSavingNotification();
                         mHandler.postDelayed(() -> {
-                            new Thread(() -> MediaProviderHelper.addVideoToContentProvider(getContentResolver(), mVideoPath, ScreenRecorderService.this)).start();
+                            saveVideo();
                         }, 2000);
                     }
                     stopRecording(false);
@@ -220,6 +225,7 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
                 public void onStart() {
                     mElapsedTimeInSeconds = 0;
                     mShouldUpdateNotification = true;
+                    mVideoSaved = false;
                 }
 
                 @Override
@@ -258,10 +264,26 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
         mHandler.post(() -> Utils.notifyError(msg, ScreenRecorderService.this, mNotificationManager));
     }
 
+    private void saveVideo() {
+        String uri = MediaProviderHelper.addVideoToContentProvider(getContentResolver(), mTempVideoPath, mVideoPath);
+        if (uri != null) {
+            sendShareNotification(uri);
+            stopForeground(false);
+        } else {
+            deleteRecording();
+            notifyError(getString(R.string.unknow_error));
+            stopForeground(true);
+        }
+    }
+
     private void deleteRecording() {
         if (mVideoPath != null && mVideoPath.exists()) {
             Log.d(TAG, "Deleting " + mVideoPath.getAbsolutePath());
             mVideoPath.delete();
+        }
+        if (mTempVideoPath != null && mTempVideoPath.exists()) {
+            Log.d(TAG, "Deleting " + mTempVideoPath.getAbsolutePath());
+            mTempVideoPath.delete();
         }
     }
 
@@ -302,14 +324,6 @@ public class ScreenRecorderService extends Service implements MediaProviderHelpe
                 .setContentIntent(PendingIntent.getActivity(this, 0, stopRecordingIntent, 0))
                 .addAction(R.drawable.ic_stop, getString(R.string.stop),
                         PendingIntent.getService(this, 0, stopRecordingIntent, 0));
-    }
-
-    @Override
-    public void onContentWritten(@Nullable String uri) {
-        if (uri != null) {
-            sendShareNotification(uri);
-        }
-        stopForeground(false);
     }
 
     private void sendShareNotification(String recordingFilePath) {
