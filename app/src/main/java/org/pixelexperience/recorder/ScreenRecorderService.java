@@ -26,6 +26,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
@@ -35,6 +36,7 @@ import android.os.IBinder;
 import android.os.StatFs;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.Size;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -347,7 +349,7 @@ public class ScreenRecorderService extends Service {
 
         Log.i(TAG, "Video complete: " + uriStr);
 
-        return new NotificationCompat.Builder(this, Utils.RECORDING_DONE_NOTIFICATION_CHANNEL)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, Utils.RECORDING_DONE_NOTIFICATION_CHANNEL)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_notification_screen)
                 .setContentTitle(getString(R.string.screen_notification_message_done))
@@ -358,5 +360,22 @@ public class ScreenRecorderService extends Service {
                 .addAction(R.drawable.ic_delete, getString(R.string.delete), deletePIntent)
                 .setAutoCancel(true)
                 .setContentIntent(playPIntent);
+
+        // Add thumbnail if available
+        Bitmap thumbnailBitmap = null;
+        try {
+            Size size = new Size(512, 384);
+            thumbnailBitmap = getContentResolver().loadThumbnail(uri, size, null);
+        } catch (Exception e) {
+            Log.e(TAG, "Error creating thumbnail");
+            e.printStackTrace();
+        }
+        if (thumbnailBitmap != null) {
+            NotificationCompat.BigPictureStyle pictureStyle = new NotificationCompat.BigPictureStyle()
+                    .bigPicture(thumbnailBitmap)
+                    .bigLargeIcon(null);
+            builder.setLargeIcon(thumbnailBitmap).setStyle(pictureStyle);
+        }
+        return builder;
     }
 }
