@@ -14,46 +14,46 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Recorder</string>
+    <string name="app_name">Ձայնագրիչ</string>
     <!-- Share action for notification -->
-    <string name="share">Share</string>
+    <string name="share">Տարածել</string>
     <!-- Stop action for notification -->
-    <string name="stop">Stop</string>
+    <string name="stop">Դադար</string>
     <!-- Play action -->
-    <string name="play">Play</string>
+    <string name="play">Նվագարկել</string>
     <!-- Delete action -->
-    <string name="delete">Delete</string>
+    <string name="delete">Ջնջել</string>
     <!-- Screen recorder notification storage error title -->
-    <string name="screen_insufficient_storage">Insufficient storage</string>
+    <string name="screen_insufficient_storage">Հիշողությունը չի բավարարում</string>
     <!-- Screen recorder notification storage error message -->
-    <string name="screen_not_enough_storage">Not enough storage available</string>
+    <string name="screen_not_enough_storage">Հիշողությունը չի բավարարում</string>
     <!-- Screen recorder notification title -->
-    <string name="screen_notification_title">Screen Recorder</string>
+    <string name="screen_notification_title">Էկրանի ձայնագրիչ</string>
     <!-- Screen recorder notification message -->
-    <string name="screen_notification_message">Video length: %s</string>
+    <string name="screen_notification_message">Տեսանյութի երկարությունը․ %s</string>
     <!-- Screen recorder notification share title -->
-    <string name="screen_notification_message_done">Ready to share</string>
+    <string name="screen_notification_message_done">Պատրաստ է տարածման համար</string>
     <!-- Screen settings dialog title -->
-    <string name="screen_settings_title">Screen recorder settings</string>
+    <string name="screen_settings_title">Էկրանի ձայնագրիչի կարգավորումները</string>
     <!-- Screen recorder persistent notification channel title -->
-    <string name="screen_channel_title">Screen recording</string>
+    <string name="screen_channel_title">Էկրանի ձայնագրում</string>
     <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Persistent notification when recording the screen and notification after it is complete</string>
     <!-- Screen record title -->
-    <string name="main_screen_action">Record screen</string>
+    <string name="main_screen_action">Ձայնագրել էկրանը</string>
     <!-- Extra settings -->
-    <string name="show_touches">Show taps</string>
-    <string name="show_touches_summary">Show visual feedback for taps</string>
+    <string name="show_touches">Ցուցադրել հպումները</string>
+    <string name="show_touches_summary">Ցույց տալ հպումների տեսանելի արձագանքը</string>
     <!-- Unknown error -->
-    <string name="recording_error">Recording stopped</string>
-    <string name="recording_error_channel_desc">Notification when recording is stopped due to an error.</string>
+    <string name="recording_error">Ձայնագրումը դադարեցված է</string>
+    <string name="recording_error_channel_desc">Ծանուցել, երբ ձայնագրումը դադարեցվի խնդրի պատճառով</string>
     <string name="unknow_error">Unknown error, recording has been stopped.</string>
     <!-- Notifications -->
-    <string name="ready_channel_desc">Notification when recording complete.</string>
+    <string name="ready_channel_desc">Ծանուցել, երբ ձայնագրումն ավարտվի</string>
     <!-- Qs tile -->
-    <string name="touch_to_stop_message">Touch to stop</string>
+    <string name="touch_to_stop_message">Հպեք դադարեցնելու համար</string>
     <!-- Permission -->
     <string name="no_permission_error_message">Grant audio recording permission to start.</string>
     <!-- Notification -->
-    <string name="saving_video_notification">Saving video…</string>
+    <string name="saving_video_notification">Տեսանյութը պահպանվում է…</string>
 </resources>
