@@ -30,7 +30,6 @@
     <!-- Screen recorder notification title -->
     <string name="screen_notification_title">فیلم‌ از صفحه</string>
     <!-- Screen recorder notification message -->
-    <string name="screen_notification_message">Video length: %s</string>
     <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">آماده اشتراک گذاری</string>
     <!-- Screen settings dialog title -->

@@ -53,7 +53,6 @@
     <!-- Qs tile -->
     <string name="touch_to_stop_message">روکنے کے لئے دبائیں</string>
     <!-- Permission -->
-    <string name="no_permission_error_message">Grant audio recording permission to start.</string>
     <!-- Notification -->
     <string name="saving_video_notification">ویڈیو محفوظ ہو رہی ہے</string>
 </resources>

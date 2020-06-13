@@ -38,7 +38,6 @@
     <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Էկրանի ձայնագրում</string>
     <!-- Screen recorder persistent notification channel description-->
-    <string name="screen_channel_desc">Persistent notification when recording the screen and notification after it is complete</string>
     <!-- Screen record title -->
     <string name="main_screen_action">Ձայնագրել էկրանը</string>
     <!-- Extra settings -->
@@ -47,13 +46,11 @@
     <!-- Unknown error -->
     <string name="recording_error">Ձայնագրումը դադարեցված է</string>
     <string name="recording_error_channel_desc">Ծանուցել, երբ ձայնագրումը դադարեցվի խնդրի պատճառով</string>
-    <string name="unknow_error">Unknown error, recording has been stopped.</string>
     <!-- Notifications -->
     <string name="ready_channel_desc">Ծանուցել, երբ ձայնագրումն ավարտվի</string>
     <!-- Qs tile -->
     <string name="touch_to_stop_message">Հպեք դադարեցնելու համար</string>
     <!-- Permission -->
-    <string name="no_permission_error_message">Grant audio recording permission to start.</string>
     <!-- Notification -->
     <string name="saving_video_notification">Տեսանյութը պահպանվում է…</string>
 </resources>

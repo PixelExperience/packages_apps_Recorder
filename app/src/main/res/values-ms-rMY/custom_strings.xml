@@ -14,33 +14,19 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Recorder</string>
     <!-- Share action for notification -->
-    <string name="share">Share</string>
     <!-- Stop action for notification -->
-    <string name="stop">Stop</string>
     <!-- Play action -->
-    <string name="play">Play</string>
     <!-- Delete action -->
-    <string name="delete">Delete</string>
     <!-- Screen recorder notification storage error title -->
-    <string name="screen_insufficient_storage">Insufficient storage</string>
     <!-- Screen recorder notification storage error message -->
-    <string name="screen_not_enough_storage">Not enough storage available</string>
     <!-- Screen recorder notification title -->
-    <string name="screen_notification_title">Screen Recorder</string>
     <!-- Screen recorder notification message -->
-    <string name="screen_notification_message">Video length: %s</string>
     <!-- Screen recorder notification share title -->
-    <string name="screen_notification_message_done">Ready to share</string>
     <!-- Screen settings dialog title -->
-    <string name="screen_settings_title">Screen recorder settings</string>
     <!-- Screen recorder persistent notification channel title -->
-    <string name="screen_channel_title">Screen recording</string>
     <!-- Screen recorder persistent notification channel description-->
-    <string name="screen_channel_desc">Persistent notification when recording the screen and notification after it is complete</string>
     <!-- Screen record title -->
-    <string name="main_screen_action">Record screen</string>
     <!-- Extra settings -->
     <string name="show_touches">Paparkan klikan</string>
     <string name="show_touches_summary">Tunjukkan maklum balas visual untuk klikan</string>
@@ -51,9 +37,6 @@
     <!-- Notifications -->
     <string name="ready_channel_desc">Pemberitahuan apabila rakaman selesai.</string>
     <!-- Qs tile -->
-    <string name="touch_to_stop_message">Touch to stop</string>
     <!-- Permission -->
-    <string name="no_permission_error_message">Grant audio recording permission to start.</string>
     <!-- Notification -->
-    <string name="saving_video_notification">Saving video…</string>
 </resources>

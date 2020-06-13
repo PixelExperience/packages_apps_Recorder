@@ -14,7 +14,6 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Recorder</string>
     <!-- Share action for notification -->
     <string name="share">Delen</string>
     <!-- Stop action for notification -->
@@ -38,7 +37,6 @@
     <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Scherm opnemen</string>
     <!-- Screen recorder persistent notification channel description-->
-    <string name="screen_channel_desc">Persistent notification when recording the screen and notification after it is complete</string>
     <!-- Screen record title -->
     <string name="main_screen_action">Scherm opnemen</string>
     <!-- Extra settings -->
@@ -51,9 +49,6 @@
     <!-- Notifications -->
     <string name="ready_channel_desc">Melding als opname afgerond is.</string>
     <!-- Qs tile -->
-    <string name="touch_to_stop_message">Touch to stop</string>
     <!-- Permission -->
-    <string name="no_permission_error_message">Grant audio recording permission to start.</string>
     <!-- Notification -->
-    <string name="saving_video_notification">Saving video…</string>
 </resources>
