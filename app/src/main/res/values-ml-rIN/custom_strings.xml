@@ -14,23 +14,46 @@
      limitations under the License.
 -->
 <resources>
+    <string name="app_name">റെക്കോർഡർ</string>
     <!-- Share action for notification -->
+    <string name="share">പങ്കുവയ്ക്കുക</string>
     <!-- Stop action for notification -->
+    <string name="stop">നിർത്തുക</string>
     <!-- Play action -->
+    <string name="play">പ്ലേ</string>
     <!-- Delete action -->
+    <string name="delete">ഡിലീറ്റ് ചെയ്യുക</string>
     <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">അപര്യാപ്തമായ സ്റ്റോറേജ്</string>
     <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">ആവശ്യത്തിന് സ്റ്റോറേജ് ലഭ്യമല്ല</string>
     <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">സ്ക്രീൻ റെക്കോർഡർ</string>
     <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">വീഡിയോ ദൈർഘ്യം: %s</string>
     <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">പങ്കിടാൻ തയ്യാറാണ്</string>
     <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">സ്‌ക്രീൻ റെക്കോർഡിങ്ങ് ക്രമീകരണങ്ങൾ</string>
     <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">സ്ക്രീൻ റെക്കോർഡിങ്ങ്</string>
     <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">സ്‌ക്രീൻ റെക്കോർഡുചെയ്യുമ്പോൾ സ്ഥിരമായ അറിയിപ്പും അത് പൂർത്തിയായതിനുശേഷം അറിയിപ്പും</string>
     <!-- Screen record title -->
+    <string name="main_screen_action">സ്ക്രീൻ റെക്കോർഡ് ചെയ്യുക</string>
     <!-- Extra settings -->
+    <string name="show_touches">സ്പർശനങ്ങൾ കാണിക്കുക</string>
+    <string name="show_touches_summary">സ്പർശനങ്ങൾക്കായി വിഷ്വൽ ഫീഡ്ബാക്ക് കാണിക്കുക</string>
     <!-- Unknown error -->
+    <string name="recording_error">റെക്കോർഡിംഗ് നിർത്തി</string>
+    <string name="recording_error_channel_desc">ഒരു പിശക് കാരണം റെക്കോർഡിംഗ് നിർത്തുമ്പോൾ അറിയിപ്പ്.</string>
+    <string name="unknow_error">അജ്ഞാത പിശക്, റെക്കോർഡിംഗ് നിർത്തി.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">റെക്കോർഡുചെയ്യൽ പൂർത്തിയാകുമ്പോൾ അറിയിപ്പ്.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">നിർത്താൻ സ്‌പർശിക്കുക</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">ഓഡിയോ റെക്കോർഡിംഗ് ആരംഭിക്കുന്നതിന് അനുമതി നൽകുക.</string>
     <!-- Notification -->
+    <string name="saving_video_notification">വീഡിയോ സംരക്ഷിക്കുന്നു</string>
 </resources>
