@@ -15,9 +15,13 @@
 -->
 <resources>
     <!-- Share action for notification -->
+    <string name="share">Бөлүшүү</string>
     <!-- Stop action for notification -->
+    <string name="stop">Токтотуу</string>
     <!-- Play action -->
+    <string name="play">Ойнотуу</string>
     <!-- Delete action -->
+    <string name="delete">Өчүрүү</string>
     <!-- Screen recorder notification storage error title -->
     <!-- Screen recorder notification storage error message -->
     <!-- Screen recorder notification title -->

@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">录音机</string>
+    <string name="app_name">录制器</string>
     <!-- Share action for notification -->
     <string name="share">分享</string>
     <!-- Stop action for notification -->
