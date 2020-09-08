@@ -14,23 +14,47 @@
      limitations under the License.
 -->
 <resources>
+    <string name="app_name">रेकर्डर</string>
     <!-- Share action for notification -->
+    <string name="share">शेयर गर्नु
+अरुलाई पठाउनु</string>
     <!-- Stop action for notification -->
+    <string name="stop">रोक्नु</string>
     <!-- Play action -->
+    <string name="play">चलाउनु</string>
     <!-- Delete action -->
+    <string name="delete">हटाउनु होस</string>
     <!-- Screen recorder notification storage error title -->
+    <string name="screen_insufficient_storage">मेमोरी कम</string>
     <!-- Screen recorder notification storage error message -->
+    <string name="screen_not_enough_storage">प्रयाप्त मेमोरी छैन</string>
     <!-- Screen recorder notification title -->
+    <string name="screen_notification_title">स्क्रिन रेकर्डर</string>
     <!-- Screen recorder notification message -->
+    <string name="screen_notification_message">भिडियो को लम्बाई: %s</string>
     <!-- Screen recorder notification share title -->
+    <string name="screen_notification_message_done">अरुलाई पठाउन तयार</string>
     <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">स्क्रिन रेकर्डका सेटिङ्ग</string>
     <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">स्क्रिन रेकर्डिङ</string>
     <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">घरि घरि आईरहने नोटिफिकेसन जब स्क्रिन रेर्कडङ्गि बन्द भएपश्चात मात्र देखाउने</string>
     <!-- Screen record title -->
+    <string name="main_screen_action">स्क्रिन रेकर्ड गर्नुहोस</string>
     <!-- Extra settings -->
+    <string name="show_touches">थिचेको देखाउँनुहोस्</string>
+    <string name="show_touches_summary">थिचेको ठाँउको  प्रतिक्रिया देखाउँनुहोस्</string>
     <!-- Unknown error -->
+    <string name="recording_error">रेकर्ड गर्न रोकियो</string>
+    <string name="recording_error_channel_desc">अन्जान कारणले रेर्कडङ्गि बन्द भए जनाउनु</string>
+    <string name="unknow_error">अन्जान कारणले रेर्कडिङ्ग बन्द भयो </string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">रेर्कडङ्गि सम्पन्न भयपछि जनाउनु</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">बन्द गर्न थिचनुहोस</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">आवाज रेकर्ड हुन अनुमति प्रदान गर्नुहोस</string>
     <!-- Notification -->
+    <string name="saving_video_notification">भिडियो सेभ हुदैँ छ</string>
 </resources>

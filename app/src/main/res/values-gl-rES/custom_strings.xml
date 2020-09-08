@@ -42,9 +42,18 @@
     <!-- Screen record title -->
     <string name="main_screen_action">Gravar a pantalla</string>
     <!-- Extra settings -->
+    <string name="show_touches">Amosar pulsacións </string>
+    <string name="show_touches_summary">Amosar información visual das pulsacións </string>
     <!-- Unknown error -->
+    <string name="recording_error">Gravación detida</string>
+    <string name="recording_error_channel_desc">Notificación cando se detén a gravación por un erro.</string>
+    <string name="unknow_error">Erro descoñecido. A gravación detívose.</string>
     <!-- Notifications -->
+    <string name="ready_channel_desc">Notificación ao finalizar a gravación.</string>
     <!-- Qs tile -->
+    <string name="touch_to_stop_message">Toque para parar</string>
     <!-- Permission -->
+    <string name="no_permission_error_message">Outorgue permiso de gravación de audio para comezar.</string>
     <!-- Notification -->
+    <string name="saving_video_notification">Gardando vídeo…</string>
 </resources>
