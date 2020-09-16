@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Felvevő</string>
+    <string name="app_name">Hangrögzítő</string>
     <!-- Share action for notification -->
     <string name="share">Megosztás</string>
     <!-- Stop action for notification -->
@@ -24,13 +24,13 @@
     <!-- Delete action -->
     <string name="delete">Törlés</string>
     <!-- Screen recorder notification storage error title -->
-    <string name="screen_insufficient_storage">Nincs elég tárhely</string>
+    <string name="screen_insufficient_storage">Nem megfelelő tárhely</string>
     <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Nincs elég tárhely</string>
     <!-- Screen recorder notification title -->
-    <string name="screen_notification_title">Képernyőfelvevő</string>
+    <string name="screen_notification_title">Képernyővideó-felvevő</string>
     <!-- Screen recorder notification message -->
-    <string name="screen_notification_message">Videó hossza: %s</string>
+    <string name="screen_notification_message">Videóhossz: %s</string>
     <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Megosztásra kész</string>
     <!-- Screen settings dialog title -->
@@ -38,7 +38,7 @@
     <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Képernyőfelvétel</string>
     <!-- Screen recorder persistent notification channel description-->
-    <string name="screen_channel_desc">Állandó értesítés képernyőfelvétel közben és értesítés befejezéskor</string>
+    <string name="screen_channel_desc">Állandó értesítés felvétel közben és értesítés befejezés után is</string>
     <!-- Screen record title -->
     <string name="main_screen_action">Képernyővideó-felvétel</string>
     <!-- Extra settings -->
@@ -46,7 +46,7 @@
     <string name="show_touches_summary">Jelenítse meg vizuálisan is az érintéseket</string>
     <!-- Unknown error -->
     <string name="recording_error">A felvétel megállítva</string>
-    <string name="recording_error_channel_desc">Ha egy hiba miatt leáll a felvétel, értesítést küld róla.</string>
+    <string name="recording_error_channel_desc">Ha egy hiba miatt leáll a felvétel, értesítést jelenít meg róla.</string>
     <string name="unknow_error">Ismeretlen hiba, a felvétel leállt.</string>
     <!-- Notifications -->
     <string name="ready_channel_desc">Jelenítsen meg értesítést a felvétel végéről.</string>
