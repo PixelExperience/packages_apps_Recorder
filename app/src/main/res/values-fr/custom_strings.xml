@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Magnétophone</string>
+    <string name="app_name">Enregistreur</string>
     <!-- Share action for notification -->
     <string name="share">Partager</string>
     <!-- Stop action for notification -->
