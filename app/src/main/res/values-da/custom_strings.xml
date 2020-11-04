@@ -15,33 +15,14 @@
 -->
 <resources>
     <string name="app_name">Optager</string>
-    <!-- Share action for notification -->
     <string name="share">Del</string>
-    <!-- Stop action for notification -->
-    <!-- Play action -->
     <string name="play">Afspil</string>
-    <!-- Delete action -->
     <string name="delete">Slet</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Ikke nok lagerplads</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Ikke nok lagerplads tilgængelig</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Skærmoptager</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Videolængde: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Klar til deling</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Skærmoptager-indstillinger</string>
-    <!-- Screen recorder persistent notification channel title -->
-    <!-- Screen recorder persistent notification channel description-->
-    <!-- Screen record title -->
     <string name="main_screen_action">Optag skærm</string>
-    <!-- Extra settings -->
-    <!-- Unknown error -->
-    <!-- Notifications -->
-    <!-- Qs tile -->
-    <!-- Permission -->
-    <!-- Notification -->
 </resources>

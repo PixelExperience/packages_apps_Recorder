@@ -15,45 +15,26 @@
 -->
 <resources>
     <string name="app_name">レコーダー</string>
-    <!-- Share action for notification -->
     <string name="share">共有</string>
-    <!-- Stop action for notification -->
     <string name="stop">停止</string>
-    <!-- Play action -->
     <string name="play">再生</string>
-    <!-- Delete action -->
     <string name="delete">削除</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">ストレージ容量不足</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">十分な容量がありません</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">画面の録画</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">動画の長さ: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">共有する準備ができました</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">スクリーンレコード設定</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">画面の録画中</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">録音中の通知を完了後も表示し続ける</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">画面の録画</string>
-    <!-- Extra settings -->
     <string name="show_touches">タップを表示</string>
     <string name="show_touches_summary">タップを視覚表示する</string>
-    <!-- Unknown error -->
     <string name="recording_error">録音を停止しました</string>
     <string name="recording_error_channel_desc">エラーで記録が停止した時に通知する</string>
     <string name="unknow_error">不明なエラー、記録は停止されました。</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">記録が終了したら通知する.</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">タップして停止</string>
-    <!-- Permission -->
     <string name="no_permission_error_message">開始するには音声録音の権限を与えて下さい</string>
-    <!-- Notification -->
     <string name="saving_video_notification">動画を保存中…</string>
 </resources>

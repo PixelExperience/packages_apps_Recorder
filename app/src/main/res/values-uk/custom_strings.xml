@@ -14,46 +14,27 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Диктофон</string>
-    <!-- Share action for notification -->
+    <string name="app_name">Запис</string>
     <string name="share">Поділитися</string>
-    <!-- Stop action for notification -->
     <string name="stop">Зупинити</string>
-    <!-- Play action -->
     <string name="play">Відтворити</string>
-    <!-- Delete action -->
     <string name="delete">Видалити</string>
-    <!-- Screen recorder notification storage error title -->
-    <string name="screen_insufficient_storage">Недостатньо пам\'яті</string>
-    <!-- Screen recorder notification storage error message -->
-    <string name="screen_not_enough_storage">Недостатньо вільної пам\'яті</string>
-    <!-- Screen recorder notification title -->
+    <string name="screen_insufficient_storage">Недостатньо місця для зберігання</string>
+    <string name="screen_not_enough_storage">Недостатньо місця на диску</string>
     <string name="screen_notification_title">Запис екрану</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Тривалість відео: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Готово, аби поділитися</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Налаштування запису екрану</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Запис екрану</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Постійне повідомлення при запису екрану та повідомлення після його завершення</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">Запис з екрану</string>
-    <!-- Extra settings -->
     <string name="show_touches">Показувати дотики</string>
     <string name="show_touches_summary">Показувати візуальну реакцію на дотики</string>
-    <!-- Unknown error -->
     <string name="recording_error">Запис зупинено</string>
     <string name="recording_error_channel_desc">Повідомити, якщо запис зупинено через помилку.</string>
     <string name="unknow_error">Невідома помилка, запис зупинено.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">Повідомлення після закінчення запису.</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">Торкніться, щоб зупинити</string>
-    <!-- Permission -->
-    <string name="no_permission_error_message">Надати дозвіл запису звуку, щоб почати.</string>
-    <!-- Notification -->
+    <string name="no_permission_error_message">Надайте дозвіл запису звуку, щоб почати.</string>
     <string name="saving_video_notification">Збереження відео…</string>
 </resources>

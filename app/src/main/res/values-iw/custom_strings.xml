@@ -15,45 +15,26 @@
 -->
 <resources>
     <string name="app_name">מקליט</string>
-    <!-- Share action for notification -->
     <string name="share">שיתוף</string>
-    <!-- Stop action for notification -->
     <string name="stop">עצור</string>
-    <!-- Play action -->
     <string name="play">נגן</string>
-    <!-- Delete action -->
     <string name="delete">מחק</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">אין מספיק מקום אחסון</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">אין מספיק מקום אחסון זמין</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">מקליט מסך</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">אורך הוידאו: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">מוכן לשיתוף</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">הגדרות מקליט מסך</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">הקלטת מסך</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">התראה קבועה בעת הקלטת המסך והתראה בסיום ההקלטה</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">הקלט מסך</string>
-    <!-- Extra settings -->
     <string name="show_touches">הצג נגיעות</string>
     <string name="show_touches_summary">הצג משוב ויזואלי עבור נגיעות</string>
-    <!-- Unknown error -->
     <string name="recording_error">ההקלטה נעצרה</string>
     <string name="recording_error_channel_desc">התראה בעת הפסקת ההקלטה בגלל שגיאה.</string>
     <string name="unknow_error">שגיאה לא ידועה, ההקלטה הופסקה.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">התראה עם השלמת ההקלטה.</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">גע כדי לעצור</string>
-    <!-- Permission -->
     <string name="no_permission_error_message">הענק הרשאות שימוש בשמע כדי להתחיל</string>
-    <!-- Notification -->
     <string name="saving_video_notification">שומר וידאו…</string>
 </resources>

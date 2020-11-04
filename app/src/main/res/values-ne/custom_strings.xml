@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">रेकर्डर</string>
+    <string name="share">शेयर गर्नु
+अरुलाई पठाउनु</string>
+    <string name="stop">रोक्नु</string>
+    <string name="play">चलाउनु</string>
+    <string name="delete">हटाउनु होस</string>
+    <string name="screen_insufficient_storage">मेमोरी कम</string>
+    <string name="screen_not_enough_storage">प्रयाप्त मेमोरी छैन</string>
+    <string name="screen_notification_title">स्क्रिन रेकर्डर</string>
+    <string name="screen_notification_message">भिडियो को लम्बाई: %s</string>
+    <string name="screen_notification_message_done">अरुलाई पठाउन तयार</string>
+    <string name="screen_settings_title">स्क्रिन रेकर्डका सेटिङ्ग</string>
+    <string name="screen_channel_title">स्क्रिन रेकर्डिङ</string>
+    <string name="screen_channel_desc">घरि घरि आईरहने नोटिफिकेसन जब स्क्रिन रेर्कडङ्गि बन्द भएपश्चात मात्र देखाउने</string>
+    <string name="main_screen_action">स्क्रिन रेकर्ड गर्नुहोस</string>
+    <string name="show_touches">थिचेको देखाउँनुहोस्</string>
+    <string name="show_touches_summary">थिचेको ठाँउको  प्रतिक्रिया देखाउँनुहोस्</string>
+    <string name="recording_error">रेकर्ड गर्न रोकियो</string>
+    <string name="recording_error_channel_desc">अन्जान कारणले रेर्कडङ्गि बन्द भए जनाउनु</string>
+    <string name="unknow_error">अन्जान कारणले रेर्कडिङ्ग बन्द भयो </string>
+    <string name="ready_channel_desc">रेर्कडङ्गि सम्पन्न भयपछि जनाउनु</string>
+    <string name="touch_to_stop_message">बन्द गर्न थिचनुहोस</string>
+    <string name="no_permission_error_message">आवाज रेकर्ड हुन अनुमति प्रदान गर्नुहोस</string>
+    <string name="saving_video_notification">भिडियो सेभ हुदैँ छ</string>
+</resources>

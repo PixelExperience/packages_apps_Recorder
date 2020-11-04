@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Ձայնագրիչ</string>
+    <string name="share">Տարածել</string>
+    <string name="stop">Դադար</string>
+    <string name="play">Նվագարկել</string>
+    <string name="delete">Ջնջել</string>
+    <string name="screen_insufficient_storage">Հիշողությունը չի բավարարում</string>
+    <string name="screen_not_enough_storage">Հիշողությունը չի բավարարում</string>
+    <string name="screen_notification_title">Էկրանի ձայնագրիչ</string>
+    <string name="screen_notification_message">Տեսանյութի երկարությունը․ %s</string>
+    <string name="screen_notification_message_done">Պատրաստ է տարածման համար</string>
+    <string name="screen_settings_title">Էկրանի ձայնագրիչի կարգավորումները</string>
+    <string name="screen_channel_title">Էկրանի ձայնագրում</string>
+    <string name="screen_channel_desc">Մշտական ծանուցումներ՝ էկրանի տեսագրման ժամանակ և ծանուցում նրա ավարտից հետո</string>
+    <string name="main_screen_action">Ձայնագրել էկրանը</string>
+    <string name="show_touches">Ցուցադրել հպումները</string>
+    <string name="show_touches_summary">Ցույց տալ հպումների տեսանելի արձագանքը</string>
+    <string name="recording_error">Ձայնագրումը դադարեցված է</string>
+    <string name="recording_error_channel_desc">Ծանուցել, երբ ձայնագրումը դադարեցվի խնդրի պատճառով</string>
+    <string name="unknow_error">Անհայտ սխալ, տեսագրումը դադարեցվեց:</string>
+    <string name="ready_channel_desc">Ծանուցել, երբ ձայնագրումն ավարտվի</string>
+    <string name="touch_to_stop_message">Հպեք դադարեցնելու համար</string>
+    <string name="no_permission_error_message">Տվեք ձայնագրման թույլտվություն՝ սկսելու համար:</string>
+    <string name="saving_video_notification">Տեսանյութը պահպանվում է…</string>
+</resources>

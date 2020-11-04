@@ -15,45 +15,26 @@
 -->
 <resources>
     <string name="app_name">Opptaker</string>
-    <!-- Share action for notification -->
     <string name="share">Del</string>
-    <!-- Stop action for notification -->
     <string name="stop">Stopp</string>
-    <!-- Play action -->
     <string name="play">Spill av</string>
-    <!-- Delete action -->
     <string name="delete">Slett</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Ikke nok lagringsplass</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Ikke nok tilgjengelig lagringsplass</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Skjermopptaker</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Videolengde: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Klar til å dele</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Skjerminnspiller-innstillinger</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Skjermopptak</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Vedvarende varsel under skjermopptak og varsel etter fullføring</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">Ta opp skjermen</string>
-    <!-- Extra settings -->
     <string name="show_touches">Vis trykk</string>
     <string name="show_touches_summary">Vis visuell tilbakemelding ved trykk</string>
-    <!-- Unknown error -->
     <string name="recording_error">Opptak stoppet</string>
     <string name="recording_error_channel_desc">Varsel når opptak blir stoppet på grunn av en feil.</string>
     <string name="unknow_error">Ukjent feil. Opptak stoppet.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">Varsel når opptak er fullført.</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">Trykk for å stoppe</string>
-    <!-- Permission -->
     <string name="no_permission_error_message">Gi tillatelse for lydopptak for å starte.</string>
-    <!-- Notification -->
     <string name="saving_video_notification">Lagrer video…</string>
 </resources>

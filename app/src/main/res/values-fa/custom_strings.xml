@@ -15,44 +15,25 @@
 -->
 <resources>
     <string name="app_name">ضبط کننده </string>
-    <!-- Share action for notification -->
     <string name="share">اشتراک گذاری</string>
-    <!-- Stop action for notification -->
     <string name="stop">متوقف </string>
-    <!-- Play action -->
     <string name="play">پخش </string>
-    <!-- Delete action -->
     <string name="delete">حذف</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">فضای ذخیره سازی کافی نیست </string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">فضای ذخیره سازی کافی نیست</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">فیلم‌ از صفحه</string>
-    <!-- Screen recorder notification message -->
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">آماده اشتراک گذاری</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">تنظیمات ضبط صفحه </string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">ضبط صفحه</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">اعلان مداوم هنگام ضبط از صفحه و اعلان پس از تمام شدن آن</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">ضبط صفحه</string>
-    <!-- Extra settings -->
     <string name="show_touches">نمایش ضربه‌ها</string>
     <string name="show_touches_summary">نمایش بازخورد قابل دیدن برای ضربه‌ها</string>
-    <!-- Unknown error -->
     <string name="recording_error">ضبط متوقف شد</string>
     <string name="recording_error_channel_desc">اعلان هنگام توقف ضبط مکالمه به علت خطا.</string>
     <string name="unknow_error">خطای نامشخص، ضبط متوقف شد.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">اعلان هنگام پایان مکالمه.</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">لمس برای توقف</string>
-    <!-- Permission -->
     <string name="no_permission_error_message">برای شروع اجازه ضبط صدا را صادر کنید </string>
-    <!-- Notification -->
     <string name="saving_video_notification">ذخیره ویدیو...</string>
 </resources>

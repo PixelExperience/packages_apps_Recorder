@@ -14,23 +14,5 @@
      limitations under the License.
 -->
 <resources>
-    <!-- Share action for notification -->
-    <!-- Stop action for notification -->
-    <!-- Play action -->
-    <!-- Delete action -->
-    <!-- Screen recorder notification storage error title -->
-    <!-- Screen recorder notification storage error message -->
-    <!-- Screen recorder notification title -->
-    <!-- Screen recorder notification message -->
-    <!-- Screen recorder notification share title -->
-    <!-- Screen settings dialog title -->
-    <!-- Screen recorder persistent notification channel title -->
-    <!-- Screen recorder persistent notification channel description-->
-    <!-- Screen record title -->
-    <!-- Extra settings -->
-    <!-- Unknown error -->
-    <!-- Notifications -->
-    <!-- Qs tile -->
-    <!-- Permission -->
-    <!-- Notification -->
+    <string name="delete">Dzēst</string>
 </resources>

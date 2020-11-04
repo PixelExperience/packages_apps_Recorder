@@ -14,29 +14,10 @@
      limitations under the License.
 -->
 <resources>
-    <!-- Share action for notification -->
-    <!-- Stop action for notification -->
-    <!-- Play action -->
-    <!-- Delete action -->
-    <!-- Screen recorder notification storage error title -->
-    <!-- Screen recorder notification storage error message -->
-    <!-- Screen recorder notification title -->
-    <!-- Screen recorder notification message -->
-    <!-- Screen recorder notification share title -->
-    <!-- Screen settings dialog title -->
-    <!-- Screen recorder persistent notification channel title -->
-    <!-- Screen recorder persistent notification channel description-->
-    <!-- Screen record title -->
-    <!-- Extra settings -->
     <string name="show_touches">Ipakita ang taps</string>
     <string name="show_touches_summary">Ipakita ang visual feedback para sa mga tap</string>
-    <!-- Unknown error -->
     <string name="recording_error">Tumigil ang pagrerekord</string>
     <string name="recording_error_channel_desc">Abiso kapag ang pagrerekord ay tumigil dahil sa error.</string>
     <string name="unknow_error">Di malamang error, ang pagrerekord ay itinigil.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">Abiso kapag nakumpleto ang pag-record.</string>
-    <!-- Qs tile -->
-    <!-- Permission -->
-    <!-- Notification -->
 </resources>

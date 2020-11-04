@@ -15,31 +15,12 @@
 -->
 <resources>
     <string name="app_name">Opnemer</string>
-    <!-- Share action for notification -->
     <string name="share">Deel</string>
-    <!-- Stop action for notification -->
-    <!-- Play action -->
     <string name="play">Speel</string>
-    <!-- Delete action -->
     <string name="delete">Verwyder</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Onvoldoende stoorspasie</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Onvoldoende stoorspasie beskikbaar</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Skermopnemer</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Video lengte: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Gereed om te deel</string>
-    <!-- Screen settings dialog title -->
-    <!-- Screen recorder persistent notification channel title -->
-    <!-- Screen recorder persistent notification channel description-->
-    <!-- Screen record title -->
-    <!-- Extra settings -->
-    <!-- Unknown error -->
-    <!-- Notifications -->
-    <!-- Qs tile -->
-    <!-- Permission -->
-    <!-- Notification -->
 </resources>
