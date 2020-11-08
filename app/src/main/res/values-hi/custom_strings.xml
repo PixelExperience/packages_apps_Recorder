@@ -15,39 +15,24 @@
 -->
 <resources>
     <string name="app_name">Perekam</string>
-    <!-- Share action for notification -->
     <string name="share">Bagikan</string>
-    <!-- Stop action for notification -->
     <string name="stop">Hentikan</string>
-    <!-- Play action -->
     <string name="play">Putar</string>
-    <!-- Delete action -->
     <string name="delete">Hapus</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Penyimpanan tidak cukup</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Penyimpanan yang tersedia tidak cukup</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Perekam Layar</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Durasi video: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Siap untuk dibagikan</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Setelan perekam layar</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Rekaman layar</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Pemberitahuan tetap saat merekam layar dan pemberitahuan setelah selesai</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">Rekam layar</string>
-    <!-- Extra settings -->
     <string name="show_touches">स्पर्श दिखाओ</string>
     <string name="show_touches_summary">स्पर्श के लिए दृश्य प्रतिक्रिया दिखाओ।</string>
-    <!-- Unknown error -->
-    <!-- Notifications -->
+    <string name="recording_error">रिकॉर्डिंग रुक गई है</string>
+    <string name="recording_error_channel_desc">एक त्रुटि के कारण रिकॉर्डिंग बंद होने पर अधिसूचना</string>
+    <string name="unknow_error">अज्ञात त्रुटि, रिकॉर्डिंग रोक दी गई है।</string>
     <string name="ready_channel_desc">अधिसूचना जब रिकॉर्डिंग समाप्त होगी।</string>
-    <!-- Qs tile -->
-    <!-- Permission -->
-    <!-- Notification -->
+    <string name="no_permission_error_message">प्रारंभ करने के लिए ऑडियो रिकॉर्डिंग की अनुमति दें</string>
 </resources>

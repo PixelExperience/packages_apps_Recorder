@@ -15,45 +15,26 @@
 -->
 <resources>
     <string name="app_name">Registratore schermo</string>
-    <!-- Share action for notification -->
     <string name="share">Condividi</string>
-    <!-- Stop action for notification -->
     <string name="stop">Interrompi</string>
-    <!-- Play action -->
     <string name="play">Riproduci</string>
-    <!-- Delete action -->
     <string name="delete">Elimina</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Spazio di archiviazione insufficiente</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Memoria insufficiente per la registrazione dello schermo</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Registrazione dello schermo</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Durata video: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Pronto a condividere</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Impostazioni registratore schermo</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Registrazione dello schermo</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Notifica costante per una sessione di registrazione dello schermo</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">Avvia registrazione</string>
-    <!-- Extra settings -->
     <string name="show_touches">Mostra tocchi</string>
     <string name="show_touches_summary">Mostra feedback visivi per i tocchi</string>
-    <!-- Unknown error -->
     <string name="recording_error">Registrazione dello schermo interrotta</string>
     <string name="recording_error_channel_desc">Mostra una notifica quando la registrazione dello schermo viene interrotta a causa di un errore</string>
     <string name="unknow_error">Registrazione dello schermo interrotta a causa di un errore sconosciuto.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">Mostra una notifica al completamento della registrazione dello schermo</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">Tocca per interrompere</string>
-    <!-- Permission -->
     <string name="no_permission_error_message">Per iniziare, consenti la registrazione dell\'audio.</string>
-    <!-- Notification -->
     <string name="saving_video_notification">Salvataggio del video in corso…</string>
 </resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Gravador</string>
+    <string name="share">Compartir</string>
+    <string name="stop">Deter</string>
+    <string name="play">Reproducir</string>
+    <string name="delete">Borrar</string>
+    <string name="screen_insufficient_storage">Almacenamento insuficiente</string>
+    <string name="screen_not_enough_storage">Sen espazo abondo no almacenamento</string>
+    <string name="screen_notification_title">Gravador de pantalla</string>
+    <string name="screen_notification_message">Duración do vídeo: %s</string>
+    <string name="screen_notification_message_done">Listo para compartir</string>
+    <string name="screen_settings_title">Axustes do gravador de pantalla</string>
+    <string name="screen_channel_title">Gravación da pantalla</string>
+    <string name="screen_channel_desc">Notificación persistente durante a gravación da pantalla e notificación ao se completar</string>
+    <string name="main_screen_action">Gravar a pantalla</string>
+    <string name="show_touches">Amosar pulsacións </string>
+    <string name="show_touches_summary">Amosar información visual das pulsacións </string>
+    <string name="recording_error">Gravación detida</string>
+    <string name="recording_error_channel_desc">Notificación cando se detén a gravación por un erro.</string>
+    <string name="unknow_error">Erro descoñecido. A gravación detívose.</string>
+    <string name="ready_channel_desc">Notificación ao finalizar a gravación.</string>
+    <string name="touch_to_stop_message">Toque para parar</string>
+    <string name="no_permission_error_message">Outorgue permiso de gravación de audio para comezar.</string>
+    <string name="saving_video_notification">Gardando vídeo…</string>
+</resources>

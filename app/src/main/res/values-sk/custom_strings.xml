@@ -15,45 +15,26 @@
 -->
 <resources>
     <string name="app_name">Rekordér</string>
-    <!-- Share action for notification -->
     <string name="share">Zdieľať</string>
-    <!-- Stop action for notification -->
     <string name="stop">Zastaviť</string>
-    <!-- Play action -->
     <string name="play">Prehrať</string>
-    <!-- Delete action -->
     <string name="delete">Vymazať</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Nedostatok miesta</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Nedostatok miesta na úložisku</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Nahrávanie obrazovky</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Dĺžka video záznamu: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Pripravený na zdieľanie</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Nastavenia nahrávánia obrazovky</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Nahrávanie obrazovky</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Trvalé upozornenie pri nahrávaní obrazovky a upozornenie po jeho dokončení</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">Nahrávanie obrazovky</string>
-    <!-- Extra settings -->
     <string name="show_touches">Zobraziť dotyky</string>
     <string name="show_touches_summary">Zobraziť vizuálnu spätnú väzbu pre dotyky</string>
-    <!-- Unknown error -->
     <string name="recording_error">Nahrávanie zastavené</string>
     <string name="recording_error_channel_desc">Notifikácia po zastavení nahrávania kvôli chybe.</string>
     <string name="unknow_error">Neznáma chyba, nahrávanie bolo zastavené.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">Notifikácia po dokončení nahrávania.</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">Kliknite pre zastavenie</string>
-    <!-- Permission -->
     <string name="no_permission_error_message">Pre spustenie najprv povoľte nahrávanie zvuku.</string>
-    <!-- Notification -->
     <string name="saving_video_notification">Video sa ukladá</string>
 </resources>

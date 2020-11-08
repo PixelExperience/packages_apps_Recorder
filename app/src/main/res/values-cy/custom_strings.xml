@@ -15,36 +15,17 @@
 -->
 <resources>
     <string name="app_name">Recordydd</string>
-    <!-- Share action for notification -->
     <string name="share">Rhannu</string>
-    <!-- Stop action for notification -->
     <string name="stop">Stopio</string>
-    <!-- Play action -->
     <string name="play">Chwarae</string>
-    <!-- Delete action -->
     <string name="delete">Dileu</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Dim digon o storfa</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Dim digon o storfa\'n rhydd</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Recordydd sgrîn</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Hyd y fideo: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Yn barod i rannu</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Gosodiadau\'r recordydd sgrin</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Recordio\'r sgrin</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Hysbysiad cyson wrth recordio\'r sgrin a hysbysiad ar ôl gorffen recordio</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">Recordio\'r sgrin</string>
-    <!-- Extra settings -->
-    <!-- Unknown error -->
-    <!-- Notifications -->
-    <!-- Qs tile -->
-    <!-- Permission -->
-    <!-- Notification -->
 </resources>

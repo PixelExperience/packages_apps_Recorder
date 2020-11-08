@@ -15,34 +15,15 @@
 -->
 <resources>
     <string name="app_name">Inspelare</string>
-    <!-- Share action for notification -->
     <string name="share">Dela</string>
-    <!-- Stop action for notification -->
     <string name="stop">Avbryt</string>
-    <!-- Play action -->
     <string name="play">Spela upp</string>
-    <!-- Delete action -->
     <string name="delete">Radera</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Otillräckligt med utrymme</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Inte tillräckligt med lagringsutrymme ledigt</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Skärminspelare</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Videolängd: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Redo att dela</string>
-    <!-- Screen settings dialog title -->
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Skärminspelning</string>
-    <!-- Screen recorder persistent notification channel description-->
-    <!-- Screen record title -->
     <string name="main_screen_action">Spela in skärmen</string>
-    <!-- Extra settings -->
-    <!-- Unknown error -->
-    <!-- Notifications -->
-    <!-- Qs tile -->
-    <!-- Permission -->
-    <!-- Notification -->
 </resources>

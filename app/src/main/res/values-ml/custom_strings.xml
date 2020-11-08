@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">റെക്കോർഡർ</string>
+    <string name="share">പങ്കുവയ്ക്കുക</string>
+    <string name="stop">നിർത്തുക</string>
+    <string name="play">പ്ലേ</string>
+    <string name="delete">ഡിലീറ്റ് ചെയ്യുക</string>
+    <string name="screen_insufficient_storage">അപര്യാപ്തമായ സ്റ്റോറേജ്</string>
+    <string name="screen_not_enough_storage">ആവശ്യത്തിന് സ്റ്റോറേജ് ലഭ്യമല്ല</string>
+    <string name="screen_notification_title">സ്ക്രീൻ റെക്കോർഡർ</string>
+    <string name="screen_notification_message">വീഡിയോ ദൈർഘ്യം: %s</string>
+    <string name="screen_notification_message_done">പങ്കിടാൻ തയ്യാറാണ്</string>
+    <string name="screen_settings_title">സ്‌ക്രീൻ റെക്കോർഡിങ്ങ് ക്രമീകരണങ്ങൾ</string>
+    <string name="screen_channel_title">സ്ക്രീൻ റെക്കോർഡിങ്ങ്</string>
+    <string name="screen_channel_desc">സ്‌ക്രീൻ റെക്കോർഡുചെയ്യുമ്പോൾ സ്ഥിരമായ അറിയിപ്പും അത് പൂർത്തിയായതിനുശേഷം അറിയിപ്പും</string>
+    <string name="main_screen_action">സ്ക്രീൻ റെക്കോർഡ് ചെയ്യുക</string>
+    <string name="show_touches">സ്പർശനങ്ങൾ കാണിക്കുക</string>
+    <string name="show_touches_summary">സ്പർശനങ്ങൾക്കായി വിഷ്വൽ ഫീഡ്ബാക്ക് കാണിക്കുക</string>
+    <string name="recording_error">റെക്കോർഡിംഗ് നിർത്തി</string>
+    <string name="recording_error_channel_desc">ഒരു പിശക് കാരണം റെക്കോർഡിംഗ് നിർത്തുമ്പോൾ അറിയിപ്പ്.</string>
+    <string name="unknow_error">അജ്ഞാത പിശക്, റെക്കോർഡിംഗ് നിർത്തി.</string>
+    <string name="ready_channel_desc">റെക്കോർഡുചെയ്യൽ പൂർത്തിയാകുമ്പോൾ അറിയിപ്പ്.</string>
+    <string name="touch_to_stop_message">നിർത്താൻ സ്‌പർശിക്കുക</string>
+    <string name="no_permission_error_message">ഓഡിയോ റെക്കോർഡിംഗ് ആരംഭിക്കുന്നതിന് അനുമതി നൽകുക.</string>
+    <string name="saving_video_notification">വീഡിയോ സംരക്ഷിക്കുന്നു</string>
+</resources>

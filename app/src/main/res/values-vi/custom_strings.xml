@@ -15,45 +15,26 @@
 -->
 <resources>
     <string name="app_name">Trình ghi lại</string>
-    <!-- Share action for notification -->
     <string name="share">Chia sẻ</string>
-    <!-- Stop action for notification -->
     <string name="stop">Dừng</string>
-    <!-- Play action -->
     <string name="play">Phát</string>
-    <!-- Delete action -->
     <string name="delete">Xóa</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Không đủ bộ nhớ</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">Không đủ bộ nhớ khả dụng</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Trình quay màn hình</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Độ dài video: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">Sẵn sàng để chia sẻ</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Cài đặt trình ghi màn hình</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Ghi màn hình</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Thông báo liên tục khi ghi lại màn hình và thông báo sau khi hoàn tất</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">Ghi lại màn hình</string>
-    <!-- Extra settings -->
     <string name="show_touches">Hiện chạm</string>
     <string name="show_touches_summary">Hiển thị phản hồi trực quan cho các lần chạm</string>
-    <!-- Unknown error -->
     <string name="recording_error">Đã dừng ghi</string>
     <string name="recording_error_channel_desc">Thông báo khi bị dừng ghi do lỗi.</string>
     <string name="unknow_error">Lỗi không xác định, ghi đã bị dừng.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">Thông báo khi ghi xong.</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">Chạm để dừng</string>
-    <!-- Permission -->
     <string name="no_permission_error_message">Cấp quyền ghi âm để bắt đầu.</string>
-    <!-- Notification -->
     <string name="saving_video_notification">Đang lưu video…</string>
 </resources>

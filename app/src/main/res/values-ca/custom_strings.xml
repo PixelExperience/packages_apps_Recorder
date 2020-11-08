@@ -15,45 +15,26 @@
 -->
 <resources>
     <string name="app_name">Gravadora</string>
-    <!-- Share action for notification -->
     <string name="share">Comparteix</string>
-    <!-- Stop action for notification -->
     <string name="stop">Para</string>
-    <!-- Play action -->
     <string name="play">Reprodueix</string>
-    <!-- Delete action -->
     <string name="delete">Elimina</string>
-    <!-- Screen recorder notification storage error title -->
     <string name="screen_insufficient_storage">Emmagatzematge insuficient</string>
-    <!-- Screen recorder notification storage error message -->
     <string name="screen_not_enough_storage">No hi ha prou emmagatzematge disponible</string>
-    <!-- Screen recorder notification title -->
     <string name="screen_notification_title">Gravadora de pantalla</string>
-    <!-- Screen recorder notification message -->
     <string name="screen_notification_message">Durada del vídeo: %s</string>
-    <!-- Screen recorder notification share title -->
     <string name="screen_notification_message_done">A punt per compartir</string>
-    <!-- Screen settings dialog title -->
     <string name="screen_settings_title">Configuració de l\'enregistrador de pantalla</string>
-    <!-- Screen recorder persistent notification channel title -->
     <string name="screen_channel_title">Enregistrament de pantalla</string>
-    <!-- Screen recorder persistent notification channel description-->
     <string name="screen_channel_desc">Notificació persistent quan s\'està enregistrant la pantalla i notificació quan s\'hagi acabat</string>
-    <!-- Screen record title -->
     <string name="main_screen_action">Enregistra la pantalla</string>
-    <!-- Extra settings -->
     <string name="show_touches">Mostra els tocs</string>
     <string name="show_touches_summary">Mostra la ubicació visual dels tocs</string>
-    <!-- Unknown error -->
     <string name="recording_error">S\'ha aturat la gravació</string>
     <string name="recording_error_channel_desc">Notificació quan s\'atura la gravació a causa d\'un error.</string>
     <string name="unknow_error">Error desconegut, la gravació s\'ha aturat.</string>
-    <!-- Notifications -->
     <string name="ready_channel_desc">Notificació quan es completa la gravació.</string>
-    <!-- Qs tile -->
     <string name="touch_to_stop_message">Toca per parar</string>
-    <!-- Permission -->
     <string name="no_permission_error_message">Concedeix el permís per iniciar l\'enregistrament d\'àudio.</string>
-    <!-- Notification -->
     <string name="saving_video_notification">S\'està desant el vídeo…</string>
 </resources>
