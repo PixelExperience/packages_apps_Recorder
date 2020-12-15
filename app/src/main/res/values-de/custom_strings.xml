@@ -35,6 +35,6 @@
     <string name="unknow_error">Unbekannter Fehler, die Aufzeichnung wurde gestoppt.</string>
     <string name="ready_channel_desc">Benachrichtigung bei vollständiger Aufzeichnung.</string>
     <string name="touch_to_stop_message">Berühren zum Stoppen</string>
-    <string name="no_permission_error_message">Erteilen Sie die Audioaufnahme Berechtigung um zu starten.</string>
+    <string name="no_permission_error_message">Erteilen Sie die Audioaufnahme Berechtigung, um zu starten.</string>
     <string name="saving_video_notification">Speichere Video ...</string>
 </resources>

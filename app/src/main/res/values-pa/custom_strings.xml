@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">ਰਿਕਾਰਡਰ</string>
+    <string name="share">ਸਾਂਝਾ ਕਰੋ</string>
+    <string name="stop">ਬੰਦ ਕਰੋ</string>
+    <string name="play">ਚਲਾਓ</string>
+    <string name="screen_insufficient_storage">ਨਾਕਾਫ਼ੀ ਥਾਂ</string>
+    <string name="screen_not_enough_storage">ਲੋੜੀਂਦੀ ਥਾਂ ਨਹੀਂ ਹੈ</string>
+    <string name="screen_notification_title">ਸਕ੍ਰੀਨ ਰਿਕਾਰਡਰ</string>
+    <string name="screen_notification_message">ਵੀਡੀਓ ਦੀ ਲੰਬਾਈ: %s</string>
+    <string name="screen_notification_message_done">ਸਾਂਝਾ ਕਰਨ ਲਈ ਤਿਆਰ</string>
+    <string name="screen_settings_title">ਸਕ੍ਰੀਨ ਰਿਕਾਰਡ ਸੈਟਿੰਗਾਂ</string>
+    <string name="screen_channel_title">ਸਕ੍ਰੀਨ ਰਿਕਾਰਡਿੰਗ</string>
+    <string name="screen_channel_desc">ਸਕ੍ਰੀਨ ਰਿਕਾਰਡ ਹੋਣ ਵੇਲੇ ਲਗਾਤਾਰ ਸੂਚਨਾ ਅਤੇ ਰਿਕਾਰਡਿੰਗ ਪੂਰੀ ਹੋਣ \'ਤੇ ਸੂਚਨਾ</string>
+    <string name="main_screen_action">ਸਕ੍ਰੀਨ ਰਿਕਾਰਡ ਕਰੋ</string>
+    <string name="show_touches">ਟੈਪ ਵਿਖਾਓ</string>
+    <string name="show_touches_summary">ਟੈਪ ਹੋਣ \'ਤੇ ਝਲਕ ਵਿਖਾਓ</string>
+    <string name="recording_error">ਰਿਕਾਰਡਿੰਗ ਬੰਦ ਹੋਈ</string>
+    <string name="recording_error_channel_desc">ਕਿਸੇ ਗੜਬੜ ਕਰਕੇ ਰਿਕਾਰਡਿੰਗ ਰੁਕਣ \'ਤੇ ਸੂਚਨਾ।</string>
+    <string name="unknow_error">ਅਣਪਛਾਤੀ ਗੜਬੜ, ਰਿਕਾਰਡਿੰਗ ਬੰਦ ਹੋਈ।</string>
+    <string name="ready_channel_desc">ਰਿਕਾਰਡਿੰਗ ਪੂਰੀ ਹੋਣ \'ਤੇ ਸੂਚਨਾ।</string>
+    <string name="touch_to_stop_message">ਬੰਦ ਕਰਨ ਲਈ ਛੂਹੋ</string>
+    <string name="no_permission_error_message">ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਅਵਾਜ਼ ਰਿਕਾਰਡਿੰਗ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ।</string>
+    <string name="saving_video_notification">ਵੀਡੀਓ ਸੰਭਾਲ ਰਹੇ…</string>
+</resources>

@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Enregistreur</string>
+    <string name="app_name">Magnétophone</string>
     <string name="share">Partager</string>
     <string name="stop">Arrêter</string>
     <string name="play">Lecture</string>
@@ -24,7 +24,7 @@
     <string name="screen_notification_title">Enregistreur d\'écran</string>
     <string name="screen_notification_message">Durée de la vidéo : %s</string>
     <string name="screen_notification_message_done">Prêt à partager</string>
-    <string name="screen_settings_title">Paramètres de capture vidéo</string>
+    <string name="screen_settings_title">Paramètres de capture d\'écran</string>
     <string name="screen_channel_title">Enregistrement d\'écran</string>
     <string name="screen_channel_desc">Notification persistante lors de l\'enregistrement d\'écran et notification après la fin de ce dernier</string>
     <string name="main_screen_action">Enregistrer l\'écran</string>

@@ -14,6 +14,9 @@
      limitations under the License.
 -->
 <resources>
+    <string name="app_name">Pang-record</string>
+    <string name="share">Ibahagi</string>
+    <string name="screen_insufficient_storage">Hindi sapat ang storage</string>
     <string name="show_touches">Ipakita ang taps</string>
     <string name="show_touches_summary">Ipakita ang visual feedback para sa mga tap</string>
     <string name="recording_error">Tumigil ang pagrerekord</string>
